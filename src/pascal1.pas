@@ -20313,7 +20313,20 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                  EXPRESSION ( FALSE , FSYS + [ SYRPARENT ] ) ;
                  if GATTR . TYPTR <> NIL then
                    if GATTR . TYPTR -> . FORM <> SETS then
-                     SET_ERROR ( 125 ) ;
+                     SET_ERROR ( 125 )
+                   else
+
+                 //**********************************************
+                 // CRD expects the set in the set workarea,     
+                 // like the other set operations: copy set      
+                 // variables and constants there first          
+                 //**********************************************
+
+                     if GATTR . KIND <> EXPR then
+                       begin
+                         SET_TO_WORKAREA ( GATTR ) ;
+                         GATTR . KIND := EXPR ;
+                       end (* then *) ;
                  GEN0 ( PCODE_CRD ) ;
                  GATTR . TYPTR := PTYPE_INT ;
                end (* CARD1 *) ;
