@@ -1798,6 +1798,13 @@ static void *cspf_wrc (void *vgs,
 
 
 
+//**********************************************************
+// correction of the slots popped by CSP WRE (-1: 4-byte element)
+//**********************************************************
+
+static int wre_extra_pop = 0;
+
+
 static void *cspf_wre (void *vgs,
                        int parm1,
                        double parmd,
@@ -1828,7 +1835,7 @@ static void *cspf_wre (void *vgs,
    charp2 = ADDRSTOR (fcb -> pfilvar);
 
    memcpy (charp2, &parmd, parm3);
-   fwrite (charp, parm3, 1, fcb -> fhandle);
+   fwrite (charp2, parm3, 1, fcb -> fhandle);
 
    return NULL;
 }
@@ -6072,6 +6079,7 @@ static void int1 (global_store *gs)
          /************************************************/
 
          pft = ft + pcode -> q;
+         wre_extra_pop = 0;
          if (pft -> cspnum != pcode -> q)
          {
             fprintf (stderr, "+++ Fatal Error in CSP-Table, "
@@ -6156,11 +6164,32 @@ static void int1 (global_store *gs)
                   break;
 
                case -3:
+
+                  //*******************************************
+                  // stack: file, element value, length.
+                  // the value takes two 4-byte slots for
+                  // 8-byte elements (reals), else one; copy
+                  // its bytes instead of always reading a
+                  // double. The file address stays on the
+                  // stack (until EIO), so pop one slot less
+                  // for the shorter elements.
+                  //*******************************************
+
                   cfunc2 = (cspfunc2 *) (pft -> func);
                   pint = (int *) stackp;
                   parm3 = *pint;
-                  pint -= 2;
-                  parmd = *((double *) pint);
+                  parmd = 0.0;
+                  if (parm3 > 4)
+                  {
+                     pint -= 2;
+                     memcpy (&parmd, pint, parm3 > 8 ? 8 : parm3);
+                  }
+                  else
+                  {
+                     pint --;
+                     memcpy (&parmd, pint, parm3 > 0 ? parm3 : 0);
+                     wre_extra_pop = -1;
+                  }
                   pint --;
                   parm1 = *pint;
                   pres = (*cfunc2) (gs, parm1, parmd, parm3, parm4);
@@ -6168,7 +6197,7 @@ static void int1 (global_store *gs)
             }
          }
 
-         (gs -> sp) -= 4 * pft -> numpops;
+         (gs -> sp) -= 4 * (pft -> numpops + wre_extra_pop);
 
          break;
 
