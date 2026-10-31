@@ -23373,22 +23373,22 @@ L43 LAB
  STO A
 ;---- Neues Statement - LCOUNTER-Pegel = 228
  LOC 8741
- LOD A,4,224                 ; MIN                 
- INC A,16                    ; MIN                 
- LDA 1,1260                  ; SYVAL               
- MOV 28
-;---- Neues Statement - LCOUNTER-Pegel = 228
- LOC 8742
  LOD I,4,212                 ; SIGN                
  LDC I,0
  LES I
  FJP L47
 ;---- Neues Statement - LCOUNTER-Pegel = 228
- LOC 8743
+ LOC 8742
  LOD I,1,1264                ; SYVAL               
  NGI
  STR I,1,1264                ; SYVAL               
 L47 LAB
+;---- Neues Statement - LCOUNTER-Pegel = 228
+ LOC 8743
+ LOD A,4,224                 ; MIN                 
+ INC A,16                    ; MIN                 
+ LDA 1,1260                  ; SYVAL               
+ MOV 28
 ;---- Neues Statement - LCOUNTER-Pegel = 228
  LOC 8744
  LOD A,4,224                 ; SIZE                
@@ -55893,7 +55893,7 @@ L1 DEF I,280
 ;
 ;
 ;
- BGN PASCALCOMPILER       15:47:57 09/23/2026
+ BGN PASCALCOMPILER       22:22:07 10/31/2026
 $PASMAIN ENT P,1,L3  $PASMAIN            ,TFFFF,2,0,$PASMAI#,        ,112
  LOC 26878
  VPU 1,5536

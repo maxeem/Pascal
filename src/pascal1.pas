@@ -8738,9 +8738,9 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                    with LSP -> do
                      begin
                        RANGETYPE := PTYPE_INT ;
-                       MIN := SYVAL ;
                        if SIGN < 0 then
                          SYVAL . IVAL := - SYVAL . IVAL ;
+                       MIN := SYVAL ;
                        SIZE := INTSIZE ;
                      end (* with *) ;
                    SY := SYDOTDOT
