@@ -2223,10 +2223,17 @@ static void *cspf_wrp (void *vgs,
    if (parm3 < 8)
       parm3 = 8;
 
+   //*******************************************************
+   // print the Pascal address (the value PTR2INT returns)
+   // as 8 hex digits. "%p" of the host address was too long
+   // on 64-bit systems: cut to the field width, every
+   // pointer printed the same leading digits.
+   //*******************************************************
+
    if (parm2 == -1)
       strcpy (buf, "nil");
    else
-      sprintf (buf, "%p", ADDRSTOR (parm2));
+      sprintf (buf, "%08X", (unsigned int) parm2);
 
    fprintf (fcb -> fhandle, "%*.*s", parm3, parm3, buf);
 
