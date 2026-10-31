@@ -4699,7 +4699,7 @@ static int work_set_compare_neu (int opnum,
             {
                if (! stat1)
                {
-                  stat1 = offsw >= offs1;
+                  stat1 = offsw >= offs1 && offsw < offs1 + len1;
                   spw = sp1 + offsw - offs1;
                }
                else
@@ -4717,7 +4717,7 @@ static int work_set_compare_neu (int opnum,
             {
                if (! stat2)
                {
-                  stat2 = offsw >= offs2;
+                  stat2 = offsw >= offs2 && offsw < offs2 + len2;
                   sp2w = sp2 + offsw - offs2;
                }
                else
@@ -4795,7 +4795,7 @@ static int work_set_compare_neu (int opnum,
             {
                if (! stat1)
                {
-                  stat1 = offsw >= offs1;
+                  stat1 = offsw >= offs1 && offsw < offs1 + len1;
                   spw = sp1 + offsw - offs1;
                }
                else
@@ -4813,7 +4813,7 @@ static int work_set_compare_neu (int opnum,
             {
                if (! stat2)
                {
-                  stat2 = offsw >= offs2;
+                  stat2 = offsw >= offs2 && offsw < offs2 + len2;
                   sp2w = sp2 + offsw - offs2;
                }
                else
