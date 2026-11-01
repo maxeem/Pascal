@@ -2878,13 +2878,20 @@ void translate2 (global_store *gs)
 
    memset (gs -> store0, INIT_PATTERN, pegel);
 
-   gs -> stack_alloc = 4096;
-   gs -> stack_used = 0;
-   gs -> stack0 = malloc (4096);
-   gs -> stacktype = malloc (4096);
+   //********************************************************
+   // the expression stack was 4096 bytes: a recursion that
+   // keeps a value pending across its call (n + f (n - 1))
+   // stopped with EXPSTACKSPACE after about 1000 levels,
+   // long before the 3 MB of the frames were used
+   //********************************************************
 
-   memset (gs -> stack0, INIT_PATTERN, 4096);
-   memset (gs -> stacktype, ' ', 4096);
+   gs -> stack_alloc = EXPSTACK_SIZE;
+   gs -> stack_used = 0;
+   gs -> stack0 = malloc (EXPSTACK_SIZE);
+   gs -> stacktype = malloc (EXPSTACK_SIZE);
+
+   memset (gs -> stack0, INIT_PATTERN, EXPSTACK_SIZE);
+   memset (gs -> stacktype, ' ', EXPSTACK_SIZE);
 
    memcpy (ADDRSTOR (gs -> rconst_start),
            gs -> rconst0,

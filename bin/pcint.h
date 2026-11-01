@@ -141,6 +141,7 @@
 #define CMDLINEMAX     1024
 #define STRINGSZMAX    32767
 #define ST_SAFETY      4096
+#define EXPSTACK_SIZE  1048576
 
 #define BADFILE         1
 #define BADIO           2

@@ -11204,7 +11204,7 @@ static void int1 (global_store *gs)
    if (gs -> stack_used < gs -> sp)
    {
       gs -> stack_used = gs -> sp;
-      if (gs -> stack_alloc < gs -> sp)
+      if (gs -> stack_alloc - 64 < gs -> sp)
          runtime_error (gs, EXPSTACKSPACE, NULL);
    }
 }
