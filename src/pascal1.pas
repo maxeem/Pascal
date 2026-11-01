@@ -13537,6 +13537,16 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                   TYPTR := IDTYPE ;
                   BTYPE := TYPTR ;
                   KIND := VARBL ;
+
+              //************************************************
+              // a const parameter may not be assigned to;      
+              // one passed by address (an array or record)     
+              // was changed in the caller                      
+              //************************************************
+
+                  if KLASS = VARS then
+                    if VKIND = CONSTPARM then
+                      IS_KONSTP := TRUE ;
                   if FALSE then
                     if KLASS = FIELD then
                       begin
@@ -24584,6 +24594,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                 REC_STR : TTP ;
                 DUMMYB : BOOLEAN ;
                 IS_KONST : BOOLEAN ;
+                KONST_SEL : BOOLEAN ;
 
             begin (* WITHSTATEMENT *)
               LLC := LCOUNTER ;
@@ -24637,6 +24648,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
               // if variable is constant                 
               //*****************************************
 
+                      KONST_SEL := IS_KONST ;
                       TOP := TOP + 1 ;
                       with DISPLAY [ TOP ] do
                         begin
@@ -24645,7 +24657,8 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                           if GATTR . ACCESS = DRCT then
                             begin
                               OCCUR := CREC ;
-                              IS_KONST := LCP -> . KLASS = KONST ;
+                              IS_KONST := ( LCP -> . KLASS = KONST ) or
+                                          KONST_SEL ;
                               CLEV := GATTR . VLEVEL ;
                               CDSPL := GATTR . DPLMT
                             end (* then *)
@@ -24656,7 +24669,8 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                               GEN3 ( PCODE_STR , ORD ( 'A' ) , LEVEL ,
                                      LCOUNTER ) ;
                               OCCUR := VREC ;
-                              IS_KONSTV := LCP -> . KLASS = KONST ;
+                              IS_KONSTV := ( LCP -> . KLASS = KONST ) or
+                                           KONST_SEL ;
                               VDSPL := LCOUNTER ;
                               LCOUNTER := LCOUNTER + PTRSIZE ;
                               if LCOUNTER > LCMAX then
