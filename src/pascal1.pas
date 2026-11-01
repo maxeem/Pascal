@@ -21851,8 +21851,16 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                           // skalar, oder char                
                           //**********************************
 
-                          if ( LSP -> . BASETYPE = NIL ) and ( ATTR1 .
-                          TYPTR <> PTYPE_INT ) then
+                          //**********************************
+                          // integers too: a constructor of   
+                          // integers is compatible with sets 
+                          // of integer subranges (subrange   
+                          // and base type are compatible),   
+                          // but no longer with a set of an   
+                          // enumeration ([1] for days)       
+                          //**********************************
+
+                          if LSP -> . BASETYPE = NIL then
                             LSP -> . BASETYPE := ATTR1 . TYPTR ;
 
                           //**********************************

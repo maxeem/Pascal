@@ -55336,14 +55336,14 @@ L1 DEF I,280
  DEF B,0
 %INCLUDE pcode1
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 27475
+ LOC 27483
 ;
 ;
 ;
 ;
- BGN PASCALCOMPILER       17:15:55 11/01/2026
+ BGN PASCALCOMPILER       17:24:01 11/01/2026
 $PASMAIN ENT P,1,L3  $PASMAIN            ,TFFFF,2,0,$PASMAI#,        ,400
- LOC 27481
+ LOC 27489
  VPU 1,5544
  LDA 1,512
  CSP SIO,5552
@@ -55396,107 +55396,107 @@ $PASMAIN ENT P,1,L3  $PASMAIN            ,TFFFF,2,0,$PASMAI#,        ,400
  MST 1,0
  CUP P,1,$PRV0250,5552
 ;---- Neues Statement - LCOUNTER-Pegel = 5548
- LOC 27487
+ LOC 27495
  MST 1,0
  CUP P,1,$PRV0251,5552
 ;---- Neues Statement - LCOUNTER-Pegel = 5548
- LOC 27488
- LDC I,0
- STR H,1,1472                ; TOP                 
-;---- Neues Statement - LCOUNTER-Pegel = 5548
- LOC 27489
- LDA 1,1476                  ; DISPLAY             
- LDC I,0
- CHK J,0,20
- IXA 12
- STR A,1,5548
-;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27491
- LOD A,1,5548                ; OCCUR               
- LDC I,0
- STO H
-;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27492
- LOD A,1,5548                ; FLABEL              
- INC A,4                     ; FLABEL              
- LDC N
- STO A
-;---- Neues Statement - LCOUNTER-Pegel = 5548
- LOC 27494
- MST 1,0
- CUP P,1,$PRV0248,5552
-;---- Neues Statement - LCOUNTER-Pegel = 5548
- LOC 27495
- MST 1,0
- CUP P,1,$PRV0249,5552
-;---- Neues Statement - LCOUNTER-Pegel = 5548
  LOC 27496
- LDC I,1
+ LDC I,0
  STR H,1,1472                ; TOP                 
 ;---- Neues Statement - LCOUNTER-Pegel = 5548
  LOC 27497
+ LDA 1,1476                  ; DISPLAY             
+ LDC I,0
+ CHK J,0,20
+ IXA 12
+ STR A,1,5548
+;---- Neues Statement - LCOUNTER-Pegel = 5552
+ LOC 27499
+ LOD A,1,5548                ; OCCUR               
+ LDC I,0
+ STO H
+;---- Neues Statement - LCOUNTER-Pegel = 5552
+ LOC 27500
+ LOD A,1,5548                ; FLABEL              
+ INC A,4                     ; FLABEL              
+ LDC N
+ STO A
+;---- Neues Statement - LCOUNTER-Pegel = 5548
+ LOC 27502
+ MST 1,0
+ CUP P,1,$PRV0248,5552
+;---- Neues Statement - LCOUNTER-Pegel = 5548
+ LOC 27503
+ MST 1,0
+ CUP P,1,$PRV0249,5552
+;---- Neues Statement - LCOUNTER-Pegel = 5548
+ LOC 27504
+ LDC I,1
+ STR H,1,1472                ; TOP                 
+;---- Neues Statement - LCOUNTER-Pegel = 5548
+ LOC 27505
  LDC I,1
  STR H,1,1442                ; LEVEL               
 ;---- Neues Statement - LCOUNTER-Pegel = 5548
- LOC 27498
+ LOC 27506
  LDA 1,1476                  ; DISPLAY             
  LDC I,1
  CHK J,0,20
  IXA 12
  STR A,1,5548
 ;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27500
+ LOC 27508
  LOD A,1,5548                ; OCCUR               
  LDC I,0
  STO H
 ;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27501
+ LOC 27509
  LOD A,1,5548                ; FLABEL              
  INC A,4                     ; FLABEL              
  LDC N
  STO A
 ;---- Neues Statement - LCOUNTER-Pegel = 5548
- LOC 27503
+ LOC 27511
  LDC B,0
  STR B,1,594                 ; OPT                 
 ;---- Neues Statement - LCOUNTER-Pegel = 5548
- LOC 27510
+ LOC 27518
  LOD A,1,348                 ; OSPARM              
  LDC N
  EQU A
  FJP L5
 ;---- Neues Statement - LCOUNTER-Pegel = 5548
- LOC 27511
+ LOC 27519
  LDA 1,524                   ; SOURCENAME          
  LCA M,8,'        '
  MOV 8
  UJP L6
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 5548
- LOC 27513
+ LOC 27521
  LOD A,1,348                 ; OSPARM              
  STR A,1,5548
 ;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27515
+ LOC 27523
  LDA 1,524                   ; SOURCENAME          
  LCA M,8,'        '
  MOV 8
 ;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27516
+ LOC 27524
  LDC I,1
  STR I,1,532                 ; SX                  
  LDC B,1
  FJP L9
 L7 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27517
+ LOC 27525
  LOD I,1,532                 ; SX                  
  LOD A,1,5548                ; PLENGTH             
  IND I,0                     ; PLENGTH             
  LEQ I
  FJP L10
 ;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27518
+ LOC 27526
  LDA 1,524                   ; SOURCENAME          
  LOD I,1,532                 ; SX                  
  CHK J,1,8
@@ -55522,21 +55522,21 @@ L10 LAB
  UJP L7
 L9 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27519
+ LOC 27527
  LOD A,1,5548                ; PLENGTH             
  IND I,0                     ; PLENGTH             
  LDC I,8
  GRT I
  FJP L11
 ;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27521
+ LOC 27529
  LDA 1,1800                  ; OPTLINE             
  LCA M,120,'                                                    ',
        '                                                        ',
        '            '
  MOV 120
 ;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27522
+ LOC 27530
  LDC I,9
  STR H,1,1288                ; CHCNT               
  LOD A,1,5548                ; PLENGTH             
@@ -55548,7 +55548,7 @@ L9 LAB
  FJP L14
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 5556
- LOC 27523
+ LOC 27531
  LDA 1,1800                  ; OPTLINE             
  LOD H,1,1288                ; CHCNT               
  LDC I,8
@@ -55575,7 +55575,7 @@ L12 LAB
  UJP L12
 L14 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27524
+ LOC 27532
  MST 1,0
  LDA 1,1800                  ; OPTLINE             
  STR A,1,5664
@@ -55587,15 +55587,15 @@ L14 LAB
 L11 LAB
 L6 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 5548
- LOC 27533
+ LOC 27541
  MST 1,0
  CUP P,1,$PRV0017,5552
 ;---- Neues Statement - LCOUNTER-Pegel = 5548
- LOC 27534
+ LOC 27542
  MST 1,0
  CUP P,1,$PRV0010,5552
 ;---- Neues Statement - LCOUNTER-Pegel = 5548
- LOC 27540
+ LOC 27548
  MST 1,0
  LCA S11,0,X'000000000000fa0400000c'
  ZMX 12,0
@@ -55610,20 +55610,20 @@ L6 LAB
  CUP P,3,$PRV0247,5552
  VPO 1,5544
 ;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27541
+ LOC 27549
  LDC B,0
  FJP L15
 ;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27542
+ LOC 27550
  MST 1,0
  CUP P,1,$PRV0025,5552
 L15 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27548
+ LOC 27556
  MST 1,0
  CUP P,1,$PRV0018,5552
 ;---- Neues Statement - LCOUNTER-Pegel = 5552
- LOC 27549
+ LOC 27557
  RET P
 L3 DEF I,5680
  DEF I,322
