@@ -16705,6 +16705,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                var SIZE : INTEGER ;
                    LCP : IDP ;
                    XTYPE : TTP ;
+                   SAVE_PRCODE : BOOLEAN ;
 
                begin (* SIZEOF1 *)
                  SIZE := 0 ;
@@ -16751,7 +16752,17 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                  // then load size of that type     
                  //*********************************
 
+                 //*********************************
+                 // sizeof needs only the type: no  
+                 // code for the variable, or an    
+                 // indexed one (sizeof (a [1]))    
+                 // leaves its address on the stack 
+                 //*********************************
+
+                     SAVE_PRCODE := OPT . PRCODE ;
+                     OPT . PRCODE := FALSE ;
                      VARIABLE ( FSYS + [ SYRPARENT ] , FALSE ) ;
+                     OPT . PRCODE := SAVE_PRCODE ;
                      if GATTR . TYPTR <> NIL then
                        begin
                          SIZE := GATTR . TYPTR -> . SIZE ;
@@ -21287,12 +21298,21 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
 
                         var DUMMYB : BOOLEAN ;
                             DUMMYB2 : BOOLEAN ;
+                            FUNCID : ALPHA ;
 
                         begin (* FACTOR_IDENT *)
                           SID_RC := SEARCHID ( SYID , FALSE , FALSE , [
                                     KONST , VARS , FIELD , FUNC ] , LCP
                                     ) ;
                           STARTID := SYID ;
+
+                          //********************************************
+                          // STARTID is shared by nested factors: the   
+                          // arguments of a call overwrite it. Keep the 
+                          // name for the check after the call.         
+                          //********************************************
+
+                          FUNCID := SYID ;
                           ERRLINE_SAVE := SCB . LINENR ;
                           ERRPOS_SAVE := SCB . LINEPOS ;
                           INSYMBOL ;
@@ -21385,8 +21405,8 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
 
                               else
                                 begin
-                                  if ( STARTID <> 'SIZEOF' ) and (
-                                  STARTID <> 'DIGITSOF' ) and ( STARTID
+                                  if ( FUNCID <> 'SIZEOF' ) and (
+                                  FUNCID <> 'DIGITSOF' ) and ( FUNCID
                                   <> 'PRECISIONOF' ) then
                                     GATTR . KIND := EXPR ;
                                 end (* else *)
