@@ -47658,7 +47658,7 @@ L7 LAB
  LOC 15929
  LOD H,1,1224                ; SY                  
  ORD
- LCA S11,0,X'0049c018'
+ LCA S11,0,X'0049c0180001'
  ZIN
  NOT B
  FJP L10
@@ -47676,7 +47676,7 @@ L9 LAB
  LOC 15938
  LOD H,1,1224                ; SY                  
  ORD
- LCA S11,0,X'0049c018'
+ LCA S11,0,X'0049c0180001'
  ZIN
  FJP L11
 L12 LAB
@@ -48344,7 +48344,7 @@ L3 LAB
  LOC 16113
  LOD H,1,1224                ; SY                  
  ORD
- LCA S11,0,X'0049c018'
+ LCA S11,0,X'0049c0180001'
  ZIN
  NOT B
  FJP L5
@@ -48362,7 +48362,7 @@ L4 LAB
  LOC 16116
  LOD H,1,1224                ; SY                  
  ORD
- LCA S11,0,X'0049c018'
+ LCA S11,0,X'0049c0180001'
  ZIN
  FJP L6
 ;---- Neues Statement - LCOUNTER-Pegel = 136
@@ -55893,7 +55893,7 @@ L1 DEF I,280
 ;
 ;
 ;
- BGN PASCALCOMPILER       23:51:50 10/31/2026
+ BGN PASCALCOMPILER       04:07:00 11/01/2026
 $PASMAIN ENT P,1,L3  $PASMAIN            ,TFFFF,2,0,$PASMAI#,        ,112
  LOC 26891
  VPU 1,5536
