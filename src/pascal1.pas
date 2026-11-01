@@ -7549,11 +7549,18 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
         FVALU . IVAL := 0 ;
         FVALU . STRTYPE := ' ' ;
         LSTRING := 0 ;
-        if not ( SY in CONSTBEGSYS ) then
+
+        //*********************************************
+        // INTDOTDOT: an integer written right before  
+        // "..", as in "1..3"; the scanner returns     
+        // both as one symbol (see SIMPLETYPE)         
+        //*********************************************
+
+        if not ( SY in CONSTBEGSYS + [ INTDOTDOT ] ) then
           begin
             SET_ERROR_SKIP ( 50 , FSYS + CONSTBEGSYS )
           end (* then *) ;
-        if SY in CONSTBEGSYS then
+        if SY in CONSTBEGSYS + [ INTDOTDOT ] then
           begin
             SIGN := NONE ;
             CONST_ERR := 0 ;
@@ -7723,6 +7730,22 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                       LSP := PTYPE_INT ;
                       FVALU := SYVAL ;
                       INSYMBOL ;
+                      break ;
+                    end (* tag/ca *) ;
+
+        //*********************************************
+        // intconst followed by "..": take the number  
+        // and leave ".." as the current symbol, for   
+        // ranges such as case labels 1..3             
+        //*********************************************
+
+                  INTDOTDOT :
+                    begin
+                      if SIGN = NEG then
+                        SYVAL . IVAL := - SYVAL . IVAL ;
+                      LSP := PTYPE_INT ;
+                      FVALU := SYVAL ;
+                      SY := SYDOTDOT ;
                       break ;
                     end (* tag/ca *) ;
 
