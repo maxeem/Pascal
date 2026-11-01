@@ -9478,6 +9478,14 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                    , LOCAL_SIZE , FALSE ) ;
 
            //************************************************
+           // files can't be record fields either           
+           //************************************************
+
+             if FIELDTYPE <> NIL then
+               if FIELDTYPE -> . FORM = FILES then
+                 SET_ERROR ( 392 ) ;
+
+           //************************************************
            // compute addresses of all new components        
            //************************************************
 
@@ -9941,6 +9949,15 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                           SET_ERROR ( 8 ) ;
                         PACKDATA := PACKST2 ;
                         TYP ( PCODEP , FSYS , LSP , LSIZE , FALSE ) ;
+
+        //************************************************
+        // files can't be array elements: the runtime    
+        // handles only files declared one by one        
+        //************************************************
+
+                        if LSP <> NIL then
+                          if LSP -> . FORM = FILES then
+                            SET_ERROR ( 392 ) ;
                         ARRAY_ERROR := FALSE ;
                         if LSP <> NIL then
                           begin
@@ -11571,7 +11588,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                     LCOUNTER := LCOUNTER + LSIZE ;
                     if LSP -> . FORM = FILES then
                       if LEVEL > 1 then
-                        SET_ERROR ( 398 )
+                        SET_ERROR ( 393 )
 
         //*****************************
         // ONLY GLOBAL FILES SUPPORTED 
@@ -11803,7 +11820,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                 if LSP <> NIL then
                   begin
                     if LSP -> . FORM = FILES then
-                      SET_ERROR ( 398 )
+                      SET_ERROR ( 393 )
                     else
                       if INITVAL then
                         begin
