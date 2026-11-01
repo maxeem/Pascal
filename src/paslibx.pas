@@ -2140,13 +2140,13 @@ function $PASMEM ( FUNCCODE : INTEGER ; X : VOIDPTR ) : VOIDPTR ;
            end (* tag/ca *) ;
 
      //*******************************
-     // dispose does nothing          
+     // dispose does nothing; memory  
+     // from new is given back only   
+     // by release; it used to write  
+     // three trace lines each time   
      //*******************************
 
        8 : begin
-             WRITELN ( '*** DISPOSE has been called ***' ) ;
-             WRITELN ( '*** Argument for DISPOSE = ' , X ) ;
-             WRITELN ( '*** DISPOSE has no effect ***' ) ;
              $PASMEM := NIL
            end (* tag/ca *) ;
        otherwise

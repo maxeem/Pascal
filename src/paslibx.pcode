@@ -6588,39 +6588,6 @@ L14 LAB
  UJP L7
 L15 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 2147
- LDA 1,260
- CSP SIO,136
- LCA M,31,'*** DISPOSE has been called ***'
- LDC I,31
- LDC I,31
- CSP WRS,136
- CSP WLN,136
- CSP EIO,136
-;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 2148
- LDA 1,260
- CSP SIO,136
- LCA M,27,'*** Argument for DISPOSE = '
- LDC I,27
- LDC I,27
- CSP WRS,136
- LOD A,2,116                 ; X                   
- LDC I,8
- CSP WRP,136
- CSP WLN,136
- CSP EIO,136
-;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 2149
- LDA 1,260
- CSP SIO,136
- LCA M,29,'*** DISPOSE has no effect ***'
- LDC I,29
- LDC I,29
- CSP WRS,136
- CSP WLN,136
- CSP EIO,136
-;---- Neues Statement - LCOUNTER-Pegel = 136
  LOC 2151
  LDC N
  STR A,2,72                  ; $PASMEM             
@@ -6653,7 +6620,7 @@ L7 LAB
  LOC 2155
  RET A
 L1 DEF I,256
- DEF I,268
+ DEF I,216
  DEF B,0
 $LI#X025 CST ROUNDX1                25,T,F,F
 ;---- Neues Statement - LCOUNTER-Pegel = 160
@@ -19684,7 +19651,7 @@ L1 DEF I,200
 ;
 ;
 ;
- BGN $PASLIBX             10:56:23 11/01/2026
+ BGN $PASLIBX             14:20:52 11/01/2026
  LDC I,999
  CHK E,0,0
  STP

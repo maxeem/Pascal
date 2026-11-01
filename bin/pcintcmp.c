@@ -12,6 +12,42 @@
 
 #include "pcint.h"
 
+#if !defined (_WIN32)
+#include <sys/mman.h>
+#endif
+
+
+//**********************************************************
+//  the store gets an inaccessible guard area of 64 KB on
+//  each side (not on Windows), so that an access through
+//  nil (which is -1) or past the end of the store faults;
+//  pcint reports the fault as runtime error BADADDRESS
+//  instead of reading or overwriting memory that is not
+//  the program's
+//**********************************************************
+
+#define STORE_GUARD  65536
+
+static char *alloc_store (int size)
+
+{
+#if !defined (_WIN32)
+   size_t page = (size_t) sysconf (_SC_PAGESIZE);
+   size_t body = ((size_t) size + page - 1) / page * page;
+   char *base;
+
+   base = mmap (NULL, body + 2 * STORE_GUARD, PROT_READ | PROT_WRITE,
+                MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+   if (base != MAP_FAILED)
+   {
+      mprotect (base, STORE_GUARD, PROT_NONE);
+      mprotect (base + STORE_GUARD + body, STORE_GUARD, PROT_NONE);
+      return base + STORE_GUARD;
+   }
+#endif
+   return malloc (size);
+}
+
 
 
 
@@ -2806,7 +2842,7 @@ void translate2 (global_store *gs)
 
    gs -> store_alloc = pegel;
    gs -> store_used = pegel;
-   gs -> store0 = malloc (pegel);
+   gs -> store0 = alloc_store (pegel);
 
    memset (gs -> store0, INIT_PATTERN, pegel);
 

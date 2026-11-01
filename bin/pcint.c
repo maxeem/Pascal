@@ -98,6 +98,7 @@
 
 
 #include "pcint.h"
+#include <signal.h>
 
 
 
@@ -895,6 +896,65 @@ static void runtime_error (void *vgs, int errn, char *info)
    print_runtime_error (stdout, vgs, errn, info);
    exit (1000);
 }
+
+
+
+
+//**********************************************************
+//  a memory access outside the program's store (through an
+//  unset or damaged pointer, mostly) used to end pcint with
+//  a segmentation fault and nothing else; it now ends with
+//  a runtime error and the usual traceback
+//**********************************************************
+
+static void *segv_gs = NULL;
+
+#if defined (_WIN32)
+
+static void segv_handler (int sig)
+
+{
+   signal (sig, SIG_DFL);
+   if (segv_gs != NULL)
+   {
+      fflush (stdout);
+      runtime_error (segv_gs, BADADDRESS,
+                     "access outside the program's memory "
+                     "(an unset or damaged pointer?)");
+   }
+   raise (sig);
+}
+
+#else
+
+//**********************************************************
+//  the store has a guard area of 64 KB in front of it
+//  (pcintcmp.c, alloc_store); a fault there comes from an
+//  access through nil, which is -1
+//**********************************************************
+
+static void segv_action (int sig, siginfo_t *info, void *context)
+
+{
+   global_store *gs = segv_gs;
+   char *fault = info -> si_addr;
+
+   signal (sig, SIG_DFL);
+   if (gs != NULL)
+   {
+      fflush (stdout);
+      if (gs -> store0 != NULL &&
+          fault < gs -> store0 && fault >= gs -> store0 - 65536)
+         runtime_error (gs, NILPOINTER,
+                        "access through a nil pointer");
+      runtime_error (gs, BADADDRESS,
+                     "access outside the program's memory "
+                     "(an unset or damaged pointer?)");
+   }
+   raise (sig);
+}
+
+#endif
 
 
 
@@ -4052,7 +4112,8 @@ static char *cup_special (global_store *gs,
       //   second argument = address
       //**********************************************
       //   subfunction 1 = ALLOC
-      //   subfunction 2 = FREE (not here ???)
+      //   subfunction 2 = FREE (the memory from subfunction 1
+      //                    is not reused; FREE does nothing)
       //   subfunction 10 = FILEFCB
       //   subfunction 11 = CMSX a.k.a. system
       //   subfunction 12 = WINX a.k.a. system
@@ -4069,6 +4130,12 @@ static char *cup_special (global_store *gs,
             (gs -> sp) += 4;
             intp = ADDRSTACK (gs -> sp);
             *intp = x;
+            break;
+
+         case 2:
+            (gs -> sp) += 4;
+            intp = ADDRSTACK (gs -> sp);
+            *intp = -1;
             break;
 
          case 10:
@@ -12050,6 +12117,22 @@ int main (int argc, char **argv)
    fprintf (stdout, "\nPCINT (Build %s)\n\n", version_string);
 
    memset (&gs, 0x00, sizeof (global_store));
+
+   segv_gs = &gs;
+#if defined (_WIN32)
+   signal (SIGSEGV, segv_handler);
+#else
+   {
+      struct sigaction sa;
+
+      memset (&sa, 0, sizeof (sa));
+      sa.sa_sigaction = segv_action;
+      sa.sa_flags = SA_SIGINFO;
+      sigemptyset (&sa.sa_mask);
+      sigaction (SIGSEGV, &sa, NULL);
+      sigaction (SIGBUS, &sa, NULL);
+   }
+#endif
 
    strcpy (inpfilename, parmvalues [0]);
    strcpy (includes, parmvalues [1]);

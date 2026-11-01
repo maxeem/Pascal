@@ -6217,7 +6217,14 @@ procedure WRITESET ( var PCODEP : TEXT ; VALX : XCONSTANT ; ELTYPE :
 
    begin (* WRITESET *)
      LEN := VALX . SETX_LENGTH ;
-     S := VALX . SET_STRING -> ;
+
+     //*************************************************
+     // the empty set has no set string (nil); copying
+     // through it read 32500 bytes before the store
+     //*************************************************
+
+     if LEN > 0 then
+       S := VALX . SET_STRING -> ;
 
      //**********
      // %%% set  
