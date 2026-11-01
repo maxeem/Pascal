@@ -6509,7 +6509,20 @@ static void int1 (global_store *gs)
          intp = ADDRSTACK (gs -> sp);
          wert2 = *intp;
 
-         *intp = wert2 / wert1;
+         //*********************************************
+         // division by zero is a runtime error; it
+         // used to stop the interpreter with SIGFPE.
+         // The smallest integer divided by -1 wraps,
+         // like the other integer operations, instead
+         // of trapping.
+         //*********************************************
+
+         if (wert1 == 0)
+            runtime_error (gs, ZERODIVIDE, NULL);
+         if (wert1 == -1)
+            *intp = (int) (0u - (unsigned int) wert2);
+         else
+            *intp = wert2 / wert1;
 
          break;
 
@@ -7477,7 +7490,17 @@ static void int1 (global_store *gs)
          intp = ADDRSTACK (gs -> sp);
          wert2 = *intp;
 
-         *intp = wert2 % wert1;
+         //*********************************************
+         // mod 0 is a runtime error (see DVI);
+         // anything mod -1 is 0
+         //*********************************************
+
+         if (wert1 == 0)
+            runtime_error (gs, ZERODIVIDE, NULL);
+         if (wert1 == -1)
+            *intp = 0;
+         else
+            *intp = wert2 % wert1;
 
          break;
 

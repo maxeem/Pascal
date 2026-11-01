@@ -151,6 +151,7 @@
 #define MINNESTCALL     22
 #define MAXNESTCALL     23
 #define EXPSTACKSPACE   24
+#define ZERODIVIDE      25
 
 static const char *runtime_errmsg [] =
 
@@ -179,6 +180,7 @@ static const char *runtime_errmsg [] =
    "MINNESTCALL",
    "MAXNESTCALL",
    "EXPSTACKSPACE",
+   "ZERODIVIDE",
    NULL
 };
 
