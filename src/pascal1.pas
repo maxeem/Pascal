@@ -2486,6 +2486,16 @@ var MXINT2 : INTEGER ;
 
     LINECNT , OLDLN , PLCNT , ERRLN : INTEGER ;
 
+    //******************************************************
+    // codeline = line of the last symbol read; code is     
+    // generated for symbols already read, so LOC uses it   
+    // (linecnt is the line of the lookahead symbol, often  
+    // the next line: a call at the end of a line was put   
+    // on the next line in tracebacks)                      
+    //******************************************************
+
+    CODELINE : INTEGER ;
+
     //****************************************
     // SWITCHES:                              
     // *********                              
@@ -3743,6 +3753,7 @@ procedure INSYMBOL ;
 
 
    begin (* INSYMBOL *)
+     CODELINE := LINECNT ;
      SYVAL . STRTYPE := ' ' ;
      SYVAL . CONSTCLASS := XINT ;
 
@@ -6079,13 +6090,13 @@ procedure INCR_IC ;
 procedure PUTIC ( var PCODEP : TEXT ) ;
 
    begin (* PUTIC *)
-     if LINECNT > OLDLN then
+     if CODELINE > OLDLN then
        begin
          WRITELN ( PCODEP , ';---- Neues Statement - LCOUNTER-Pegel = '
                    , LCOUNTER : 1 ) ;
-         WRITELN ( PCODEP , ' LOC ' , LINECNT : 1 ) ;
+         WRITELN ( PCODEP , ' LOC ' , CODELINE : 1 ) ;
          INCR_IC ;
-         OLDLN := LINECNT
+         OLDLN := CODELINE
        end (* then *) ;
    end (* PUTIC *) ;
 
@@ -25190,6 +25201,8 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
 
                  WRITELN ( PCODEP , ' LOC ' , LINECNT : 1 ) ;
                  INCR_IC ;
+                 if LINECNT > OLDLN then
+                   OLDLN := LINECNT ;
 
            //************************************************
            // output debug information                       
@@ -25353,6 +25366,8 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                   : 4 ) ;
         WRITELN ( PCODEP , ' LOC ' , LINECNT : 1 ) ;
         INCR_IC ;
+        if LINECNT > OLDLN then
+          OLDLN := LINECNT ;
         STRCOUNTER := 0 ;
 
         //******************************************************
@@ -27269,6 +27284,7 @@ procedure INITSCALARS ;
      OLDICOUNTER := 0 ;
      ICOUNTER := 0 ;
      LINECNT := 0 ;
+     CODELINE := 0 ;
      PLCNT := OPT . PAGESIZE ;
 
      //**************************
