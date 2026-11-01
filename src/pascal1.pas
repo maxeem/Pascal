@@ -22766,7 +22766,16 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                                   begin
                                     if LOP in [ SYLTOP , SYLEOP ,
                                     SYGTOP , SYGEOP ] then
-                                      SET_ERROR ( 131 )
+                                      SET_ERROR ( 131 ) ;
+
+              //******************************************
+              // = and <> compare the arrays byte by byte,
+              // like records; without this the compare  
+              // instruction had no type and PCINT       
+              // couldn't read it                         
+              //******************************************
+
+                                    TYPIND := 'M'
                                   end (* then *)
                                 else
                                   begin
