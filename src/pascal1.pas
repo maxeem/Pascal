@@ -11898,6 +11898,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
       var PROCID : IDP ;
           LCP1 , LCP2 : IDP ;
           FORW : BOOLEAN ;
+          REF_BEFORE_BODY : CHAR ;
           OLDLABEL : LABELRNG ;
           LLC , LCM : ADDRRANGE ;
           MARKP : -> INTEGER ;
@@ -12633,6 +12634,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
             if OPT . SHOW_LISTDEF then
               DEF_PRINTSYMBOL ( PROCID ) ;
             MARK ( MARKP ) ;
+            REF_BEFORE_BODY := PROCID -> . REFERENCEP ;
             ALIGN ( LCOUNTER , MAXDATASIZE ) ;
             SCRATCHPOS := LCOUNTER ;
             LCOUNTER := LCOUNTER + SCRATCHSIZE ;
@@ -12663,12 +12665,13 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
             RELEASE ( MARKP ) ;
 
         //*****************************************
-        // set proc/func reference to blank        
         // internal and recursive references to    
-        // procedures don't count                  
+        // procedures don't count; calls made      
+        // before the body (of a forward           
+        // procedure) do, they gave P221           
         //*****************************************
 
-            PROCID -> . REFERENCEP := ' ' ;
+            PROCID -> . REFERENCEP := REF_BEFORE_BODY ;
           end (* else *) ;
         LEVEL := LEVEL - 1 ;
         TOP := LEVEL ;
