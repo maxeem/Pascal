@@ -29,6 +29,21 @@
 
 #include "oiscach.h"
 
+/*********************************************************/
+/*   INPUT is read lazily (eof known only after a read   */
+/*   fails) when it is a terminal, so that prompts work; */
+/*   redirected or piped input is read like a file, so   */
+/*   that eof (input) is true after the last line        */
+/*********************************************************/
+
+#if defined (_WIN32)
+#include <io.h>
+#define STDIN_TERMINAL() (_isatty (_fileno (stdin)) ? 'Y' : 'N')
+#else
+#include <unistd.h>
+#define STDIN_TERMINAL() (isatty (fileno (stdin)) ? 'Y' : 'N')
+#endif
+
 
 
 

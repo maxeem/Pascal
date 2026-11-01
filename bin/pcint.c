@@ -1123,7 +1123,7 @@ static FILE *file_open (filecb *fcb, char *fmode)
       if (strcmp (fname_neu, "*stdin*") == 0)
       {
          f = stdin;
-         fcb -> terminal = 'Y';
+         fcb -> terminal = STDIN_TERMINAL ();
       }
       else if (strcmp (fname_neu, "*stdout*") == 0)
       {
@@ -1142,7 +1142,7 @@ static FILE *file_open (filecb *fcb, char *fmode)
    if (strcmp (fname, "INPUT") == 0)
    {
       f = stdin;
-      fcb -> terminal = 'Y';
+      fcb -> terminal = STDIN_TERMINAL ();
    }
    else if (strcmp (fname, "OUTPUT") == 0)
    {
