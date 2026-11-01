@@ -16714,33 +16714,25 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                    begin
 
                  //******************************
-                 // schauen, ob typ-bezeichner   
+                 // type or constant identifier? 
+                 // one search over all kinds of 
+                 // names, so that the nearest   
+                 // declaration counts: a program
+                 // constant named text hides the
+                 // standard type text           
                  //******************************
 
                      SID_RC := SEARCHID ( SYID , FALSE , FALSE , [
-                               TYPES ] , LCP ) ;
+                               TYPES , KONST , VARS , FIELD ] , LCP ) ;
                      if LCP <> NIL then
-                       begin
-                         XTYPE := LCP -> . IDTYPE ;
-                         SIZE := XTYPE -> . SIZE ;
-                         INSYMBOL ;
-                       end (* then *)
-                     else
-                       begin
-
-                 //********************************
-                 // schauen, ob const-bezeichner   
-                 //********************************
-
-                         SID_RC := SEARCHID ( SYID , FALSE , FALSE , [
-                                   KONST ] , LCP ) ;
-                         if LCP <> NIL then
-                           begin
-                             XTYPE := LCP -> . IDTYPE ;
-                             SIZE := XTYPE -> . SIZE ;
-                             INSYMBOL ;
-                           end (* then *)
-                       end (* else *)
+                       if LCP -> . KLASS in [ TYPES , KONST ] then
+                         begin
+                           XTYPE := LCP -> . IDTYPE ;
+                           SIZE := XTYPE -> . SIZE ;
+                           INSYMBOL ;
+                         end (* then *)
+                       else
+                         LCP := NIL
                    end (* then *) ;
                  if LCP = NIL then
                    begin

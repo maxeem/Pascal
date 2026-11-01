@@ -50733,7 +50733,7 @@ $PRV0166 ENT P,6,L1  SIZEOF1             ,TFFFF,2,166,,        ,112
  EQU I
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 16720
+ LOC 16725
  MST 1,0
  LDA 1,1240                  ; SYID                
  LDA 6,256
@@ -50743,8 +50743,8 @@ $PRV0166 ENT P,6,L1  SIZEOF1             ,TFFFF,2,166,,        ,112
  LDC B,0
  STR B,6,277
 ;---- Neues Statement - LCOUNTER-Pegel = 280
- LOC 16721
- LCA S1,0,X'80'
+ LOC 16726
+ LCA S1,0,X'f0'
  LDA 6,280
  ZMV -4,0
  LDA 6,124                   ; LCP                 
@@ -50752,87 +50752,60 @@ $PRV0166 ENT P,6,L1  SIZEOF1             ,TFFFF,2,166,,        ,112
  CUP I,11,$PRV0028,144
  STR I,4,176                 ; SID_RC              
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 16722
+ LOC 16727
  LOD A,6,124                 ; LCP                 
  LDC N
  NEQ A
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 16724
- LOD A,6,124                 ; LCP                 
- IND A,20                    ; LCP                 
- STR A,6,128                 ; XTYPE               
-;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 16725
- LOD A,6,128                 ; XTYPE               
- IND I,0                     ; XTYPE               
- STR I,6,120                 ; SIZE                
-;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 16726
- MST 1,0
- CUP P,1,$PRV0010,144
-;---- Neues Statement - LCOUNTER-Pegel = 140
  LOC 16728
- UJP L5
-L4 LAB
-;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 16735
- MST 1,0
- LDA 1,1240                  ; SYID                
- LDA 6,256
- MOV -20
- LDC B,0
- STR B,6,276
- LDC B,0
- STR B,6,277
-;---- Neues Statement - LCOUNTER-Pegel = 280
- LOC 16736
- LCA S1,0,X'40'
- LDA 6,280
- ZMV -4,0
- LDA 6,124                   ; LCP                 
- STR A,6,288
- CUP I,11,$PRV0028,144
- STR I,4,176                 ; SID_RC              
-;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 16737
  LOD A,6,124                 ; LCP                 
- LDC N
- NEQ A
- FJP L6
+ IND H,48                    ; LCP                 
+ ORD
+ LCA S1,0,X'c0'
+ ZIN
+ FJP L5
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 16739
+ LOC 16730
  LOD A,6,124                 ; LCP                 
  IND A,20                    ; LCP                 
  STR A,6,128                 ; XTYPE               
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 16740
+ LOC 16731
  LOD A,6,128                 ; XTYPE               
  IND I,0                     ; XTYPE               
  STR I,6,120                 ; SIZE                
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 16741
+ LOC 16732
  MST 1,0
  CUP P,1,$PRV0010,144
-L6 LAB
+;---- Neues Statement - LCOUNTER-Pegel = 140
+ LOC 16734
+ UJP L6
 L5 LAB
+;---- Neues Statement - LCOUNTER-Pegel = 140
+ LOC 16736
+ LDC N
+ STR A,6,124                 ; LCP                 
+L6 LAB
+L4 LAB
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 16745
+ LOC 16737
  LOD A,6,124                 ; LCP                 
  LDC N
  EQU A
  FJP L7
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 16762
+ LOC 16754
  LOD B,1,593                 ; OPT                 
  STR B,6,132                 ; SAVE_PRCODE         
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 16763
+ LOC 16755
  LDC B,0
  STR B,1,593                 ; OPT                 
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 16764
+ LOC 16756
  MST 5,0
  LDA 5,112                   ; FSYS                
  ZMX 12,0
@@ -50846,74 +50819,74 @@ L3 LAB
  CUP P,5,$PRV0145,144
  VPO 6,136
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 16765
+ LOC 16757
  LOD B,6,132                 ; SAVE_PRCODE         
  STR B,1,593                 ; OPT                 
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 16766
+ LOC 16758
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L8
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 16768
+ LOC 16760
  LOD A,1,1724                ; GATTR               
  IND I,0                     ; GATTR               
  STR I,6,120                 ; SIZE                
 L8 LAB
 L7 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 16771
+ LOC 16763
  LOD A,1,1344                ; PTYPE_INT           
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 16778
+ LOC 16770
  LDC I,0
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 16779
+ LOC 16771
  LDC C,' '
  STR C,1,1736                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 16780
+ LOC 16772
  LOD I,6,120                 ; SIZE                
  STR I,1,1740                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 16781
+ LOC 16773
  RET P
 L1 DEF I,296
- DEF I,148
+ DEF I,122
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 132
- LOC 16791
+ LOC 16783
 ;
 ;
 ;
 ;
 $PRV0167 ENT P,6,L1  DIGITSOF1           ,TFFFF,2,167,,        ,112
- LOC 16791
+ LOC 16783
  VPU 6,132
  LDC I,0
  STR I,6,120                 ; DIGITS              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16792
+ LOC 16784
  LDC N
  STR A,6,124                 ; LCP                 
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16793
+ LOC 16785
  LDC N
  STR A,6,128                 ; XTYPE               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16794
+ LOC 16786
  LOD H,1,1224                ; SY                  
  ORD
  CHK I,0,86
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16795
+ LOC 16787
  XJP N,L5
 L8 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16801
+ LOC 16793
  MST 1,0
  LDA 1,1240                  ; SYID                
  LDA 6,248
@@ -50921,7 +50894,7 @@ L8 LAB
  LDC B,0
  STR B,6,268
 ;---- Neues Statement - LCOUNTER-Pegel = 269
- LOC 16802
+ LOC 16794
  LDC B,0
  STR B,6,269
  LCA S1,0,X'80'
@@ -50932,26 +50905,26 @@ L8 LAB
  CUP I,11,$PRV0028,136
  STR I,4,176                 ; SID_RC              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16803
+ LOC 16795
  LOD A,6,124                 ; LCP                 
  LDC N
  NEQ A
  FJP L9
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16805
+ LOC 16797
  LOD A,6,124                 ; LCP                 
  IND A,20                    ; LCP                 
  STR A,6,128                 ; XTYPE               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16806
+ LOC 16798
  MST 1,0
  CUP P,1,$PRV0010,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16808
+ LOC 16800
  UJP L10
 L9 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16815
+ LOC 16807
  MST 1,0
  LDA 1,1240                  ; SYID                
  LDA 6,248
@@ -50959,7 +50932,7 @@ L9 LAB
  LDC B,0
  STR B,6,268
 ;---- Neues Statement - LCOUNTER-Pegel = 269
- LOC 16816
+ LOC 16808
  LDC B,0
  STR B,6,269
  LCA S1,0,X'40'
@@ -50970,30 +50943,30 @@ L9 LAB
  CUP I,11,$PRV0028,136
  STR I,4,176                 ; SID_RC              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16817
+ LOC 16809
  LOD A,6,124                 ; LCP                 
  LDC N
  NEQ A
  FJP L11
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16819
+ LOC 16811
  LOD A,6,124                 ; LCP                 
  IND A,20                    ; LCP                 
  STR A,6,128                 ; XTYPE               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16820
+ LOC 16812
  MST 1,0
  CUP P,1,$PRV0010,136
 L11 LAB
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16823
+ LOC 16815
  LOD A,6,124                 ; LCP                 
  LDC N
  EQU A
  FJP L12
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16833
+ LOC 16825
  MST 5,0
  LDA 5,112                   ; FSYS                
  ZMX 12,0
@@ -51003,57 +50976,57 @@ L10 LAB
  LDA 6,248
  ZMV -12,0
 ;---- Neues Statement - LCOUNTER-Pegel = 264
- LOC 16834
+ LOC 16826
  LDC B,0
  STR B,6,264
  CUP P,5,$PRV0145,136
  VPO 6,132
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16835
+ LOC 16827
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L13
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16837
+ LOC 16829
  LOD A,1,1724                ; GATTR               
  STR A,6,128                 ; XTYPE               
 L13 LAB
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16840
+ LOC 16832
  UJP L7
 L14 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16843
+ LOC 16835
  LOD I,1,1232                ; SYDIGITS            
  STR I,6,120                 ; DIGITS              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16844
+ LOC 16836
  MST 1,0
  CUP P,1,$PRV0010,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16845
+ LOC 16837
  UJP L7
 L15 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16848
+ LOC 16840
  LOD I,1,1232                ; SYDIGITS            
  STR I,6,120                 ; DIGITS              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16849
+ LOC 16841
  MST 1,0
  CUP P,1,$PRV0010,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16850
+ LOC 16842
  UJP L7
 L6 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16852
+ LOC 16844
  UJP L7
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16853
+ LOC 16845
  DEF I,12
  UJP L14
  DEF I,15
@@ -51062,27 +51035,27 @@ L5 LAB
  UJP L8
 L7 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16854
+ LOC 16846
  LOD A,6,128                 ; XTYPE               
  LDC N
  NEQ A
  FJP L18
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16855
+ LOC 16847
  LOD A,6,128                 ; XTYPE               
  IND H,8                     ; XTYPE               
  LDC I,0
  EQU I
  FJP L19
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16856
+ LOC 16848
  LOD A,6,128                 ; XTYPE               
  IND H,12                    ; XTYPE               
  LDC I,0
  EQU I
  FJP L20
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16857
+ LOC 16849
  LOD A,6,128                 ; XTYPE               
  IND I,20                    ; XTYPE               
  STR I,6,120                 ; DIGITS              
@@ -51090,57 +51063,57 @@ L20 LAB
 L19 LAB
 L18 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16858
+ LOC 16850
  LOD A,1,1344                ; PTYPE_INT           
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16865
+ LOC 16857
  LDC I,0
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16866
+ LOC 16858
  LDC C,' '
  STR C,1,1736                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16867
+ LOC 16859
  LOD I,6,120                 ; DIGITS              
  STR I,1,1740                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16868
+ LOC 16860
  RET P
 L1 DEF I,288
  DEF I,191
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 132
- LOC 16878
+ LOC 16870
 ;
 ;
 ;
 ;
 $PRV0168 ENT P,6,L1  PRECISIONOF1        ,TFFFF,2,168,,        ,112
- LOC 16878
+ LOC 16870
  VPU 6,132
  LDC I,0
  STR I,6,120                 ; PREC                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16879
+ LOC 16871
  LDC N
  STR A,6,124                 ; LCP                 
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16880
+ LOC 16872
  LDC N
  STR A,6,128                 ; XTYPE               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16881
+ LOC 16873
  LOD H,1,1224                ; SY                  
  ORD
  CHK I,0,86
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16882
+ LOC 16874
  XJP N,L5
 L8 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16888
+ LOC 16880
  MST 1,0
  LDA 1,1240                  ; SYID                
  LDA 6,248
@@ -51148,7 +51121,7 @@ L8 LAB
  LDC B,0
  STR B,6,268
 ;---- Neues Statement - LCOUNTER-Pegel = 269
- LOC 16889
+ LOC 16881
  LDC B,0
  STR B,6,269
  LCA S1,0,X'80'
@@ -51159,26 +51132,26 @@ L8 LAB
  CUP I,11,$PRV0028,136
  STR I,4,176                 ; SID_RC              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16890
+ LOC 16882
  LOD A,6,124                 ; LCP                 
  LDC N
  NEQ A
  FJP L9
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16892
+ LOC 16884
  LOD A,6,124                 ; LCP                 
  IND A,20                    ; LCP                 
  STR A,6,128                 ; XTYPE               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16893
+ LOC 16885
  MST 1,0
  CUP P,1,$PRV0010,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16895
+ LOC 16887
  UJP L10
 L9 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16902
+ LOC 16894
  MST 1,0
  LDA 1,1240                  ; SYID                
  LDA 6,248
@@ -51186,7 +51159,7 @@ L9 LAB
  LDC B,0
  STR B,6,268
 ;---- Neues Statement - LCOUNTER-Pegel = 269
- LOC 16903
+ LOC 16895
  LDC B,0
  STR B,6,269
  LCA S1,0,X'40'
@@ -51197,30 +51170,30 @@ L9 LAB
  CUP I,11,$PRV0028,136
  STR I,4,176                 ; SID_RC              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16904
+ LOC 16896
  LOD A,6,124                 ; LCP                 
  LDC N
  NEQ A
  FJP L11
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16906
+ LOC 16898
  LOD A,6,124                 ; LCP                 
  IND A,20                    ; LCP                 
  STR A,6,128                 ; XTYPE               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16907
+ LOC 16899
  MST 1,0
  CUP P,1,$PRV0010,136
 L11 LAB
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16910
+ LOC 16902
  LOD A,6,124                 ; LCP                 
  LDC N
  EQU A
  FJP L12
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16920
+ LOC 16912
  MST 5,0
  LDA 5,112                   ; FSYS                
  ZMX 12,0
@@ -51230,57 +51203,57 @@ L10 LAB
  LDA 6,248
  ZMV -12,0
 ;---- Neues Statement - LCOUNTER-Pegel = 264
- LOC 16921
+ LOC 16913
  LDC B,0
  STR B,6,264
  CUP P,5,$PRV0145,136
  VPO 6,132
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16922
+ LOC 16914
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L13
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16924
+ LOC 16916
  LOD A,1,1724                ; GATTR               
  STR A,6,128                 ; XTYPE               
 L13 LAB
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16927
+ LOC 16919
  UJP L7
 L14 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16930
+ LOC 16922
  LOD I,1,1236                ; SYPREC              
  STR I,6,120                 ; PREC                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16931
+ LOC 16923
  MST 1,0
  CUP P,1,$PRV0010,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16932
+ LOC 16924
  UJP L7
 L15 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16935
+ LOC 16927
  LOD I,1,1236                ; SYPREC              
  STR I,6,120                 ; PREC                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16936
+ LOC 16928
  MST 1,0
  CUP P,1,$PRV0010,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16937
+ LOC 16929
  UJP L7
 L6 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16939
+ LOC 16931
  UJP L7
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16940
+ LOC 16932
  DEF I,12
  UJP L14
  DEF I,15
@@ -51289,27 +51262,27 @@ L5 LAB
  UJP L8
 L7 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16941
+ LOC 16933
  LOD A,6,128                 ; XTYPE               
  LDC N
  NEQ A
  FJP L18
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16942
+ LOC 16934
  LOD A,6,128                 ; XTYPE               
  IND H,8                     ; XTYPE               
  LDC I,0
  EQU I
  FJP L19
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16943
+ LOC 16935
  LOD A,6,128                 ; XTYPE               
  IND H,12                    ; XTYPE               
  LDC I,0
  EQU I
  FJP L20
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16944
+ LOC 16936
  LOD A,6,128                 ; XTYPE               
  IND I,24                    ; XTYPE               
  STR I,6,120                 ; PREC                
@@ -51317,35 +51290,35 @@ L20 LAB
 L19 LAB
 L18 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16945
+ LOC 16937
  LOD A,1,1344                ; PTYPE_INT           
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16952
+ LOC 16944
  LDC I,0
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16953
+ LOC 16945
  LDC C,' '
  STR C,1,1736                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16954
+ LOC 16946
  LOD I,6,120                 ; PREC                
  STR I,1,1740                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 16955
+ LOC 16947
  RET P
 L1 DEF I,288
  DEF I,191
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 120
- LOC 16967
+ LOC 16959
 ;
 ;
 ;
 ;
 $PRV0169 ENT P,6,L1  STR1                ,TFFFF,2,169,,        ,112
- LOC 16967
+ LOC 16959
  VPU 6,120
  MST 4,0
  LDC B,0
@@ -51360,19 +51333,19 @@ $PRV0169 ENT P,6,L1  STR1                ,TFFFF,2,169,,        ,112
  CUP P,5,$PRV0136,128
  VPO 6,120
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16968
+ LOC 16960
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16969
+ LOC 16961
  LOD A,1,1724                ; GATTR               
  LOD A,1,1352                ; PTYPE_CHAR          
  EQU A
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16971
+ LOC 16963
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,240
@@ -51382,28 +51355,28 @@ $PRV0169 ENT P,6,L1  STR1                ,TFFFF,2,169,,        ,112
  STR A,6,248
  CUP P,7,$PRV0071,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16972
+ LOC 16964
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16973
+ LOC 16965
  MST 3,0
  LDC I,85
  STR H,6,240
  CUP P,3,$PRV0114,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16975
+ LOC 16967
  UJP L5
 L4 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16976
+ LOC 16968
  MST 1,0
  LOD A,1,1724                ; GATTR               
  STR A,6,240
  CUP B,3,$PRV0054,128
  FJP L6
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16978
+ LOC 16970
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,240
@@ -51411,11 +51384,11 @@ L4 LAB
  STR A,6,244
  CUP P,5,$PRV0073,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16979
+ LOC 16971
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16980
+ LOC 16972
  MST 3,0
  LDC I,86
  STR H,6,240
@@ -51424,11 +51397,11 @@ L4 LAB
  STR I,6,244
  CUP P,5,$PRV0115,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16982
+ LOC 16974
  UJP L7
 L6 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16983
+ LOC 16975
  MST 1,0
  LDC I,340
  STR H,6,240
@@ -51437,33 +51410,33 @@ L7 LAB
 L5 LAB
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16984
+ LOC 16976
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16985
+ LOC 16977
  LDC I,2
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 16986
+ LOC 16978
  RET P
 L1 DEF I,264
  DEF I,94
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 124
- LOC 17000
+ LOC 16992
 ;
 ;
 ;
 ;
 $PRV0170 ENT P,6,L1  MAXLENGTH1          ,TFFFF,2,170,,        ,112
- LOC 17000
+ LOC 16992
  VPU 6,124
  MST 3,0
  CUP I,1,$PRV0112,128
  STR I,6,120                 ; XBG_LOCAL           
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17001
+ LOC 16993
  MST 4,0
  LDC B,0
  STR B,6,240
@@ -51477,19 +51450,19 @@ $PRV0170 ENT P,6,L1  MAXLENGTH1          ,TFFFF,2,170,,        ,112
  CUP P,5,$PRV0136,128
  VPO 6,124
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17002
+ LOC 16994
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17008
+ LOC 17000
  LOD A,1,1724                ; GATTR               
  LOD A,1,1352                ; PTYPE_CHAR          
  EQU A
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17010
+ LOC 17002
  MST 3,0
  LOD I,6,120                 ; XBG_LOCAL           
  STR I,6,240
@@ -51497,7 +51470,7 @@ $PRV0170 ENT P,6,L1  MAXLENGTH1          ,TFFFF,2,170,,        ,112
  STR B,6,244
  CUP P,5,$PRV0113,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17011
+ LOC 17003
  MST 3,0
  LDC I,51
  STR H,6,240
@@ -51507,18 +51480,18 @@ $PRV0170 ENT P,6,L1  MAXLENGTH1          ,TFFFF,2,170,,        ,112
  STR I,6,248
  CUP P,7,$PRV0116,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17013
+ LOC 17005
  UJP L5
 L4 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17019
+ LOC 17011
  MST 1,0
  LOD A,1,1724                ; GATTR               
  STR A,6,240
  CUP B,3,$PRV0054,128
  FJP L6
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17021
+ LOC 17013
  MST 3,0
  LOD I,6,120                 ; XBG_LOCAL           
  STR I,6,240
@@ -51526,7 +51499,7 @@ L4 LAB
  STR B,6,244
  CUP P,5,$PRV0113,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17022
+ LOC 17014
  MST 3,0
  LDC I,51
  STR H,6,240
@@ -51534,16 +51507,16 @@ L4 LAB
  STR I,6,244
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 248
- LOC 17023
+ LOC 17015
  IND I,0                     ; GATTR               
  STR I,6,248
  CUP P,7,$PRV0116,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17025
+ LOC 17017
  UJP L7
 L6 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17027
+ LOC 17019
  MST 3,0
  LOD I,6,120                 ; XBG_LOCAL           
  STR I,6,240
@@ -51551,47 +51524,47 @@ L6 LAB
  STR B,6,244
  CUP P,5,$PRV0113,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17028
+ LOC 17020
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L8
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17029
+ LOC 17021
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L9
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17038
+ LOC 17030
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17039
+ LOC 17031
  IND B,12                    ; GATTR               
  NOT B
  FJP L10
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17040
+ LOC 17032
  MST 3,0
  LDC I,51
  STR H,6,240
  LDC I,1
  STR I,6,244
 ;---- Neues Statement - LCOUNTER-Pegel = 248
- LOC 17041
+ LOC 17033
  LOD A,1,1724                ; GATTR               
  IND I,0                     ; GATTR               
  LDC I,4
  SBI
  STR I,6,248
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17042
+ LOC 17034
  CUP P,7,$PRV0116,128
  UJP L11
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17050
+ LOC 17042
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,240
@@ -51599,7 +51572,7 @@ L10 LAB
  STR A,6,244
  CUP P,5,$PRV0073,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17051
+ LOC 17043
  MST 3,0
  LDC I,35
  STR H,6,240
@@ -51609,26 +51582,26 @@ L10 LAB
  LDC I,0
  STR I,6,248
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17052
+ LOC 17044
  CUP P,7,$PRV0116,128
 L11 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17054
+ LOC 17046
  UJP L12
 L9 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17063
+ LOC 17055
  MST 3,0
  LDC I,92
  STR H,6,240
  CUP P,3,$PRV0114,128
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17065
+ LOC 17057
  UJP L13
 L8 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17066
+ LOC 17058
  MST 1,0
  LDC I,340
  STR H,6,240
@@ -51637,11 +51610,11 @@ L13 LAB
 L7 LAB
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17068
+ LOC 17060
  UJP L14
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17069
+ LOC 17061
  MST 3,0
  LOD I,6,120                 ; XBG_LOCAL           
  STR I,6,240
@@ -51650,29 +51623,29 @@ L3 LAB
  CUP P,5,$PRV0113,128
 L14 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17070
+ LOC 17062
  LOD A,1,1344                ; PTYPE_INT           
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17071
+ LOC 17063
  RET P
 L1 DEF I,264
  DEF I,177
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 124
- LOC 17085
+ LOC 17077
 ;
 ;
 ;
 ;
 $PRV0171 ENT P,6,L1  LENGTH1             ,TFFFF,2,171,,        ,112
- LOC 17085
+ LOC 17077
  VPU 6,124
  MST 3,0
  CUP I,1,$PRV0112,128
  STR I,6,120                 ; XBG_LOCAL           
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17086
+ LOC 17078
  MST 4,0
  LDC B,0
  STR B,6,240
@@ -51686,19 +51659,19 @@ $PRV0171 ENT P,6,L1  LENGTH1             ,TFFFF,2,171,,        ,112
  CUP P,5,$PRV0136,128
  VPO 6,124
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17087
+ LOC 17079
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17093
+ LOC 17085
  LOD A,1,1724                ; GATTR               
  LOD A,1,1352                ; PTYPE_CHAR          
  EQU A
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17095
+ LOC 17087
  MST 3,0
  LOD I,6,120                 ; XBG_LOCAL           
  STR I,6,240
@@ -51706,7 +51679,7 @@ $PRV0171 ENT P,6,L1  LENGTH1             ,TFFFF,2,171,,        ,112
  STR B,6,244
  CUP P,5,$PRV0113,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17096
+ LOC 17088
  MST 3,0
  LDC I,51
  STR H,6,240
@@ -51716,18 +51689,18 @@ $PRV0171 ENT P,6,L1  LENGTH1             ,TFFFF,2,171,,        ,112
  STR I,6,248
  CUP P,7,$PRV0116,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17098
+ LOC 17090
  UJP L5
 L4 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17104
+ LOC 17096
  MST 1,0
  LOD A,1,1724                ; GATTR               
  STR A,6,240
  CUP B,3,$PRV0054,128
  FJP L6
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17106
+ LOC 17098
  MST 3,0
  LOD I,6,120                 ; XBG_LOCAL           
  STR I,6,240
@@ -51735,7 +51708,7 @@ L4 LAB
  STR B,6,244
  CUP P,5,$PRV0113,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17107
+ LOC 17099
  MST 3,0
  LDC I,51
  STR H,6,240
@@ -51743,16 +51716,16 @@ L4 LAB
  STR I,6,244
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 248
- LOC 17108
+ LOC 17100
  IND I,0                     ; GATTR               
  STR I,6,248
  CUP P,7,$PRV0116,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17110
+ LOC 17102
  UJP L7
 L6 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17112
+ LOC 17104
  MST 3,0
  LOD I,6,120                 ; XBG_LOCAL           
  STR I,6,240
@@ -51760,20 +51733,20 @@ L6 LAB
  STR B,6,244
  CUP P,5,$PRV0113,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17113
+ LOC 17105
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L8
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17114
+ LOC 17106
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L9
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17122
+ LOC 17114
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,240
@@ -51781,7 +51754,7 @@ L6 LAB
  STR A,6,244
  CUP P,5,$PRV0073,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17123
+ LOC 17115
  MST 3,0
  LDC I,35
  STR H,6,240
@@ -51791,25 +51764,25 @@ L6 LAB
  LDC I,2
  STR I,6,248
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17124
+ LOC 17116
  CUP P,7,$PRV0116,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17125
+ LOC 17117
  UJP L10
 L9 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17135
+ LOC 17127
  MST 3,0
  LDC I,92
  STR H,6,240
  CUP P,3,$PRV0114,128
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17137
+ LOC 17129
  UJP L11
 L8 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17138
+ LOC 17130
  MST 1,0
  LDC I,340
  STR H,6,240
@@ -51818,11 +51791,11 @@ L11 LAB
 L7 LAB
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17140
+ LOC 17132
  UJP L12
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17141
+ LOC 17133
  MST 3,0
  LOD I,6,120                 ; XBG_LOCAL           
  STR I,6,240
@@ -51831,36 +51804,36 @@ L3 LAB
  CUP P,5,$PRV0113,128
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17142
+ LOC 17134
  LOD A,1,1344                ; PTYPE_INT           
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17143
+ LOC 17135
  RET P
 L1 DEF I,264
  DEF I,152
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 120
- LOC 17149
+ LOC 17141
 ;
 ;
 ;
 ;
 $PRV0172 ENT P,6,L1  STRRESULTP1         ,TFFFF,2,172,,        ,112
- LOC 17149
+ LOC 17141
  VPU 6,120
  LOD B,3,132                 ; STRING_RESULT       
  NOT B
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 124
- LOC 17150
+ LOC 17142
  MST 1,0
  LDC I,354
  STR H,6,240
  CUP P,3,$PRV0013,128
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17159
+ LOC 17151
  MST 3,0
  LDC I,54
  STR H,6,240
@@ -51874,39 +51847,39 @@ L3 LAB
  ADI
  STR I,6,252
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17160
+ LOC 17152
  CUP P,9,$PRV0117,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17161
+ LOC 17153
  LOD A,1,1360                ; PTYPE_ANY           
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17162
+ LOC 17154
  RET P
 L1 DEF I,256
  DEF I,33
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 120
- LOC 17168
+ LOC 17160
 ;
 ;
 ;
 ;
 $PRV0173 ENT P,6,L1  STRRESULT1          ,TFFFF,2,173,,        ,112
- LOC 17168
+ LOC 17160
  VPU 6,120
  LOD B,3,132                 ; STRING_RESULT       
  NOT B
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 124
- LOC 17169
+ LOC 17161
  MST 1,0
  LDC I,354
  STR H,6,240
  CUP P,3,$PRV0013,128
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17178
+ LOC 17170
  MST 3,0
  LDC I,50
  STR H,6,240
@@ -51916,7 +51889,7 @@ L3 LAB
  STR I,6,248
  CUP P,7,$PRV0116,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17179
+ LOC 17171
  MST 3,0
  LDC I,88
  STR H,6,240
@@ -51926,23 +51899,23 @@ L3 LAB
  STR I,6,248
  CUP P,7,$PRV0116,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17180
+ LOC 17172
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17181
+ LOC 17173
  RET P
 L1 DEF I,256
  DEF I,36
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 120
- LOC 17187
+ LOC 17179
 ;
 ;
 ;
 ;
 $PRV0174 ENT P,6,L1  RESULTP1            ,TFFFF,2,174,,        ,112
- LOC 17187
+ LOC 17179
  VPU 6,120
  MST 2,0
  LOD A,2,132                 ; FPROCP              
@@ -51952,14 +51925,14 @@ $PRV0174 ENT P,6,L1  RESULTP1            ,TFFFF,2,174,,        ,112
  EQU C
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 124
- LOC 17188
+ LOC 17180
  MST 1,0
  LDC I,356
  STR H,6,240
  CUP P,3,$PRV0013,128
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17197
+ LOC 17189
  MST 3,0
  LDC I,50
  STR H,6,240
@@ -51969,23 +51942,23 @@ L3 LAB
  STR I,6,248
  CUP P,7,$PRV0116,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17198
+ LOC 17190
  LOD A,1,1360                ; PTYPE_ANY           
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17199
+ LOC 17191
  RET P
 L1 DEF I,256
  DEF I,31
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 124
- LOC 17214
+ LOC 17206
 ;
 ;
 ;
 ;
 $PRV0175 ENT P,6,L1  REPEATSTR1          ,TFFFF,2,175,,        ,112
- LOC 17214
+ LOC 17206
  VPU 6,124
  MST 4,0
  LDC B,0
@@ -51998,30 +51971,30 @@ $PRV0175 ENT P,6,L1  REPEATSTR1          ,TFFFF,2,175,,        ,112
  LDA 6,244
  ZMV -12,0
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17215
+ LOC 17207
  CUP P,5,$PRV0136,128
  VPO 6,124
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17221
+ LOC 17213
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17222
+ LOC 17214
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17224
+ LOC 17216
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L5
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17226
+ LOC 17218
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,240
@@ -52029,7 +52002,7 @@ $PRV0175 ENT P,6,L1  REPEATSTR1          ,TFFFF,2,175,,        ,112
  STR A,6,244
  CUP P,5,$PRV0073,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17227
+ LOC 17219
  MST 3,0
  LDC I,88
  STR H,6,240
@@ -52037,7 +52010,7 @@ $PRV0175 ENT P,6,L1  REPEATSTR1          ,TFFFF,2,175,,        ,112
  STR I,6,244
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 248
- LOC 17228
+ LOC 17220
  IND I,0                     ; GATTR               
  LDC I,4
  SBI
@@ -52045,37 +52018,37 @@ $PRV0175 ENT P,6,L1  REPEATSTR1          ,TFFFF,2,175,,        ,112
  CUP P,7,$PRV0116,128
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17230
+ LOC 17222
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17231
+ LOC 17223
  LDC I,2
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17233
+ LOC 17225
  UJP L6
 L4 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17235
+ LOC 17227
  MST 1,0
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,6,240
 ;---- Neues Statement - LCOUNTER-Pegel = 244
- LOC 17236
+ LOC 17228
  LOD A,1,1724                ; GATTR               
  STR A,6,244
  CUP I,5,$PRV0053,128
  STR I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17237
+ LOC 17229
  LOD I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17238
+ LOC 17230
  XJP N,L9
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17239
+ LOC 17231
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,240
@@ -52085,21 +52058,21 @@ L12 LAB
  STR A,6,248
  CUP P,7,$PRV0071,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17240
+ LOC 17232
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17241
+ LOC 17233
  MST 3,0
  LDC I,85
  STR H,6,240
  CUP P,3,$PRV0114,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17242
+ LOC 17234
  UJP L11
 L13 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17244
+ LOC 17236
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,240
@@ -52107,36 +52080,36 @@ L13 LAB
  STR A,6,244
  CUP P,5,$PRV0073,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17245
+ LOC 17237
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17246
+ LOC 17238
  MST 3,0
  LDC I,86
  STR H,6,240
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 244
- LOC 17247
+ LOC 17239
  IND I,0                     ; GATTR               
  STR I,6,244
  CUP P,5,$PRV0115,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17248
+ LOC 17240
  UJP L11
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17251
+ LOC 17243
  MST 1,0
  LDC I,342
  STR H,6,240
  CUP P,3,$PRV0013,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17253
+ LOC 17245
  LDC N
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17254
+ LOC 17246
  UJP L11
 L9 LAB
  DEF I,4
@@ -52145,50 +52118,50 @@ L9 LAB
  UJP L13
 L11 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17255
+ LOC 17247
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17256
+ LOC 17248
  LDC I,2
  STR H,1,1732                ; GATTR               
 L6 LAB
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17264
+ LOC 17256
  LOD H,1,1224                ; SY                  
  LDC I,21
  EQU I
  FJP L15
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17266
+ LOC 17258
  MST 1,0
  CUP P,1,$PRV0010,128
  UJP L16
 L15 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17268
+ LOC 17260
  MST 1,0
  LDC I,355
  STR H,6,240
  CUP P,3,$PRV0013,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17269
+ LOC 17261
  LOD H,1,1224                ; SY                  
  LDC I,18
  EQU I
  FJP L17
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17271
+ LOC 17263
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17273
+ LOC 17265
  UJP L2
 L17 LAB
 L16 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17281
+ LOC 17273
  MST 4,0
  LDC B,0
  STR B,6,240
@@ -52202,29 +52175,29 @@ L16 LAB
  CUP P,5,$PRV0136,128
  VPO 6,124
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17282
+ LOC 17274
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L18
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17283
+ LOC 17275
  LOD A,1,1724                ; GATTR               
  LOD A,1,1344                ; PTYPE_INT           
  NEQ A
  FJP L19
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17284
+ LOC 17276
  MST 1,0
  LDC I,191
  STR H,6,240
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17285
+ LOC 17277
  CUP P,3,$PRV0013,128
  UJP L20
 L19 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17286
+ LOC 17278
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,240
@@ -52236,57 +52209,57 @@ L19 LAB
 L20 LAB
 L18 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17292
+ LOC 17284
  MST 3,0
  LDC I,96
  STR H,6,240
  CUP P,3,$PRV0114,128
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17293
+ LOC 17285
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 L2 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 128
- LOC 17294
+ LOC 17286
  RET P
 L1 DEF I,264
  DEF I,234
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 17312
+ LOC 17304
 ;
 ;
 ;
 ;
 $PRV0176 ENT P,6,L1  SUBSTR1             ,TFFFF,2,176,,        ,112
- LOC 17312
+ LOC 17304
  VPU 6,140
  LOD I,5,160                 ; LCPARM              
  CHK I,0,16777215
  STR I,6,128                 ; LCPARM1             
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17313
+ LOC 17305
  LOD I,6,128                 ; LCPARM1             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,6,132                 ; LCPARM2             
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17314
+ LOC 17306
  LOD I,6,132                 ; LCPARM2             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,6,136                 ; LCPARM3             
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17315
+ LOC 17307
  LOD I,6,136                 ; LCPARM3             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,5,160                 ; LCPARM              
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17321
+ LOC 17313
  MST 4,0
  LDC B,0
  STR B,6,256
@@ -52298,30 +52271,30 @@ $PRV0176 ENT P,6,L1  SUBSTR1             ,TFFFF,2,176,,        ,112
  LDA 6,260
  ZMV -12,0
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17322
+ LOC 17314
  CUP P,5,$PRV0136,144
  VPO 6,140
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17323
+ LOC 17315
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17324
+ LOC 17316
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17326
+ LOC 17318
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L5
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17328
+ LOC 17320
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -52329,7 +52302,7 @@ $PRV0176 ENT P,6,L1  SUBSTR1             ,TFFFF,2,176,,        ,112
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17329
+ LOC 17321
  MST 3,0
  LDC I,88
  STR H,6,256
@@ -52337,7 +52310,7 @@ $PRV0176 ENT P,6,L1  SUBSTR1             ,TFFFF,2,176,,        ,112
  STR I,6,260
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 264
- LOC 17330
+ LOC 17322
  IND I,0                     ; GATTR               
  LDC I,4
  SBI
@@ -52345,37 +52318,37 @@ $PRV0176 ENT P,6,L1  SUBSTR1             ,TFFFF,2,176,,        ,112
  CUP P,7,$PRV0116,144
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17332
+ LOC 17324
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17333
+ LOC 17325
  LDC I,2
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17335
+ LOC 17327
  UJP L6
 L4 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17337
+ LOC 17329
  MST 1,0
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,6,256
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 17338
+ LOC 17330
  LOD A,1,1724                ; GATTR               
  STR A,6,260
  CUP I,5,$PRV0053,144
  STR I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17339
+ LOC 17331
  LOD I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17340
+ LOC 17332
  XJP N,L9
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17341
+ LOC 17333
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -52385,21 +52358,21 @@ L12 LAB
  STR A,6,264
  CUP P,7,$PRV0071,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17342
+ LOC 17334
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17343
+ LOC 17335
  MST 3,0
  LDC I,85
  STR H,6,256
  CUP P,3,$PRV0114,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17344
+ LOC 17336
  UJP L11
 L13 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17346
+ LOC 17338
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -52407,36 +52380,36 @@ L13 LAB
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17347
+ LOC 17339
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17348
+ LOC 17340
  MST 3,0
  LDC I,86
  STR H,6,256
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 17349
+ LOC 17341
  IND I,0                     ; GATTR               
  STR I,6,260
  CUP P,5,$PRV0115,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17350
+ LOC 17342
  UJP L11
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17353
+ LOC 17345
  MST 1,0
  LDC I,342
  STR H,6,256
  CUP P,3,$PRV0013,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17355
+ LOC 17347
  LDC N
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17356
+ LOC 17348
  UJP L11
 L9 LAB
  DEF I,4
@@ -52445,29 +52418,29 @@ L9 LAB
  UJP L13
 L11 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17357
+ LOC 17349
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17358
+ LOC 17350
  LDC I,2
  STR H,1,1732                ; GATTR               
 L6 LAB
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17366
+ LOC 17358
  LOD I,5,164                 ; LCWORK              
  CHK I,0,16777215
  STR I,6,124                 ; LLC                 
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17367
+ LOC 17359
  LOD I,6,124                 ; LLC                 
  LDC I,8
  ADI
  CHK I,0,16777215
  STR I,5,164                 ; LCWORK              
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17368
+ LOC 17360
  MST 3,0
  LDC I,50
  STR H,6,256
@@ -52477,7 +52450,7 @@ L3 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17369
+ LOC 17361
  MST 3,0
  LDC I,89
  STR H,6,256
@@ -52488,7 +52461,7 @@ L3 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17370
+ LOC 17362
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -52501,40 +52474,40 @@ L3 LAB
  STR I,6,268
  CUP P,9,$PRV0117,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17371
+ LOC 17363
  LOD H,1,1224                ; SY                  
  LDC I,21
  EQU I
  FJP L15
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17373
+ LOC 17365
  MST 1,0
  CUP P,1,$PRV0010,144
  UJP L16
 L15 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17375
+ LOC 17367
  MST 1,0
  LDC I,355
  STR H,6,256
  CUP P,3,$PRV0013,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17376
+ LOC 17368
  LOD H,1,1224                ; SY                  
  LDC I,18
  EQU I
  FJP L17
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17378
+ LOC 17370
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17380
+ LOC 17372
  UJP L2
 L17 LAB
 L16 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17387
+ LOC 17379
  MST 4,0
  LDC B,0
  STR B,6,256
@@ -52546,33 +52519,33 @@ L16 LAB
  LDA 6,260
  ZMV -12,0
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17388
+ LOC 17380
  CUP P,5,$PRV0136,144
  VPO 6,140
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17389
+ LOC 17381
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L18
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17390
+ LOC 17382
  LOD A,1,1724                ; GATTR               
  LOD A,1,1344                ; PTYPE_INT           
  NEQ A
  FJP L19
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17391
+ LOC 17383
  MST 1,0
  LDC I,191
  STR H,6,256
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17392
+ LOC 17384
  CUP P,3,$PRV0013,144
  UJP L20
 L19 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17394
+ LOC 17386
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -52582,7 +52555,7 @@ L19 LAB
  STR A,6,264
  CUP P,7,$PRV0071,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17395
+ LOC 17387
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -52592,24 +52565,24 @@ L19 LAB
  LOD H,1,1434                ; LEVEL               
  STR I,6,264
 ;---- Neues Statement - LCOUNTER-Pegel = 268
- LOC 17396
+ LOC 17388
  LOD I,6,132                 ; LCPARM2             
  STR I,6,268
  CUP P,9,$PRV0117,144
 L20 LAB
 L18 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17403
+ LOC 17395
  LOD H,1,1224                ; SY                  
  LDC I,21
  EQU I
  FJP L21
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17405
+ LOC 17397
  MST 1,0
  CUP P,1,$PRV0010,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17406
+ LOC 17398
  MST 4,0
  LDC B,0
  STR B,6,256
@@ -52623,29 +52596,29 @@ L18 LAB
  CUP P,5,$PRV0136,144
  VPO 6,140
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17407
+ LOC 17399
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L22
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17408
+ LOC 17400
  LOD A,1,1724                ; GATTR               
  LOD A,1,1344                ; PTYPE_INT           
  NEQ A
  FJP L23
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17409
+ LOC 17401
  MST 1,0
  LDC I,191
  STR H,6,256
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17410
+ LOC 17402
  CUP P,3,$PRV0013,144
  UJP L24
 L23 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17411
+ LOC 17403
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -52657,7 +52630,7 @@ L23 LAB
 L24 LAB
 L22 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17412
+ LOC 17404
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -52669,14 +52642,14 @@ L22 LAB
  LOD I,6,136                 ; LCPARM3             
  STR I,6,268
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17413
+ LOC 17405
  CUP P,9,$PRV0117,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17420
+ LOC 17412
  UJP L25
 L21 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17422
+ LOC 17414
  MST 3,0
  LDC I,51
  STR H,6,256
@@ -52687,7 +52660,7 @@ L21 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17423
+ LOC 17415
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -52699,11 +52672,11 @@ L21 LAB
  LOD I,6,136                 ; LCPARM3             
  STR I,6,268
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17424
+ LOC 17416
  CUP P,9,$PRV0117,144
 L25 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17426
+ LOC 17418
  MST 5,0
  LOD A,5,128                 ; PROCID              
  STR A,6,256
@@ -52712,51 +52685,51 @@ L25 LAB
  STR I,6,260
  CUP P,5,$PRV0147,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17427
+ LOC 17419
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 L2 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17428
+ LOC 17420
  RET P
 L1 DEF I,280
  DEF I,407
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 17446
+ LOC 17438
 ;
 ;
 ;
 ;
 $PRV0177 ENT P,6,L1  LEFT1               ,TFFFF,2,177,,        ,112
- LOC 17446
+ LOC 17438
  VPU 6,140
  LOD I,5,160                 ; LCPARM              
  CHK I,0,16777215
  STR I,6,128                 ; LCPARM1             
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17447
+ LOC 17439
  LOD I,6,128                 ; LCPARM1             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,6,132                 ; LCPARM2             
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17448
+ LOC 17440
  LOD I,6,132                 ; LCPARM2             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,6,136                 ; LCPARM3             
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17449
+ LOC 17441
  LOD I,6,136                 ; LCPARM3             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,5,160                 ; LCPARM              
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17455
+ LOC 17447
  MST 4,0
  LDC B,0
  STR B,6,256
@@ -52768,30 +52741,30 @@ $PRV0177 ENT P,6,L1  LEFT1               ,TFFFF,2,177,,        ,112
  LDA 6,260
  ZMV -12,0
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17456
+ LOC 17448
  CUP P,5,$PRV0136,144
  VPO 6,140
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17457
+ LOC 17449
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17458
+ LOC 17450
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17460
+ LOC 17452
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L5
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17462
+ LOC 17454
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -52799,7 +52772,7 @@ $PRV0177 ENT P,6,L1  LEFT1               ,TFFFF,2,177,,        ,112
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17463
+ LOC 17455
  MST 3,0
  LDC I,88
  STR H,6,256
@@ -52807,7 +52780,7 @@ $PRV0177 ENT P,6,L1  LEFT1               ,TFFFF,2,177,,        ,112
  STR I,6,260
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 264
- LOC 17464
+ LOC 17456
  IND I,0                     ; GATTR               
  LDC I,4
  SBI
@@ -52815,37 +52788,37 @@ $PRV0177 ENT P,6,L1  LEFT1               ,TFFFF,2,177,,        ,112
  CUP P,7,$PRV0116,144
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17466
+ LOC 17458
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17467
+ LOC 17459
  LDC I,2
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17469
+ LOC 17461
  UJP L6
 L4 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17471
+ LOC 17463
  MST 1,0
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,6,256
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 17472
+ LOC 17464
  LOD A,1,1724                ; GATTR               
  STR A,6,260
  CUP I,5,$PRV0053,144
  STR I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17473
+ LOC 17465
  LOD I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17474
+ LOC 17466
  XJP N,L9
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17475
+ LOC 17467
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -52855,21 +52828,21 @@ L12 LAB
  STR A,6,264
  CUP P,7,$PRV0071,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17476
+ LOC 17468
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17477
+ LOC 17469
  MST 3,0
  LDC I,85
  STR H,6,256
  CUP P,3,$PRV0114,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17478
+ LOC 17470
  UJP L11
 L13 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17480
+ LOC 17472
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -52877,36 +52850,36 @@ L13 LAB
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17481
+ LOC 17473
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17482
+ LOC 17474
  MST 3,0
  LDC I,86
  STR H,6,256
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 17483
+ LOC 17475
  IND I,0                     ; GATTR               
  STR I,6,260
  CUP P,5,$PRV0115,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17484
+ LOC 17476
  UJP L11
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17487
+ LOC 17479
  MST 1,0
  LDC I,342
  STR H,6,256
  CUP P,3,$PRV0013,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17489
+ LOC 17481
  LDC N
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17490
+ LOC 17482
  UJP L11
 L9 LAB
  DEF I,4
@@ -52915,29 +52888,29 @@ L9 LAB
  UJP L13
 L11 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17491
+ LOC 17483
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17492
+ LOC 17484
  LDC I,2
  STR H,1,1732                ; GATTR               
 L6 LAB
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17500
+ LOC 17492
  LOD I,5,164                 ; LCWORK              
  CHK I,0,16777215
  STR I,6,124                 ; LLC                 
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17501
+ LOC 17493
  LOD I,6,124                 ; LLC                 
  LDC I,8
  ADI
  CHK I,0,16777215
  STR I,5,164                 ; LCWORK              
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17502
+ LOC 17494
  MST 3,0
  LDC I,50
  STR H,6,256
@@ -52947,7 +52920,7 @@ L3 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17503
+ LOC 17495
  MST 3,0
  LDC I,89
  STR H,6,256
@@ -52958,7 +52931,7 @@ L3 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17504
+ LOC 17496
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -52971,40 +52944,40 @@ L3 LAB
  STR I,6,268
  CUP P,9,$PRV0117,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17505
+ LOC 17497
  LOD H,1,1224                ; SY                  
  LDC I,21
  EQU I
  FJP L15
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17507
+ LOC 17499
  MST 1,0
  CUP P,1,$PRV0010,144
  UJP L16
 L15 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17509
+ LOC 17501
  MST 1,0
  LDC I,355
  STR H,6,256
  CUP P,3,$PRV0013,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17510
+ LOC 17502
  LOD H,1,1224                ; SY                  
  LDC I,18
  EQU I
  FJP L17
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17512
+ LOC 17504
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17514
+ LOC 17506
  UJP L2
 L17 LAB
 L16 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17521
+ LOC 17513
  MST 4,0
  LDC B,0
  STR B,6,256
@@ -53016,33 +52989,33 @@ L16 LAB
  LDA 6,260
  ZMV -12,0
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17522
+ LOC 17514
  CUP P,5,$PRV0136,144
  VPO 6,140
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17523
+ LOC 17515
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L18
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17524
+ LOC 17516
  LOD A,1,1724                ; GATTR               
  LOD A,1,1344                ; PTYPE_INT           
  NEQ A
  FJP L19
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17525
+ LOC 17517
  MST 1,0
  LDC I,191
  STR H,6,256
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17526
+ LOC 17518
  CUP P,3,$PRV0013,144
  UJP L20
 L19 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17528
+ LOC 17520
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -53052,7 +53025,7 @@ L19 LAB
  STR A,6,264
  CUP P,7,$PRV0071,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17529
+ LOC 17521
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -53062,14 +53035,14 @@ L19 LAB
  LOD H,1,1434                ; LEVEL               
  STR I,6,264
 ;---- Neues Statement - LCOUNTER-Pegel = 268
- LOC 17530
+ LOC 17522
  LOD I,6,132                 ; LCPARM2             
  STR I,6,268
  CUP P,9,$PRV0117,144
 L20 LAB
 L18 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17532
+ LOC 17524
  MST 5,0
  LOD A,5,128                 ; PROCID              
  STR A,6,256
@@ -53078,51 +53051,51 @@ L18 LAB
  STR I,6,260
  CUP P,5,$PRV0147,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17533
+ LOC 17525
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 L2 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17534
+ LOC 17526
  RET P
 L1 DEF I,280
  DEF I,314
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 17552
+ LOC 17544
 ;
 ;
 ;
 ;
 $PRV0178 ENT P,6,L1  RIGHT1              ,TFFFF,2,178,,        ,112
- LOC 17552
+ LOC 17544
  VPU 6,140
  LOD I,5,160                 ; LCPARM              
  CHK I,0,16777215
  STR I,6,128                 ; LCPARM1             
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17553
+ LOC 17545
  LOD I,6,128                 ; LCPARM1             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,6,132                 ; LCPARM2             
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17554
+ LOC 17546
  LOD I,6,132                 ; LCPARM2             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,6,136                 ; LCPARM3             
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17555
+ LOC 17547
  LOD I,6,136                 ; LCPARM3             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,5,160                 ; LCPARM              
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17561
+ LOC 17553
  MST 4,0
  LDC B,0
  STR B,6,256
@@ -53134,30 +53107,30 @@ $PRV0178 ENT P,6,L1  RIGHT1              ,TFFFF,2,178,,        ,112
  LDA 6,260
  ZMV -12,0
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17562
+ LOC 17554
  CUP P,5,$PRV0136,144
  VPO 6,140
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17563
+ LOC 17555
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17564
+ LOC 17556
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17566
+ LOC 17558
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L5
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17568
+ LOC 17560
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -53165,7 +53138,7 @@ $PRV0178 ENT P,6,L1  RIGHT1              ,TFFFF,2,178,,        ,112
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17569
+ LOC 17561
  MST 3,0
  LDC I,88
  STR H,6,256
@@ -53173,7 +53146,7 @@ $PRV0178 ENT P,6,L1  RIGHT1              ,TFFFF,2,178,,        ,112
  STR I,6,260
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 264
- LOC 17570
+ LOC 17562
  IND I,0                     ; GATTR               
  LDC I,4
  SBI
@@ -53181,37 +53154,37 @@ $PRV0178 ENT P,6,L1  RIGHT1              ,TFFFF,2,178,,        ,112
  CUP P,7,$PRV0116,144
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17572
+ LOC 17564
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17573
+ LOC 17565
  LDC I,2
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17575
+ LOC 17567
  UJP L6
 L4 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17577
+ LOC 17569
  MST 1,0
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,6,256
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 17578
+ LOC 17570
  LOD A,1,1724                ; GATTR               
  STR A,6,260
  CUP I,5,$PRV0053,144
  STR I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17579
+ LOC 17571
  LOD I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17580
+ LOC 17572
  XJP N,L9
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17581
+ LOC 17573
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -53221,21 +53194,21 @@ L12 LAB
  STR A,6,264
  CUP P,7,$PRV0071,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17582
+ LOC 17574
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17583
+ LOC 17575
  MST 3,0
  LDC I,85
  STR H,6,256
  CUP P,3,$PRV0114,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17584
+ LOC 17576
  UJP L11
 L13 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17586
+ LOC 17578
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -53243,36 +53216,36 @@ L13 LAB
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17587
+ LOC 17579
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17588
+ LOC 17580
  MST 3,0
  LDC I,86
  STR H,6,256
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 17589
+ LOC 17581
  IND I,0                     ; GATTR               
  STR I,6,260
  CUP P,5,$PRV0115,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17590
+ LOC 17582
  UJP L11
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17593
+ LOC 17585
  MST 1,0
  LDC I,342
  STR H,6,256
  CUP P,3,$PRV0013,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17595
+ LOC 17587
  LDC N
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17596
+ LOC 17588
  UJP L11
 L9 LAB
  DEF I,4
@@ -53281,29 +53254,29 @@ L9 LAB
  UJP L13
 L11 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17597
+ LOC 17589
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17598
+ LOC 17590
  LDC I,2
  STR H,1,1732                ; GATTR               
 L6 LAB
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17606
+ LOC 17598
  LOD I,5,164                 ; LCWORK              
  CHK I,0,16777215
  STR I,6,124                 ; LLC                 
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17607
+ LOC 17599
  LOD I,6,124                 ; LLC                 
  LDC I,8
  ADI
  CHK I,0,16777215
  STR I,5,164                 ; LCWORK              
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17608
+ LOC 17600
  MST 3,0
  LDC I,50
  STR H,6,256
@@ -53313,7 +53286,7 @@ L3 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17609
+ LOC 17601
  MST 3,0
  LDC I,89
  STR H,6,256
@@ -53324,7 +53297,7 @@ L3 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17610
+ LOC 17602
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -53337,40 +53310,40 @@ L3 LAB
  STR I,6,268
  CUP P,9,$PRV0117,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17611
+ LOC 17603
  LOD H,1,1224                ; SY                  
  LDC I,21
  EQU I
  FJP L15
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17613
+ LOC 17605
  MST 1,0
  CUP P,1,$PRV0010,144
  UJP L16
 L15 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17615
+ LOC 17607
  MST 1,0
  LDC I,355
  STR H,6,256
  CUP P,3,$PRV0013,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17616
+ LOC 17608
  LOD H,1,1224                ; SY                  
  LDC I,18
  EQU I
  FJP L17
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17618
+ LOC 17610
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17620
+ LOC 17612
  UJP L2
 L17 LAB
 L16 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17627
+ LOC 17619
  MST 4,0
  LDC B,0
  STR B,6,256
@@ -53382,33 +53355,33 @@ L16 LAB
  LDA 6,260
  ZMV -12,0
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17628
+ LOC 17620
  CUP P,5,$PRV0136,144
  VPO 6,140
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17629
+ LOC 17621
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L18
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17630
+ LOC 17622
  LOD A,1,1724                ; GATTR               
  LOD A,1,1344                ; PTYPE_INT           
  NEQ A
  FJP L19
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17631
+ LOC 17623
  MST 1,0
  LDC I,191
  STR H,6,256
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17632
+ LOC 17624
  CUP P,3,$PRV0013,144
  UJP L20
 L19 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17634
+ LOC 17626
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -53418,7 +53391,7 @@ L19 LAB
  STR A,6,264
  CUP P,7,$PRV0071,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17635
+ LOC 17627
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -53428,14 +53401,14 @@ L19 LAB
  LOD H,1,1434                ; LEVEL               
  STR I,6,264
 ;---- Neues Statement - LCOUNTER-Pegel = 268
- LOC 17636
+ LOC 17628
  LOD I,6,132                 ; LCPARM2             
  STR I,6,268
  CUP P,9,$PRV0117,144
 L20 LAB
 L18 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17638
+ LOC 17630
  MST 5,0
  LOD A,5,128                 ; PROCID              
  STR A,6,256
@@ -53444,51 +53417,51 @@ L18 LAB
  STR I,6,260
  CUP P,5,$PRV0147,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17639
+ LOC 17631
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 L2 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17640
+ LOC 17632
  RET P
 L1 DEF I,280
  DEF I,314
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 17658
+ LOC 17650
 ;
 ;
 ;
 ;
 $PRV0179 ENT P,6,L1  DELETE1             ,TFFFF,2,179,,        ,112
- LOC 17658
+ LOC 17650
  VPU 6,140
  LOD I,5,160                 ; LCPARM              
  CHK I,0,16777215
  STR I,6,128                 ; LCPARM1             
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17659
+ LOC 17651
  LOD I,6,128                 ; LCPARM1             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,6,132                 ; LCPARM2             
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17660
+ LOC 17652
  LOD I,6,132                 ; LCPARM2             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,6,136                 ; LCPARM3             
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17661
+ LOC 17653
  LOD I,6,136                 ; LCPARM3             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,5,160                 ; LCPARM              
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17667
+ LOC 17659
  MST 4,0
  LDC B,0
  STR B,6,256
@@ -53500,30 +53473,30 @@ $PRV0179 ENT P,6,L1  DELETE1             ,TFFFF,2,179,,        ,112
  LDA 6,260
  ZMV -12,0
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17668
+ LOC 17660
  CUP P,5,$PRV0136,144
  VPO 6,140
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17669
+ LOC 17661
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17670
+ LOC 17662
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17672
+ LOC 17664
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L5
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17674
+ LOC 17666
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -53531,7 +53504,7 @@ $PRV0179 ENT P,6,L1  DELETE1             ,TFFFF,2,179,,        ,112
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17675
+ LOC 17667
  MST 3,0
  LDC I,88
  STR H,6,256
@@ -53539,7 +53512,7 @@ $PRV0179 ENT P,6,L1  DELETE1             ,TFFFF,2,179,,        ,112
  STR I,6,260
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 264
- LOC 17676
+ LOC 17668
  IND I,0                     ; GATTR               
  LDC I,4
  SBI
@@ -53547,37 +53520,37 @@ $PRV0179 ENT P,6,L1  DELETE1             ,TFFFF,2,179,,        ,112
  CUP P,7,$PRV0116,144
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17678
+ LOC 17670
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17679
+ LOC 17671
  LDC I,2
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17681
+ LOC 17673
  UJP L6
 L4 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17683
+ LOC 17675
  MST 1,0
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,6,256
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 17684
+ LOC 17676
  LOD A,1,1724                ; GATTR               
  STR A,6,260
  CUP I,5,$PRV0053,144
  STR I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17685
+ LOC 17677
  LOD I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17686
+ LOC 17678
  XJP N,L9
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17687
+ LOC 17679
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -53587,21 +53560,21 @@ L12 LAB
  STR A,6,264
  CUP P,7,$PRV0071,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17688
+ LOC 17680
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17689
+ LOC 17681
  MST 3,0
  LDC I,85
  STR H,6,256
  CUP P,3,$PRV0114,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17690
+ LOC 17682
  UJP L11
 L13 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17692
+ LOC 17684
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -53609,36 +53582,36 @@ L13 LAB
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17693
+ LOC 17685
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17694
+ LOC 17686
  MST 3,0
  LDC I,86
  STR H,6,256
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 17695
+ LOC 17687
  IND I,0                     ; GATTR               
  STR I,6,260
  CUP P,5,$PRV0115,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17696
+ LOC 17688
  UJP L11
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17699
+ LOC 17691
  MST 1,0
  LDC I,342
  STR H,6,256
  CUP P,3,$PRV0013,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17701
+ LOC 17693
  LDC N
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17702
+ LOC 17694
  UJP L11
 L9 LAB
  DEF I,4
@@ -53647,29 +53620,29 @@ L9 LAB
  UJP L13
 L11 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17703
+ LOC 17695
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17704
+ LOC 17696
  LDC I,2
  STR H,1,1732                ; GATTR               
 L6 LAB
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17712
+ LOC 17704
  LOD I,5,164                 ; LCWORK              
  CHK I,0,16777215
  STR I,6,124                 ; LLC                 
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17713
+ LOC 17705
  LOD I,6,124                 ; LLC                 
  LDC I,8
  ADI
  CHK I,0,16777215
  STR I,5,164                 ; LCWORK              
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17714
+ LOC 17706
  MST 3,0
  LDC I,50
  STR H,6,256
@@ -53679,7 +53652,7 @@ L3 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17715
+ LOC 17707
  MST 3,0
  LDC I,89
  STR H,6,256
@@ -53690,7 +53663,7 @@ L3 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17716
+ LOC 17708
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -53703,40 +53676,40 @@ L3 LAB
  STR I,6,268
  CUP P,9,$PRV0117,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17717
+ LOC 17709
  LOD H,1,1224                ; SY                  
  LDC I,21
  EQU I
  FJP L15
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17719
+ LOC 17711
  MST 1,0
  CUP P,1,$PRV0010,144
  UJP L16
 L15 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17721
+ LOC 17713
  MST 1,0
  LDC I,355
  STR H,6,256
  CUP P,3,$PRV0013,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17722
+ LOC 17714
  LOD H,1,1224                ; SY                  
  LDC I,18
  EQU I
  FJP L17
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17724
+ LOC 17716
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17726
+ LOC 17718
  UJP L2
 L17 LAB
 L16 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17733
+ LOC 17725
  MST 4,0
  LDC B,0
  STR B,6,256
@@ -53748,33 +53721,33 @@ L16 LAB
  LDA 6,260
  ZMV -12,0
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17734
+ LOC 17726
  CUP P,5,$PRV0136,144
  VPO 6,140
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17735
+ LOC 17727
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L18
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17736
+ LOC 17728
  LOD A,1,1724                ; GATTR               
  LOD A,1,1344                ; PTYPE_INT           
  NEQ A
  FJP L19
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17737
+ LOC 17729
  MST 1,0
  LDC I,191
  STR H,6,256
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17738
+ LOC 17730
  CUP P,3,$PRV0013,144
  UJP L20
 L19 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17740
+ LOC 17732
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -53784,7 +53757,7 @@ L19 LAB
  STR A,6,264
  CUP P,7,$PRV0071,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17741
+ LOC 17733
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -53794,24 +53767,24 @@ L19 LAB
  LOD H,1,1434                ; LEVEL               
  STR I,6,264
 ;---- Neues Statement - LCOUNTER-Pegel = 268
- LOC 17742
+ LOC 17734
  LOD I,6,132                 ; LCPARM2             
  STR I,6,268
  CUP P,9,$PRV0117,144
 L20 LAB
 L18 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17749
+ LOC 17741
  LOD H,1,1224                ; SY                  
  LDC I,21
  EQU I
  FJP L21
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17751
+ LOC 17743
  MST 1,0
  CUP P,1,$PRV0010,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17752
+ LOC 17744
  MST 4,0
  LDC B,0
  STR B,6,256
@@ -53825,29 +53798,29 @@ L18 LAB
  CUP P,5,$PRV0136,144
  VPO 6,140
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17753
+ LOC 17745
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L22
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17754
+ LOC 17746
  LOD A,1,1724                ; GATTR               
  LOD A,1,1344                ; PTYPE_INT           
  NEQ A
  FJP L23
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17755
+ LOC 17747
  MST 1,0
  LDC I,191
  STR H,6,256
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17756
+ LOC 17748
  CUP P,3,$PRV0013,144
  UJP L24
 L23 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17757
+ LOC 17749
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -53859,7 +53832,7 @@ L23 LAB
 L24 LAB
 L22 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17758
+ LOC 17750
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -53871,14 +53844,14 @@ L22 LAB
  LOD I,6,136                 ; LCPARM3             
  STR I,6,268
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17759
+ LOC 17751
  CUP P,9,$PRV0117,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17766
+ LOC 17758
  UJP L25
 L21 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17768
+ LOC 17760
  MST 3,0
  LDC I,51
  STR H,6,256
@@ -53889,7 +53862,7 @@ L21 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17769
+ LOC 17761
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -53901,11 +53874,11 @@ L21 LAB
  LOD I,6,136                 ; LCPARM3             
  STR I,6,268
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17770
+ LOC 17762
  CUP P,9,$PRV0117,144
 L25 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17772
+ LOC 17764
  MST 5,0
  LOD A,5,128                 ; PROCID              
  STR A,6,256
@@ -53914,37 +53887,37 @@ L25 LAB
  STR I,6,260
  CUP P,5,$PRV0147,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17773
+ LOC 17765
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 L2 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 17774
+ LOC 17766
  RET P
 L1 DEF I,280
  DEF I,407
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 132
- LOC 17790
+ LOC 17782
 ;
 ;
 ;
 ;
 $PRV0180 ENT P,6,L1  RTRIM1              ,TFFFF,2,180,,        ,112
- LOC 17790
+ LOC 17782
  VPU 6,132
  LOD I,5,160                 ; LCPARM              
  CHK I,0,16777215
  STR I,6,128                 ; LCPARM1             
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17791
+ LOC 17783
  LOD I,6,128                 ; LCPARM1             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,5,160                 ; LCPARM              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17797
+ LOC 17789
  MST 4,0
  LDC B,0
  STR B,6,248
@@ -53958,26 +53931,26 @@ $PRV0180 ENT P,6,L1  RTRIM1              ,TFFFF,2,180,,        ,112
  CUP P,5,$PRV0136,136
  VPO 6,132
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17798
+ LOC 17790
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17799
+ LOC 17791
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17801
+ LOC 17793
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L5
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17803
+ LOC 17795
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,248
@@ -53985,7 +53958,7 @@ $PRV0180 ENT P,6,L1  RTRIM1              ,TFFFF,2,180,,        ,112
  STR A,6,252
  CUP P,5,$PRV0073,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17804
+ LOC 17796
  MST 3,0
  LDC I,88
  STR H,6,248
@@ -53993,7 +53966,7 @@ $PRV0180 ENT P,6,L1  RTRIM1              ,TFFFF,2,180,,        ,112
  STR I,6,252
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 256
- LOC 17805
+ LOC 17797
  IND I,0                     ; GATTR               
  LDC I,4
  SBI
@@ -54001,37 +53974,37 @@ $PRV0180 ENT P,6,L1  RTRIM1              ,TFFFF,2,180,,        ,112
  CUP P,7,$PRV0116,136
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17807
+ LOC 17799
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17808
+ LOC 17800
  LDC I,2
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17810
+ LOC 17802
  UJP L6
 L4 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17812
+ LOC 17804
  MST 1,0
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,6,248
 ;---- Neues Statement - LCOUNTER-Pegel = 252
- LOC 17813
+ LOC 17805
  LOD A,1,1724                ; GATTR               
  STR A,6,252
  CUP I,5,$PRV0053,136
  STR I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17814
+ LOC 17806
  LOD I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17815
+ LOC 17807
  XJP N,L9
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17816
+ LOC 17808
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,248
@@ -54041,21 +54014,21 @@ L12 LAB
  STR A,6,256
  CUP P,7,$PRV0071,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17817
+ LOC 17809
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17818
+ LOC 17810
  MST 3,0
  LDC I,85
  STR H,6,248
  CUP P,3,$PRV0114,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17819
+ LOC 17811
  UJP L11
 L13 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17821
+ LOC 17813
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,248
@@ -54063,36 +54036,36 @@ L13 LAB
  STR A,6,252
  CUP P,5,$PRV0073,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17822
+ LOC 17814
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17823
+ LOC 17815
  MST 3,0
  LDC I,86
  STR H,6,248
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 252
- LOC 17824
+ LOC 17816
  IND I,0                     ; GATTR               
  STR I,6,252
  CUP P,5,$PRV0115,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17825
+ LOC 17817
  UJP L11
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17828
+ LOC 17820
  MST 1,0
  LDC I,342
  STR H,6,248
  CUP P,3,$PRV0013,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17830
+ LOC 17822
  LDC N
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17831
+ LOC 17823
  UJP L11
 L9 LAB
  DEF I,4
@@ -54101,29 +54074,29 @@ L9 LAB
  UJP L13
 L11 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17832
+ LOC 17824
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17833
+ LOC 17825
  LDC I,2
  STR H,1,1732                ; GATTR               
 L6 LAB
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17841
+ LOC 17833
  LOD I,5,164                 ; LCWORK              
  CHK I,0,16777215
  STR I,6,124                 ; LLC                 
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17842
+ LOC 17834
  LOD I,6,124                 ; LLC                 
  LDC I,8
  ADI
  CHK I,0,16777215
  STR I,5,164                 ; LCWORK              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17843
+ LOC 17835
  MST 3,0
  LDC I,50
  STR H,6,248
@@ -54133,7 +54106,7 @@ L3 LAB
  STR I,6,256
  CUP P,7,$PRV0116,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17844
+ LOC 17836
  MST 3,0
  LDC I,89
  STR H,6,248
@@ -54144,7 +54117,7 @@ L3 LAB
  STR I,6,256
  CUP P,7,$PRV0116,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17845
+ LOC 17837
  MST 3,0
  LDC I,56
  STR H,6,248
@@ -54157,7 +54130,7 @@ L3 LAB
  STR I,6,260
  CUP P,9,$PRV0117,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17846
+ LOC 17838
  MST 5,0
  LOD A,5,128                 ; PROCID              
  STR A,6,248
@@ -54166,36 +54139,36 @@ L3 LAB
  STR I,6,252
  CUP P,5,$PRV0147,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17847
+ LOC 17839
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17848
+ LOC 17840
  RET P
 L1 DEF I,272
  DEF I,214
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 132
- LOC 17864
+ LOC 17856
 ;
 ;
 ;
 ;
 $PRV0181 ENT P,6,L1  LTRIM1              ,TFFFF,2,181,,        ,112
- LOC 17864
+ LOC 17856
  VPU 6,132
  LOD I,5,160                 ; LCPARM              
  CHK I,0,16777215
  STR I,6,128                 ; LCPARM1             
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17865
+ LOC 17857
  LOD I,6,128                 ; LCPARM1             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,5,160                 ; LCPARM              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17871
+ LOC 17863
  MST 4,0
  LDC B,0
  STR B,6,248
@@ -54209,26 +54182,26 @@ $PRV0181 ENT P,6,L1  LTRIM1              ,TFFFF,2,181,,        ,112
  CUP P,5,$PRV0136,136
  VPO 6,132
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17872
+ LOC 17864
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17873
+ LOC 17865
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17875
+ LOC 17867
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L5
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17877
+ LOC 17869
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,248
@@ -54236,7 +54209,7 @@ $PRV0181 ENT P,6,L1  LTRIM1              ,TFFFF,2,181,,        ,112
  STR A,6,252
  CUP P,5,$PRV0073,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17878
+ LOC 17870
  MST 3,0
  LDC I,88
  STR H,6,248
@@ -54244,7 +54217,7 @@ $PRV0181 ENT P,6,L1  LTRIM1              ,TFFFF,2,181,,        ,112
  STR I,6,252
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 256
- LOC 17879
+ LOC 17871
  IND I,0                     ; GATTR               
  LDC I,4
  SBI
@@ -54252,37 +54225,37 @@ $PRV0181 ENT P,6,L1  LTRIM1              ,TFFFF,2,181,,        ,112
  CUP P,7,$PRV0116,136
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17881
+ LOC 17873
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17882
+ LOC 17874
  LDC I,2
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17884
+ LOC 17876
  UJP L6
 L4 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17886
+ LOC 17878
  MST 1,0
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,6,248
 ;---- Neues Statement - LCOUNTER-Pegel = 252
- LOC 17887
+ LOC 17879
  LOD A,1,1724                ; GATTR               
  STR A,6,252
  CUP I,5,$PRV0053,136
  STR I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17888
+ LOC 17880
  LOD I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17889
+ LOC 17881
  XJP N,L9
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17890
+ LOC 17882
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,248
@@ -54292,21 +54265,21 @@ L12 LAB
  STR A,6,256
  CUP P,7,$PRV0071,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17891
+ LOC 17883
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17892
+ LOC 17884
  MST 3,0
  LDC I,85
  STR H,6,248
  CUP P,3,$PRV0114,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17893
+ LOC 17885
  UJP L11
 L13 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17895
+ LOC 17887
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,248
@@ -54314,36 +54287,36 @@ L13 LAB
  STR A,6,252
  CUP P,5,$PRV0073,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17896
+ LOC 17888
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17897
+ LOC 17889
  MST 3,0
  LDC I,86
  STR H,6,248
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 252
- LOC 17898
+ LOC 17890
  IND I,0                     ; GATTR               
  STR I,6,252
  CUP P,5,$PRV0115,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17899
+ LOC 17891
  UJP L11
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17902
+ LOC 17894
  MST 1,0
  LDC I,342
  STR H,6,248
  CUP P,3,$PRV0013,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17904
+ LOC 17896
  LDC N
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17905
+ LOC 17897
  UJP L11
 L9 LAB
  DEF I,4
@@ -54352,29 +54325,29 @@ L9 LAB
  UJP L13
 L11 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17906
+ LOC 17898
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17907
+ LOC 17899
  LDC I,2
  STR H,1,1732                ; GATTR               
 L6 LAB
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17915
+ LOC 17907
  LOD I,5,164                 ; LCWORK              
  CHK I,0,16777215
  STR I,6,124                 ; LLC                 
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17916
+ LOC 17908
  LOD I,6,124                 ; LLC                 
  LDC I,8
  ADI
  CHK I,0,16777215
  STR I,5,164                 ; LCWORK              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17917
+ LOC 17909
  MST 3,0
  LDC I,50
  STR H,6,248
@@ -54384,7 +54357,7 @@ L3 LAB
  STR I,6,256
  CUP P,7,$PRV0116,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17918
+ LOC 17910
  MST 3,0
  LDC I,89
  STR H,6,248
@@ -54395,7 +54368,7 @@ L3 LAB
  STR I,6,256
  CUP P,7,$PRV0116,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17919
+ LOC 17911
  MST 3,0
  LDC I,56
  STR H,6,248
@@ -54408,7 +54381,7 @@ L3 LAB
  STR I,6,260
  CUP P,9,$PRV0117,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17920
+ LOC 17912
  MST 5,0
  LOD A,5,128                 ; PROCID              
  STR A,6,248
@@ -54417,36 +54390,36 @@ L3 LAB
  STR I,6,252
  CUP P,5,$PRV0147,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17921
+ LOC 17913
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17922
+ LOC 17914
  RET P
 L1 DEF I,272
  DEF I,214
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 132
- LOC 17938
+ LOC 17930
 ;
 ;
 ;
 ;
 $PRV0182 ENT P,6,L1  TRIM1               ,TFFFF,2,182,,        ,112
- LOC 17938
+ LOC 17930
  VPU 6,132
  LOD I,5,160                 ; LCPARM              
  CHK I,0,16777215
  STR I,6,128                 ; LCPARM1             
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17939
+ LOC 17931
  LOD I,6,128                 ; LCPARM1             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,5,160                 ; LCPARM              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17945
+ LOC 17937
  MST 4,0
  LDC B,0
  STR B,6,248
@@ -54460,26 +54433,26 @@ $PRV0182 ENT P,6,L1  TRIM1               ,TFFFF,2,182,,        ,112
  CUP P,5,$PRV0136,136
  VPO 6,132
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17946
+ LOC 17938
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17947
+ LOC 17939
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17949
+ LOC 17941
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L5
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17951
+ LOC 17943
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,248
@@ -54487,7 +54460,7 @@ $PRV0182 ENT P,6,L1  TRIM1               ,TFFFF,2,182,,        ,112
  STR A,6,252
  CUP P,5,$PRV0073,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17952
+ LOC 17944
  MST 3,0
  LDC I,88
  STR H,6,248
@@ -54495,7 +54468,7 @@ $PRV0182 ENT P,6,L1  TRIM1               ,TFFFF,2,182,,        ,112
  STR I,6,252
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 256
- LOC 17953
+ LOC 17945
  IND I,0                     ; GATTR               
  LDC I,4
  SBI
@@ -54503,37 +54476,37 @@ $PRV0182 ENT P,6,L1  TRIM1               ,TFFFF,2,182,,        ,112
  CUP P,7,$PRV0116,136
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17955
+ LOC 17947
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17956
+ LOC 17948
  LDC I,2
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17958
+ LOC 17950
  UJP L6
 L4 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17960
+ LOC 17952
  MST 1,0
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,6,248
 ;---- Neues Statement - LCOUNTER-Pegel = 252
- LOC 17961
+ LOC 17953
  LOD A,1,1724                ; GATTR               
  STR A,6,252
  CUP I,5,$PRV0053,136
  STR I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17962
+ LOC 17954
  LOD I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17963
+ LOC 17955
  XJP N,L9
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17964
+ LOC 17956
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,248
@@ -54543,21 +54516,21 @@ L12 LAB
  STR A,6,256
  CUP P,7,$PRV0071,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17965
+ LOC 17957
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17966
+ LOC 17958
  MST 3,0
  LDC I,85
  STR H,6,248
  CUP P,3,$PRV0114,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17967
+ LOC 17959
  UJP L11
 L13 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17969
+ LOC 17961
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,248
@@ -54565,36 +54538,36 @@ L13 LAB
  STR A,6,252
  CUP P,5,$PRV0073,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17970
+ LOC 17962
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17971
+ LOC 17963
  MST 3,0
  LDC I,86
  STR H,6,248
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 252
- LOC 17972
+ LOC 17964
  IND I,0                     ; GATTR               
  STR I,6,252
  CUP P,5,$PRV0115,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17973
+ LOC 17965
  UJP L11
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17976
+ LOC 17968
  MST 1,0
  LDC I,342
  STR H,6,248
  CUP P,3,$PRV0013,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17978
+ LOC 17970
  LDC N
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17979
+ LOC 17971
  UJP L11
 L9 LAB
  DEF I,4
@@ -54603,29 +54576,29 @@ L9 LAB
  UJP L13
 L11 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17980
+ LOC 17972
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17981
+ LOC 17973
  LDC I,2
  STR H,1,1732                ; GATTR               
 L6 LAB
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17989
+ LOC 17981
  LOD I,5,164                 ; LCWORK              
  CHK I,0,16777215
  STR I,6,124                 ; LLC                 
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17990
+ LOC 17982
  LOD I,6,124                 ; LLC                 
  LDC I,8
  ADI
  CHK I,0,16777215
  STR I,5,164                 ; LCWORK              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17991
+ LOC 17983
  MST 3,0
  LDC I,50
  STR H,6,248
@@ -54635,7 +54608,7 @@ L3 LAB
  STR I,6,256
  CUP P,7,$PRV0116,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17992
+ LOC 17984
  MST 3,0
  LDC I,89
  STR H,6,248
@@ -54646,7 +54619,7 @@ L3 LAB
  STR I,6,256
  CUP P,7,$PRV0116,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17993
+ LOC 17985
  MST 3,0
  LDC I,56
  STR H,6,248
@@ -54659,7 +54632,7 @@ L3 LAB
  STR I,6,260
  CUP P,9,$PRV0117,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17994
+ LOC 17986
  MST 5,0
  LOD A,5,128                 ; PROCID              
  STR A,6,248
@@ -54668,36 +54641,36 @@ L3 LAB
  STR I,6,252
  CUP P,5,$PRV0147,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17995
+ LOC 17987
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 17996
+ LOC 17988
  RET P
 L1 DEF I,272
  DEF I,214
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 132
- LOC 18012
+ LOC 18004
 ;
 ;
 ;
 ;
 $PRV0183 ENT P,6,L1  COMPRESS1           ,TFFFF,2,183,,        ,112
- LOC 18012
+ LOC 18004
  VPU 6,132
  LOD I,5,160                 ; LCPARM              
  CHK I,0,16777215
  STR I,6,128                 ; LCPARM1             
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18013
+ LOC 18005
  LOD I,6,128                 ; LCPARM1             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,5,160                 ; LCPARM              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18019
+ LOC 18011
  MST 4,0
  LDC B,0
  STR B,6,248
@@ -54711,26 +54684,26 @@ $PRV0183 ENT P,6,L1  COMPRESS1           ,TFFFF,2,183,,        ,112
  CUP P,5,$PRV0136,136
  VPO 6,132
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18020
+ LOC 18012
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18021
+ LOC 18013
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18023
+ LOC 18015
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L5
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18025
+ LOC 18017
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,248
@@ -54738,7 +54711,7 @@ $PRV0183 ENT P,6,L1  COMPRESS1           ,TFFFF,2,183,,        ,112
  STR A,6,252
  CUP P,5,$PRV0073,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18026
+ LOC 18018
  MST 3,0
  LDC I,88
  STR H,6,248
@@ -54746,7 +54719,7 @@ $PRV0183 ENT P,6,L1  COMPRESS1           ,TFFFF,2,183,,        ,112
  STR I,6,252
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 256
- LOC 18027
+ LOC 18019
  IND I,0                     ; GATTR               
  LDC I,4
  SBI
@@ -54754,37 +54727,37 @@ $PRV0183 ENT P,6,L1  COMPRESS1           ,TFFFF,2,183,,        ,112
  CUP P,7,$PRV0116,136
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18029
+ LOC 18021
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18030
+ LOC 18022
  LDC I,2
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18032
+ LOC 18024
  UJP L6
 L4 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18034
+ LOC 18026
  MST 1,0
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,6,248
 ;---- Neues Statement - LCOUNTER-Pegel = 252
- LOC 18035
+ LOC 18027
  LOD A,1,1724                ; GATTR               
  STR A,6,252
  CUP I,5,$PRV0053,136
  STR I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18036
+ LOC 18028
  LOD I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18037
+ LOC 18029
  XJP N,L9
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18038
+ LOC 18030
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,248
@@ -54794,21 +54767,21 @@ L12 LAB
  STR A,6,256
  CUP P,7,$PRV0071,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18039
+ LOC 18031
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18040
+ LOC 18032
  MST 3,0
  LDC I,85
  STR H,6,248
  CUP P,3,$PRV0114,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18041
+ LOC 18033
  UJP L11
 L13 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18043
+ LOC 18035
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,248
@@ -54816,36 +54789,36 @@ L13 LAB
  STR A,6,252
  CUP P,5,$PRV0073,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18044
+ LOC 18036
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18045
+ LOC 18037
  MST 3,0
  LDC I,86
  STR H,6,248
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 252
- LOC 18046
+ LOC 18038
  IND I,0                     ; GATTR               
  STR I,6,252
  CUP P,5,$PRV0115,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18047
+ LOC 18039
  UJP L11
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18050
+ LOC 18042
  MST 1,0
  LDC I,342
  STR H,6,248
  CUP P,3,$PRV0013,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18052
+ LOC 18044
  LDC N
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18053
+ LOC 18045
  UJP L11
 L9 LAB
  DEF I,4
@@ -54854,29 +54827,29 @@ L9 LAB
  UJP L13
 L11 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18054
+ LOC 18046
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18055
+ LOC 18047
  LDC I,2
  STR H,1,1732                ; GATTR               
 L6 LAB
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18063
+ LOC 18055
  LOD I,5,164                 ; LCWORK              
  CHK I,0,16777215
  STR I,6,124                 ; LLC                 
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18064
+ LOC 18056
  LOD I,6,124                 ; LLC                 
  LDC I,8
  ADI
  CHK I,0,16777215
  STR I,5,164                 ; LCWORK              
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18065
+ LOC 18057
  MST 3,0
  LDC I,50
  STR H,6,248
@@ -54886,7 +54859,7 @@ L3 LAB
  STR I,6,256
  CUP P,7,$PRV0116,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18066
+ LOC 18058
  MST 3,0
  LDC I,89
  STR H,6,248
@@ -54897,7 +54870,7 @@ L3 LAB
  STR I,6,256
  CUP P,7,$PRV0116,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18067
+ LOC 18059
  MST 3,0
  LDC I,56
  STR H,6,248
@@ -54910,7 +54883,7 @@ L3 LAB
  STR I,6,260
  CUP P,9,$PRV0117,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18068
+ LOC 18060
  MST 5,0
  LOD A,5,128                 ; PROCID              
  STR A,6,248
@@ -54919,43 +54892,43 @@ L3 LAB
  STR I,6,252
  CUP P,5,$PRV0147,136
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18069
+ LOC 18061
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18070
+ LOC 18062
  RET P
 L1 DEF I,272
  DEF I,214
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18087
+ LOC 18079
 ;
 ;
 ;
 ;
 $PRV0184 ENT P,6,L1  INDEX1              ,TFFFF,2,184,,        ,112
- LOC 18087
+ LOC 18079
  VPU 6,136
  LOD I,5,160                 ; LCPARM              
  CHK I,0,16777215
  STR I,6,128                 ; LCPARM1             
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 18088
+ LOC 18080
  LOD I,6,128                 ; LCPARM1             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,6,132                 ; LCPARM2             
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 18089
+ LOC 18081
  LOD I,6,132                 ; LCPARM2             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,5,160                 ; LCPARM              
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 18095
+ LOC 18087
  MST 4,0
  LDC B,0
  STR B,6,256
@@ -54967,30 +54940,30 @@ $PRV0184 ENT P,6,L1  INDEX1              ,TFFFF,2,184,,        ,112
  LDA 6,260
  ZMV -12,0
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18096
+ LOC 18088
  CUP P,5,$PRV0136,144
  VPO 6,136
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18097
+ LOC 18089
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18098
+ LOC 18090
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18100
+ LOC 18092
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L5
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18102
+ LOC 18094
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -54998,7 +54971,7 @@ $PRV0184 ENT P,6,L1  INDEX1              ,TFFFF,2,184,,        ,112
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18103
+ LOC 18095
  MST 3,0
  LDC I,88
  STR H,6,256
@@ -55006,7 +54979,7 @@ $PRV0184 ENT P,6,L1  INDEX1              ,TFFFF,2,184,,        ,112
  STR I,6,260
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 264
- LOC 18104
+ LOC 18096
  IND I,0                     ; GATTR               
  LDC I,4
  SBI
@@ -55014,37 +54987,37 @@ $PRV0184 ENT P,6,L1  INDEX1              ,TFFFF,2,184,,        ,112
  CUP P,7,$PRV0116,144
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18106
+ LOC 18098
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18107
+ LOC 18099
  LDC I,2
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18109
+ LOC 18101
  UJP L6
 L4 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18111
+ LOC 18103
  MST 1,0
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,6,256
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 18112
+ LOC 18104
  LOD A,1,1724                ; GATTR               
  STR A,6,260
  CUP I,5,$PRV0053,144
  STR I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18113
+ LOC 18105
  LOD I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18114
+ LOC 18106
  XJP N,L9
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18115
+ LOC 18107
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -55054,21 +55027,21 @@ L12 LAB
  STR A,6,264
  CUP P,7,$PRV0071,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18116
+ LOC 18108
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18117
+ LOC 18109
  MST 3,0
  LDC I,85
  STR H,6,256
  CUP P,3,$PRV0114,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18118
+ LOC 18110
  UJP L11
 L13 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18120
+ LOC 18112
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -55076,36 +55049,36 @@ L13 LAB
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18121
+ LOC 18113
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18122
+ LOC 18114
  MST 3,0
  LDC I,86
  STR H,6,256
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 18123
+ LOC 18115
  IND I,0                     ; GATTR               
  STR I,6,260
  CUP P,5,$PRV0115,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18124
+ LOC 18116
  UJP L11
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18127
+ LOC 18119
  MST 1,0
  LDC I,342
  STR H,6,256
  CUP P,3,$PRV0013,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18129
+ LOC 18121
  LDC N
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18130
+ LOC 18122
  UJP L11
 L9 LAB
  DEF I,4
@@ -55114,29 +55087,29 @@ L9 LAB
  UJP L13
 L11 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18131
+ LOC 18123
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18132
+ LOC 18124
  LDC I,2
  STR H,1,1732                ; GATTR               
 L6 LAB
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18140
+ LOC 18132
  LOD I,5,164                 ; LCWORK              
  CHK I,0,16777215
  STR I,6,124                 ; LLC                 
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18141
+ LOC 18133
  LOD I,6,124                 ; LLC                 
  LDC I,8
  ADI
  CHK I,0,16777215
  STR I,5,164                 ; LCWORK              
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18142
+ LOC 18134
  MST 3,0
  LDC I,50
  STR H,6,256
@@ -55146,7 +55119,7 @@ L3 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18143
+ LOC 18135
  MST 3,0
  LDC I,89
  STR H,6,256
@@ -55157,7 +55130,7 @@ L3 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18144
+ LOC 18136
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -55170,40 +55143,40 @@ L3 LAB
  STR I,6,268
  CUP P,9,$PRV0117,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18145
+ LOC 18137
  LOD H,1,1224                ; SY                  
  LDC I,21
  EQU I
  FJP L15
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18147
+ LOC 18139
  MST 1,0
  CUP P,1,$PRV0010,144
  UJP L16
 L15 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18149
+ LOC 18141
  MST 1,0
  LDC I,355
  STR H,6,256
  CUP P,3,$PRV0013,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18150
+ LOC 18142
  LOD H,1,1224                ; SY                  
  LDC I,18
  EQU I
  FJP L17
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18152
+ LOC 18144
  LOD A,1,1344                ; PTYPE_INT           
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18154
+ LOC 18146
  UJP L2
 L17 LAB
 L16 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18161
+ LOC 18153
  MST 4,0
  LDC B,0
  STR B,6,256
@@ -55217,26 +55190,26 @@ L16 LAB
  CUP P,5,$PRV0136,144
  VPO 6,136
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18162
+ LOC 18154
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L18
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18163
+ LOC 18155
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L19
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18165
+ LOC 18157
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L20
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18167
+ LOC 18159
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -55244,7 +55217,7 @@ L16 LAB
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18168
+ LOC 18160
  MST 3,0
  LDC I,88
  STR H,6,256
@@ -55252,7 +55225,7 @@ L16 LAB
  STR I,6,260
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 264
- LOC 18169
+ LOC 18161
  IND I,0                     ; GATTR               
  LDC I,4
  SBI
@@ -55260,37 +55233,37 @@ L16 LAB
  CUP P,7,$PRV0116,144
 L20 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18171
+ LOC 18163
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18172
+ LOC 18164
  LDC I,2
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18174
+ LOC 18166
  UJP L21
 L19 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18176
+ LOC 18168
  MST 1,0
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,6,256
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 18177
+ LOC 18169
  LOD A,1,1724                ; GATTR               
  STR A,6,260
  CUP I,5,$PRV0053,144
  STR I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18178
+ LOC 18170
  LOD I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18179
+ LOC 18171
  XJP N,L24
 L27 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18180
+ LOC 18172
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -55300,21 +55273,21 @@ L27 LAB
  STR A,6,264
  CUP P,7,$PRV0071,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18181
+ LOC 18173
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18182
+ LOC 18174
  MST 3,0
  LDC I,85
  STR H,6,256
  CUP P,3,$PRV0114,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18183
+ LOC 18175
  UJP L26
 L28 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18185
+ LOC 18177
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -55322,36 +55295,36 @@ L28 LAB
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18186
+ LOC 18178
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18187
+ LOC 18179
  MST 3,0
  LDC I,86
  STR H,6,256
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 18188
+ LOC 18180
  IND I,0                     ; GATTR               
  STR I,6,260
  CUP P,5,$PRV0115,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18189
+ LOC 18181
  UJP L26
 L25 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18192
+ LOC 18184
  MST 1,0
  LDC I,342
  STR H,6,256
  CUP P,3,$PRV0013,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18194
+ LOC 18186
  LDC N
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18195
+ LOC 18187
  UJP L26
 L24 LAB
  DEF I,4
@@ -55360,29 +55333,29 @@ L24 LAB
  UJP L28
 L26 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18196
+ LOC 18188
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18197
+ LOC 18189
  LDC I,2
  STR H,1,1732                ; GATTR               
 L21 LAB
 L18 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18205
+ LOC 18197
  LOD I,5,164                 ; LCWORK              
  CHK I,0,16777215
  STR I,6,124                 ; LLC                 
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18206
+ LOC 18198
  LOD I,6,124                 ; LLC                 
  LDC I,8
  ADI
  CHK I,0,16777215
  STR I,5,164                 ; LCWORK              
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18207
+ LOC 18199
  MST 3,0
  LDC I,50
  STR H,6,256
@@ -55392,7 +55365,7 @@ L18 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18208
+ LOC 18200
  MST 3,0
  LDC I,89
  STR H,6,256
@@ -55403,7 +55376,7 @@ L18 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18209
+ LOC 18201
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -55416,7 +55389,7 @@ L18 LAB
  STR I,6,268
  CUP P,9,$PRV0117,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18210
+ LOC 18202
  MST 5,0
  LOD A,5,128                 ; PROCID              
  STR A,6,256
@@ -55425,44 +55398,44 @@ L18 LAB
  STR I,6,260
  CUP P,5,$PRV0147,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18211
+ LOC 18203
  LOD A,1,1344                ; PTYPE_INT           
  STR A,1,1724                ; GATTR               
 L2 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18212
+ LOC 18204
  RET P
 L1 DEF I,280
  DEF I,437
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 136
- LOC 18229
+ LOC 18221
 ;
 ;
 ;
 ;
 $PRV0185 ENT P,6,L1  LASTINDEX1          ,TFFFF,2,185,,        ,112
- LOC 18229
+ LOC 18221
  VPU 6,136
  LOD I,5,160                 ; LCPARM              
  CHK I,0,16777215
  STR I,6,128                 ; LCPARM1             
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 18230
+ LOC 18222
  LOD I,6,128                 ; LCPARM1             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,6,132                 ; LCPARM2             
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 18231
+ LOC 18223
  LOD I,6,132                 ; LCPARM2             
  LDC I,4
  ADI
  CHK I,0,16777215
  STR I,5,160                 ; LCPARM              
 ;---- Neues Statement - LCOUNTER-Pegel = 140
- LOC 18237
+ LOC 18229
  MST 4,0
  LDC B,0
  STR B,6,256
@@ -55474,30 +55447,30 @@ $PRV0185 ENT P,6,L1  LASTINDEX1          ,TFFFF,2,185,,        ,112
  LDA 6,260
  ZMV -12,0
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18238
+ LOC 18230
  CUP P,5,$PRV0136,144
  VPO 6,136
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18239
+ LOC 18231
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L3
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18240
+ LOC 18232
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L4
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18242
+ LOC 18234
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L5
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18244
+ LOC 18236
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -55505,7 +55478,7 @@ $PRV0185 ENT P,6,L1  LASTINDEX1          ,TFFFF,2,185,,        ,112
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18245
+ LOC 18237
  MST 3,0
  LDC I,88
  STR H,6,256
@@ -55513,7 +55486,7 @@ $PRV0185 ENT P,6,L1  LASTINDEX1          ,TFFFF,2,185,,        ,112
  STR I,6,260
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 264
- LOC 18246
+ LOC 18238
  IND I,0                     ; GATTR               
  LDC I,4
  SBI
@@ -55521,37 +55494,37 @@ $PRV0185 ENT P,6,L1  LASTINDEX1          ,TFFFF,2,185,,        ,112
  CUP P,7,$PRV0116,144
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18248
+ LOC 18240
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18249
+ LOC 18241
  LDC I,2
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18251
+ LOC 18243
  UJP L6
 L4 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18253
+ LOC 18245
  MST 1,0
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,6,256
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 18254
+ LOC 18246
  LOD A,1,1724                ; GATTR               
  STR A,6,260
  CUP I,5,$PRV0053,144
  STR I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18255
+ LOC 18247
  LOD I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18256
+ LOC 18248
  XJP N,L9
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18257
+ LOC 18249
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -55561,21 +55534,21 @@ L12 LAB
  STR A,6,264
  CUP P,7,$PRV0071,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18258
+ LOC 18250
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18259
+ LOC 18251
  MST 3,0
  LDC I,85
  STR H,6,256
  CUP P,3,$PRV0114,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18260
+ LOC 18252
  UJP L11
 L13 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18262
+ LOC 18254
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -55583,36 +55556,36 @@ L13 LAB
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18263
+ LOC 18255
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18264
+ LOC 18256
  MST 3,0
  LDC I,86
  STR H,6,256
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 18265
+ LOC 18257
  IND I,0                     ; GATTR               
  STR I,6,260
  CUP P,5,$PRV0115,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18266
+ LOC 18258
  UJP L11
 L10 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18269
+ LOC 18261
  MST 1,0
  LDC I,342
  STR H,6,256
  CUP P,3,$PRV0013,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18271
+ LOC 18263
  LDC N
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18272
+ LOC 18264
  UJP L11
 L9 LAB
  DEF I,4
@@ -55621,29 +55594,29 @@ L9 LAB
  UJP L13
 L11 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18273
+ LOC 18265
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18274
+ LOC 18266
  LDC I,2
  STR H,1,1732                ; GATTR               
 L6 LAB
 L3 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18282
+ LOC 18274
  LOD I,5,164                 ; LCWORK              
  CHK I,0,16777215
  STR I,6,124                 ; LLC                 
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18283
+ LOC 18275
  LOD I,6,124                 ; LLC                 
  LDC I,8
  ADI
  CHK I,0,16777215
  STR I,5,164                 ; LCWORK              
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18284
+ LOC 18276
  MST 3,0
  LDC I,50
  STR H,6,256
@@ -55653,7 +55626,7 @@ L3 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18285
+ LOC 18277
  MST 3,0
  LDC I,89
  STR H,6,256
@@ -55664,7 +55637,7 @@ L3 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18286
+ LOC 18278
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -55677,40 +55650,40 @@ L3 LAB
  STR I,6,268
  CUP P,9,$PRV0117,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18287
+ LOC 18279
  LOD H,1,1224                ; SY                  
  LDC I,21
  EQU I
  FJP L15
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18289
+ LOC 18281
  MST 1,0
  CUP P,1,$PRV0010,144
  UJP L16
 L15 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18291
+ LOC 18283
  MST 1,0
  LDC I,355
  STR H,6,256
  CUP P,3,$PRV0013,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18292
+ LOC 18284
  LOD H,1,1224                ; SY                  
  LDC I,18
  EQU I
  FJP L17
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18294
+ LOC 18286
  LOD A,1,1344                ; PTYPE_INT           
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18296
+ LOC 18288
  UJP L2
 L17 LAB
 L16 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18303
+ LOC 18295
  MST 4,0
  LDC B,0
  STR B,6,256
@@ -55724,26 +55697,26 @@ L16 LAB
  CUP P,5,$PRV0136,144
  VPO 6,136
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18304
+ LOC 18296
  LOD A,1,1724                ; GATTR               
  LDC N
  NEQ A
  FJP L18
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18305
+ LOC 18297
  LOD A,1,1724                ; GATTR               
  IND H,8                     ; GATTR               
  LDC I,4
  EQU I
  FJP L19
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18307
+ LOC 18299
  LOD H,1,1732                ; GATTR               
  LDC I,2
  NEQ I
  FJP L20
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18309
+ LOC 18301
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -55751,7 +55724,7 @@ L16 LAB
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18310
+ LOC 18302
  MST 3,0
  LDC I,88
  STR H,6,256
@@ -55759,7 +55732,7 @@ L16 LAB
  STR I,6,260
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 264
- LOC 18311
+ LOC 18303
  IND I,0                     ; GATTR               
  LDC I,4
  SBI
@@ -55767,37 +55740,37 @@ L16 LAB
  CUP P,7,$PRV0116,144
 L20 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18313
+ LOC 18305
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18314
+ LOC 18306
  LDC I,2
  STR H,1,1732                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18316
+ LOC 18308
  UJP L21
 L19 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18318
+ LOC 18310
  MST 1,0
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,6,256
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 18319
+ LOC 18311
  LOD A,1,1724                ; GATTR               
  STR A,6,260
  CUP I,5,$PRV0053,144
  STR I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18320
+ LOC 18312
  LOD I,6,120                 ; CT_RESULT           
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18321
+ LOC 18313
  XJP N,L24
 L27 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18322
+ LOC 18314
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -55807,21 +55780,21 @@ L27 LAB
  STR A,6,264
  CUP P,7,$PRV0071,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18323
+ LOC 18315
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18324
+ LOC 18316
  MST 3,0
  LDC I,85
  STR H,6,256
  CUP P,3,$PRV0114,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18325
+ LOC 18317
  UJP L26
 L28 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18327
+ LOC 18319
  MST 1,0
  LOD A,3,112                 ; PCODEP              
  STR A,6,256
@@ -55829,36 +55802,36 @@ L28 LAB
  STR A,6,260
  CUP P,5,$PRV0073,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18328
+ LOC 18320
  LDC B,1
  STR B,1,1776                ; CTLS                
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18329
+ LOC 18321
  MST 3,0
  LDC I,86
  STR H,6,256
  LOD A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 260
- LOC 18330
+ LOC 18322
  IND I,0                     ; GATTR               
  STR I,6,260
  CUP P,5,$PRV0115,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18331
+ LOC 18323
  UJP L26
 L25 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18334
+ LOC 18326
  MST 1,0
  LDC I,342
  STR H,6,256
  CUP P,3,$PRV0013,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18336
+ LOC 18328
  LDC N
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18337
+ LOC 18329
  UJP L26
 L24 LAB
  DEF I,4
@@ -55867,29 +55840,29 @@ L24 LAB
  UJP L28
 L26 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18338
+ LOC 18330
  LOD A,1,1376                ; PTYPE_VARCHAR       
  STR A,1,1724                ; GATTR               
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18339
+ LOC 18331
  LDC I,2
  STR H,1,1732                ; GATTR               
 L21 LAB
 L18 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18347
+ LOC 18339
  LOD I,5,164                 ; LCWORK              
  CHK I,0,16777215
  STR I,6,124                 ; LLC                 
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18348
+ LOC 18340
  LOD I,6,124                 ; LLC                 
  LDC I,8
  ADI
  CHK I,0,16777215
  STR I,5,164                 ; LCWORK              
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18349
+ LOC 18341
  MST 3,0
  LDC I,50
  STR H,6,256
@@ -55899,7 +55872,7 @@ L18 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18350
+ LOC 18342
  MST 3,0
  LDC I,89
  STR H,6,256
@@ -55910,7 +55883,7 @@ L18 LAB
  STR I,6,264
  CUP P,7,$PRV0116,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18351
+ LOC 18343
  MST 3,0
  LDC I,56
  STR H,6,256
@@ -55923,7 +55896,7 @@ L18 LAB
  STR I,6,268
  CUP P,9,$PRV0117,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18352
+ LOC 18344
  MST 5,0
  LOD A,5,128                 ; PROCID              
  STR A,6,256
@@ -55932,26 +55905,26 @@ L18 LAB
  STR I,6,260
  CUP P,5,$PRV0147,144
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18353
+ LOC 18345
  LOD A,1,1344                ; PTYPE_INT           
  STR A,1,1724                ; GATTR               
 L2 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 144
- LOC 18354
+ LOC 18346
  RET P
 L1 DEF I,280
  DEF I,437
  DEF B,0
 %INCLUDE pcode1
 ;---- Neues Statement - LCOUNTER-Pegel = 5536
- LOC 26957
+ LOC 26949
 ;
 ;
 ;
 ;
- BGN PASCALCOMPILER       04:41:46 11/01/2026
+ BGN PASCALCOMPILER       04:47:43 11/01/2026
 $PASMAIN ENT P,1,L3  $PASMAIN            ,TFFFF,2,0,$PASMAI#,        ,112
- LOC 26957
+ LOC 26949
  VPU 1,5536
  LDA 1,512
  CSP SIO,5544
@@ -56004,109 +55977,109 @@ $PASMAIN ENT P,1,L3  $PASMAIN            ,TFFFF,2,0,$PASMAI#,        ,112
  MST 1,0
  CUP P,1,$PRV0248,5544
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 26963
+ LOC 26955
  MST 1,0
  CUP P,1,$PRV0249,5544
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 26964
+ LOC 26956
  LDC I,0
  STR H,1,1464                ; TOP                 
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 26965
+ LOC 26957
  LDA 1,1468                  ; DISPLAY             
  LDC I,0
  CHK J,0,20
  IXA 12
  STR A,1,5540
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 26967
+ LOC 26959
  LOD A,1,5540                ; OCCUR               
  LDC I,0
  STO H
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 26968
+ LOC 26960
  LOD A,1,5540                ; FLABEL              
  INC A,4                     ; FLABEL              
  LDC N
  STO A
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 26970
+ LOC 26962
  MST 1,0
  CUP P,1,$PRV0246,5544
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 26971
+ LOC 26963
  MST 1,0
  CUP P,1,$PRV0247,5544
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 26972
+ LOC 26964
  LDC I,1
  STR H,1,1464                ; TOP                 
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 26973
+ LOC 26965
  LDC I,1
  STR H,1,1434                ; LEVEL               
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 26974
+ LOC 26966
  LDA 1,1468                  ; DISPLAY             
  LDC I,1
  CHK J,0,20
  IXA 12
  STR A,1,5540
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 26976
+ LOC 26968
  LOD A,1,5540                ; OCCUR               
  LDC I,0
  STO H
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 26977
+ LOC 26969
  LOD A,1,5540                ; FLABEL              
  INC A,4                     ; FLABEL              
  LDC N
  STO A
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 26979
+ LOC 26971
  LDC B,0
  STR B,1,594                 ; OPT                 
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 26986
+ LOC 26978
  LOD A,1,348                 ; OSPARM              
  LDC N
  EQU A
  FJP L5
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 26987
+ LOC 26979
  LDA 1,524                   ; SOURCENAME          
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 26988
+ LOC 26980
  LCA M,8,'        '
  MOV 8
  UJP L6
 L5 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 26989
+ LOC 26981
  LOD A,1,348                 ; OSPARM              
  STR A,1,5540
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 26991
+ LOC 26983
  LDA 1,524                   ; SOURCENAME          
  LCA M,8,'        '
  MOV 8
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 26992
+ LOC 26984
  LDC I,1
  STR I,1,532                 ; SX                  
  LDC B,1
  FJP L9
 L7 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 26993
+ LOC 26985
  LOD I,1,532                 ; SX                  
  LOD A,1,5540                ; PLENGTH             
  IND I,0                     ; PLENGTH             
  LEQ I
  FJP L10
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 26994
+ LOC 26986
  LDA 1,524                   ; SOURCENAME          
  LOD I,1,532                 ; SX                  
  CHK J,1,8
@@ -56132,21 +56105,21 @@ L10 LAB
  UJP L7
 L9 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 26995
+ LOC 26987
  LOD A,1,5540                ; PLENGTH             
  IND I,0                     ; PLENGTH             
  LDC I,8
  GRT I
  FJP L11
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 26997
+ LOC 26989
  LDA 1,1792                  ; OPTLINE             
  LCA M,120,'                                                    ',
        '                                                        ',
        '            '
  MOV 120
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 26998
+ LOC 26990
  LDC I,9
  STR H,1,1288                ; CHCNT               
  LOD A,1,5540                ; PLENGTH             
@@ -56158,7 +56131,7 @@ L9 LAB
  FJP L14
 L12 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 5548
- LOC 26999
+ LOC 26991
  LDA 1,1792                  ; OPTLINE             
  LOD H,1,1288                ; CHCNT               
  LDC I,8
@@ -56185,7 +56158,7 @@ L12 LAB
  UJP L12
 L14 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 27000
+ LOC 26992
  MST 1,0
  LDA 1,1792                  ; OPTLINE             
  STR A,1,5656
@@ -56197,15 +56170,15 @@ L14 LAB
 L11 LAB
 L6 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 27009
+ LOC 27001
  MST 1,0
  CUP P,1,$PRV0017,5544
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 27010
+ LOC 27002
  MST 1,0
  CUP P,1,$PRV0010,5544
 ;---- Neues Statement - LCOUNTER-Pegel = 5540
- LOC 27016
+ LOC 27008
  MST 1,0
  LCA S11,0,X'000000000000fa0400000c'
  ZMX 12,0
@@ -56220,20 +56193,20 @@ L6 LAB
  CUP P,3,$PRV0245,5544
  VPO 1,5536
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 27017
+ LOC 27009
  LDC B,0
  FJP L15
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 27018
+ LOC 27010
  MST 1,0
  CUP P,1,$PRV0025,5544
 L15 LAB
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 27024
+ LOC 27016
  MST 1,0
  CUP P,1,$PRV0018,5544
 ;---- Neues Statement - LCOUNTER-Pegel = 5544
- LOC 27025
+ LOC 27017
  RET P
 L3 DEF I,5672
  DEF I,323
