@@ -3373,10 +3373,32 @@ procedure GOODBYE ;
 procedure FATALERROR ( CODE : ERRCODE ) ;
 
    var ANZSYMBOLS : INTEGER ;
+       LINENR : INTEGER ;
 
    begin (* FATALERROR *)
      SET_ERROR ( CODE ) ;
      ANZSYMBOLS := 10 ;
+
+     //************************************************************
+     // only P390 (symbols after the end of the program) lists the
+     // symbols that follow; for the other fatal errors they are
+     // not wrong, and flagging them as P402 only misleads
+     //************************************************************
+
+     if CODE <> 390 then
+       begin
+
+     //************************************************************
+     // read to the end of the line, so that the line and its
+     // message are listed
+     //************************************************************
+
+         ANZSYMBOLS := 0 ;
+         LINENR := SCB . LINENR ;
+         while ( SCB . SYMBOLNR <> SYMB_EOF ) and ( SCB . LINENR =
+         LINENR ) do
+           PASSCAN ( INPUT , LISTING , SCB , TRUE ) ;
+       end (* then *) ;
      while ( SCB . SYMBOLNR <> SYMB_EOF ) and ( ANZSYMBOLS > 0 ) do
        begin
          PASSCAN ( INPUT , LISTING , SCB , TRUE ) ;
@@ -3392,6 +3414,9 @@ procedure FATALERROR ( CODE : ERRCODE ) ;
          WRITELN ( LISTING , '****' : 7 , 'FATAL ERROR - ' ,
                    'COMPILATION TERMINATED PREMATURELY.' ) ;
          WRITELN ( LISTING ) ;
+         WRITELN ( OUTPUT , '****' : 7 , 'FATAL ERROR - ' ,
+                   'COMPILATION TERMINATED PREMATURELY.' ) ;
+         WRITELN ( OUTPUT ) ;
        end (* then *) ;
      GOODBYE ;
    end (* FATALERROR *) ;
