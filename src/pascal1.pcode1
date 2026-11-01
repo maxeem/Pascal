@@ -2625,9 +2625,14 @@ $PRV0189 ENT P,6,L1  WRITESTR1           ,TFFFF,2,189,,        ,112
  LDC I,551
  STR H,6,360
  LDA 5,112                   ; FSYS                
+ ZMX 12,0
+ LCA S1,16,X'20'
+ ZMX 4,16
+ ZUN
  LDA 6,364
  ZMV -12,0
  CUP P,5,$PRV0015,248
+ VPO 6,240
 ;---- Neues Statement - LCOUNTER-Pegel = 248
  LOC 19149
  UJP L2
@@ -2644,9 +2649,14 @@ L3 LAB
  LDC I,552
  STR H,6,360
  LDA 5,112                   ; FSYS                
+ ZMX 12,0
+ LCA S1,16,X'20'
+ ZMX 4,16
+ ZUN
  LDA 6,364
  ZMV -12,0
  CUP P,5,$PRV0015,248
+ VPO 6,240
 ;---- Neues Statement - LCOUNTER-Pegel = 248
  LOC 19154
  UJP L2
@@ -3149,7 +3159,7 @@ L8 LAB
 L2 LAB
  RET P
 L1 DEF I,384
- DEF I,503
+ DEF I,513
  DEF B,1
 ;---- Neues Statement - LCOUNTER-Pegel = 164
  LOC 19309
@@ -7776,9 +7786,14 @@ $PRV0216 ENT P,6,L1  INCLUDE1            ,TFFFF,2,216,,        ,112
  LDC I,554
  STR H,6,288
  LDA 5,112                   ; FSYS                
+ ZMX 12,0
+ LCA S1,16,X'20'
+ ZMX 4,16
+ ZUN
  LDA 6,292
  ZMV -12,0
  CUP P,5,$PRV0015,176
+ VPO 6,168
 ;---- Neues Statement - LCOUNTER-Pegel = 176
  LOC 20727
  UJP L2
@@ -7795,9 +7810,14 @@ L3 LAB
  LDC I,552
  STR H,6,288
  LDA 5,112                   ; FSYS                
+ ZMX 12,0
+ LCA S1,16,X'20'
+ ZMX 4,16
+ ZUN
  LDA 6,292
  ZMV -12,0
  CUP P,5,$PRV0015,176
+ VPO 6,168
 ;---- Neues Statement - LCOUNTER-Pegel = 176
  LOC 20732
  UJP L2
@@ -7974,7 +7994,7 @@ L2 LAB
  LOC 20789
  RET P
 L1 DEF I,312
- DEF I,210
+ DEF I,220
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 168
  LOC 20807
@@ -8010,9 +8030,14 @@ $PRV0217 ENT P,6,L1  EXCLUDE1            ,TFFFF,2,217,,        ,112
  LDC I,554
  STR H,6,288
  LDA 5,112                   ; FSYS                
+ ZMX 12,0
+ LCA S1,16,X'20'
+ ZMX 4,16
+ ZUN
  LDA 6,292
  ZMV -12,0
  CUP P,5,$PRV0015,176
+ VPO 6,168
 ;---- Neues Statement - LCOUNTER-Pegel = 176
  LOC 20818
  UJP L2
@@ -8029,9 +8054,14 @@ L3 LAB
  LDC I,552
  STR H,6,288
  LDA 5,112                   ; FSYS                
+ ZMX 12,0
+ LCA S1,16,X'20'
+ ZMX 4,16
+ ZUN
  LDA 6,292
  ZMV -12,0
  CUP P,5,$PRV0015,176
+ VPO 6,168
 ;---- Neues Statement - LCOUNTER-Pegel = 176
  LOC 20823
  UJP L2
@@ -8208,7 +8238,7 @@ L2 LAB
  LOC 20880
  RET P
 L1 DEF I,312
- DEF I,210
+ DEF I,220
  DEF B,0
 ;---- Neues Statement - LCOUNTER-Pegel = 120
  LOC 20896

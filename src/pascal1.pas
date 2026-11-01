@@ -19144,12 +19144,12 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
 
                  if GATTR . TYPTR -> . FORM <> CSTRING then
                    begin
-                     SET_ERROR_SKIP ( 551 , FSYS ) ;
+                     SET_ERROR_SKIP ( 551 , FSYS + [ SYRPARENT ] ) ;
                      return
                    end (* then *) ;
                  if GATTR . KIND <> VARBL then
                    begin
-                     SET_ERROR_SKIP ( 552 , FSYS ) ;
+                     SET_ERROR_SKIP ( 552 , FSYS + [ SYRPARENT ] ) ;
                      return
                    end (* then *) ;
 
@@ -20722,12 +20722,12 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
 
                  if GATTR . TYPTR -> . FORM <> SETS then
                    begin
-                     SET_ERROR_SKIP ( 554 , FSYS ) ;
+                     SET_ERROR_SKIP ( 554 , FSYS + [ SYRPARENT ] ) ;
                      return
                    end (* then *) ;
                  if GATTR . KIND <> VARBL then
                    begin
-                     SET_ERROR_SKIP ( 552 , FSYS ) ;
+                     SET_ERROR_SKIP ( 552 , FSYS + [ SYRPARENT ] ) ;
                      return
                    end (* then *) ;
 
@@ -20813,12 +20813,12 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
 
                  if GATTR . TYPTR -> . FORM <> SETS then
                    begin
-                     SET_ERROR_SKIP ( 554 , FSYS ) ;
+                     SET_ERROR_SKIP ( 554 , FSYS + [ SYRPARENT ] ) ;
                      return
                    end (* then *) ;
                  if GATTR . KIND <> VARBL then
                    begin
-                     SET_ERROR_SKIP ( 552 , FSYS ) ;
+                     SET_ERROR_SKIP ( 552 , FSYS + [ SYRPARENT ] ) ;
                      return
                    end (* then *) ;
 
