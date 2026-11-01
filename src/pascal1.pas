@@ -2496,6 +2496,15 @@ var MXINT2 : INTEGER ;
 
     CODELINE : INTEGER ;
 
+    //******************************************************
+    // sel_konst: the last variable selected (the outermost  
+    // selector of an actual parameter finishes last) was    
+    // a typed constant or a const parameter; such a one     
+    // can't be passed to a var parameter (P218)             
+    //******************************************************
+
+    SEL_KONST : BOOLEAN ;
+
     //****************************************
     // SWITCHES:                              
     // *********                              
@@ -14254,6 +14263,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                 end (* while *) ;
               if FACT_ERR then
                 GATTR . TYPTR := NIL ;
+              SEL_KONST := IS_KONSTP ;
             end (* SELECTOR *) ;
 
 
@@ -14897,6 +14907,8 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
 
               if GATTR . KIND = VARBL then
                 begin
+                  if SEL_KONST then
+                    SET_ERROR ( 218 ) ;
                   WORK_PARAM_BYADDR ;
                 end (* then *)
               else
