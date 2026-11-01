@@ -13699,10 +13699,16 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
 
                     FUNC : if FCP <> UFCTPTR then
                              if PFDECKIND = STANDARD then
-                               SET_ERROR ( 150 )
+                               begin
+                                 SET_ERROR ( 150 ) ;
+                                 TYPTR := NIL
+                               end (* then *)
                              else
                                if PFLEV = 0 then
-                                 SET_ERROR ( 150 )
+                                 begin
+                                   SET_ERROR ( 150 ) ;
+                                   TYPTR := NIL
+                                 end (* then *)
 
               //******************************************
               // EXTERNAL Function                        
@@ -13710,10 +13716,25 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
 
                                else
                                  if PFKIND = VARPARM then
-                                   SET_ERROR ( 151 )
+                                   begin
+                                     SET_ERROR ( 151 ) ;
+                                     TYPTR := NIL
+                                   end (* then *)
                                  else
+
+              //******************************************
+              // after these errors the result has no     
+              // address; without clearing TYPTR the      
+              // assignment used undefined fields and the 
+              // compiler stopped with RANGEERR (a result 
+              // assigned in a nested procedure)          
+              //******************************************
+
                                    if ( FPROCP <> FCP ) then
-                                     SET_ERROR ( 177 )
+                                     begin
+                                       SET_ERROR ( 177 ) ;
+                                       TYPTR := NIL
+                                     end (* then *)
                                    else
                                      begin
                                        VARNAME := FCP -> . NAME ;
