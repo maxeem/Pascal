@@ -20720,6 +20720,14 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                  //CHR   
                  //******
 
+                 //*****************************************
+                 // with checks on (option D), the argument 
+                 // must be a character code; chr (300)     
+                 // silently gave chr (44) before           
+                 //*****************************************
+
+                 if OPT . DEBUG then
+                   GEN3 ( PCODE_CHK , ORD ( 'I' ) , 0 , 255 ) ;
                  GEN0 ( PCODE_CHR ) ;
                  GATTR . TYPTR := PTYPE_CHAR
                end (* CHR1 *) ;
