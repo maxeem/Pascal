@@ -23975,6 +23975,11 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                 LCP_CONTROL : IDP ;
                 LATTR_CONTROL : ATTR ;
                 GATTR_SET : ATTR ;
+                LLC_SET : ADDRRANGE ;
+                LSIZE_SET : INTEGER ;
+                LORIGIN_SET : INTEGER ;
+                LMIN_SET , LMAX_SET : INTEGER ;
+                LLC_ELEM : ADDRRANGE ;
                 FOR_WITH_SETS : BOOLEAN := FALSE ;
                 XTYPE : TTP ;
 
@@ -24131,6 +24136,76 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                       SET_ERROR ( 408 ) ;
                     CTLS . WATCH1 := TRUE ;
                     EXPRESSION ( FALSE , FSYS + [ SYDO ] ) ;
+
+              //*************************************************
+              // ZNE at the end of each round reloads the set's  
+              // address; that works only for a constant and a   
+              // variable addressed directly. Any other set (an  
+              // expression like s + [x] or all (t), or one      
+              // reached through a pointer or var parameter) is  
+              // first copied to a temporary, which is then used 
+              // like a variable. Without the copy, ZNE read a   
+              // garbage address and the interpreter crashed.    
+              //*************************************************
+
+                    if GATTR . TYPTR <> NIL then
+                      if GATTR . TYPTR -> . FORM = SETS then
+                        if not ( ( GATTR . KIND = CST ) or ( GATTR .
+                        KIND = VARBL ) and ( GATTR . ACCESS = DRCT ) )
+                        then
+                          begin
+
+              //*************************************************
+              // the length of an expression's result is known   
+              // only at run time, so the temporary covers every 
+              // element the set can hold: the range of its base 
+              // type, or else of the control variable, within   
+              // the limits for sets                             
+              //*************************************************
+
+                            XTYPE := GATTR . TYPTR -> . BASETYPE ;
+                            if ( XTYPE = NIL ) or ( XTYPE = PTYPE_INT )
+                            then
+                              XTYPE := LATTR_CONTROL . BTYPE ;
+                            LMIN_SET := 0 ;
+                            LMAX_SET := SETMAXSIZE - 1 ;
+                            if ( XTYPE <> NIL ) and ( XTYPE <> PTYPE_INT
+                            ) then
+                              if IS_CHAR_TYPE ( XTYPE ) then
+                                LMAX_SET := ORDCHMAX
+                              else
+                                if XTYPE -> . FORM <= SUBRANGE then
+                                  GETBOUNDS ( XTYPE , LMIN_SET ,
+                                              LMAX_SET ) ;
+                            if LMIN_SET < SETLOWLIMIT then
+                              LMIN_SET := SETLOWLIMIT ;
+                            if LMAX_SET > SETUPPLIMIT then
+                              LMAX_SET := SETUPPLIMIT ;
+                            if LMAX_SET - LMIN_SET >= SETMAXSIZE then
+                              LMAX_SET := LMIN_SET + SETMAXSIZE - 1 ;
+                            CALC_SETSIZE ( LMIN_SET , LMAX_SET ,
+                                           LORIGIN_SET , LSIZE_SET ) ;
+                            LORIGIN_SET := LORIGIN_SET DIV 8 ;
+                            LSIZE_SET := LSIZE_SET + 7 ;
+                            LSIZE_SET := LSIZE_SET - LSIZE_SET MOD 4 ;
+                            LOADADDRESS_SET ( PCODEP , GATTR ) ;
+                            ALIGN ( LCOUNTER , WORDSIZE ) ;
+                            LLC_SET := LCOUNTER ;
+                            LCOUNTER := LCOUNTER + LSIZE_SET ;
+                            if LCOUNTER > LCMAX then
+                              LCMAX := LCOUNTER ;
+                            GEN2 ( PCODE_LDA , LEVEL , LLC_SET ) ;
+                            GEN2 ( PCODE_ZMV , - ( LSIZE_SET - 4 ) ,
+                                   LORIGIN_SET * 8 ) ;
+                            with GATTR do
+                              begin
+                                KIND := VARBL ;
+                                VARNAME := ' ' ;
+                                ACCESS := DRCT ;
+                                VLEVEL := LEVEL ;
+                                DPLMT := LLC_SET
+                              end (* with *)
+                          end (* then *) ;
                     RESOLVE_CTLS ( 1 ) ;
                     if GATTR . TYPTR <> NIL then
                       if GATTR . TYPTR -> . FORM <> SETS then
@@ -24141,11 +24216,25 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                           if COMPTYPES ( LATTR_CONTROL . TYPTR , XTYPE
                           ) = 1 then
                             begin
+
+              //*************************************************
+              // ZMI and ZNE store the element as a full word;   
+              // a control variable of type char, an enumeration 
+              // or a subrange is shorter, and storing into it   
+              // overwrote the variables after it. They store    
+              // into a temporary word instead, which is copied  
+              // to the control variable at the top of the loop  
+              //*************************************************
+
+                              ALIGN ( LCOUNTER , INTSIZE ) ;
+                              LLC_ELEM := LCOUNTER ;
+                              LCOUNTER := LCOUNTER + INTSIZE ;
+                              if LCOUNTER > LCMAX then
+                                LCMAX := LCOUNTER ;
                               GATTR_SET := GATTR ;
                               LOADADDRESS_SET ( PCODEP , GATTR ) ;
                               GEN2_NEU_VARN ( PCODEP , PCODE_ZMI ,
-                                              LATTR_CONTROL . VLEVEL ,
-                                              LATTR_CONTROL . DPLMT ,
+                                              LEVEL , LLC_ELEM ,
                                               LATTR_CONTROL . VARNAME ,
                                               7 ) ;
                             end (* then *)
@@ -24263,6 +24352,11 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
 
               GENUJPFJP ( PCODE_FJP , LCIX ) ;
               PUTLABEL ( LADDR ) ;
+              if FOR_WITH_SETS then
+                begin
+                  GEN3 ( PCODE_LOD , ORD ( 'I' ) , LEVEL , LLC_ELEM ) ;
+                  STORE ( LATTR_CONTROL )
+                end (* then *) ;
 
               //*********************************
               // BEGINNING OF THE FOR 'LOOP'     
@@ -24317,10 +24411,9 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
               else
                 begin
                   LOADADDRESS_SET ( PCODEP , GATTR_SET ) ;
-                  LOAD_NEU ( PCODEP , LATTR_CONTROL , VAR_REF ) ;
-                  GEN2_NEU_VARN ( PCODEP , PCODE_ZNE , LATTR_CONTROL .
-                                  VLEVEL , LATTR_CONTROL . DPLMT ,
-                                  LATTR_CONTROL . VARNAME , 7 ) ;
+                  GEN3 ( PCODE_LOD , ORD ( 'I' ) , LEVEL , LLC_ELEM ) ;
+                  GEN2_NEU_VARN ( PCODEP , PCODE_ZNE , LEVEL , LLC_ELEM
+                                  , LATTR_CONTROL . VARNAME , 7 ) ;
                   GEN2 ( PCODE_NOT , ORD ( 'B' ) , 0 ) ;
                   GENUJPFJP ( PCODE_FJP , LADDR ) ;
                 end (* else *) ;
