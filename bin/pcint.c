@@ -4382,6 +4382,8 @@ static int alloc_string (global_store *gs, int newsize)
 #define FTN_DSQRT            1
 #define FTN_DEXP             2
 #define FTN_DCOS             3
+#define FTN_DLOG             4
+#define FTN_DATAN            5
 
 
 
@@ -4394,6 +4396,9 @@ static void int_ftn (global_store *gs,
 /*                                                        */
 /*   interpret math library function (Fortran lib)        */
 /*                                                        */
+/*   ln (DLOG) and arctan (DATAN) were missing: they      */
+/*   stopped the program with BADBRANCH                   */
+/*                                                        */
 /**********************************************************/
 
 {
@@ -4402,114 +4407,59 @@ static void int_ftn (global_store *gs,
    int addr;
    int *intp;
    double *doublep;
+   double arg;
    double dres;
    char *stackp;
 
    pcode = gs -> code0 + gs -> ip;
 
+   disp = gs -> display [gs -> level];
+   addr = disp + pcode -> x;
+   intp = ADDRSTOR (addr);
+   doublep = ADDRSTOR (*intp);
+   arg = *doublep;
+
    switch (ftn_function)
    {
       case FTN_DSIN:
-
-         disp = gs -> display [gs -> level];
-         addr = disp + pcode -> x;
-         intp = ADDRSTOR (addr);
-
-         // printf ("int_ftn: *intp = %d\n", *intp);
-         doublep = ADDRSTOR (*intp);
-         // printf ("int_ftn: double arg = %10.2f\n", *doublep);
-         dres = sin (*doublep);
-         // printf ("int_ftn: double res = %10.2f\n", dres);
-
-         //****************************************************
-         //* LOD real result onto stack
-         //****************************************************
-
-         (gs -> sp) += 4;
-         stackp = ADDRSTACK (gs -> sp);
-         doublep = (double *) stackp;
-         *doublep = dres;
-         (gs -> sp) += 4;
-         STACKTYPE (gs -> sp) = 'R';
-
+         dres = sin (arg);
          break;
 
       case FTN_DCOS:
-
-         disp = gs -> display [gs -> level];
-         addr = disp + pcode -> x;
-         intp = ADDRSTOR (addr);
-
-         // printf ("int_ftn: *intp = %d\n", *intp);
-         doublep = ADDRSTOR (*intp);
-         // printf ("int_ftn: double arg = %10.2f\n", *doublep);
-         dres = cos (*doublep);
-         // printf ("int_ftn: double res = %10.2f\n", dres);
-
-         //****************************************************
-         //* LOD real result onto stack
-         //****************************************************
-
-         (gs -> sp) += 4;
-         stackp = ADDRSTACK (gs -> sp);
-         doublep = (double *) stackp;
-         *doublep = dres;
-         (gs -> sp) += 4;
-         STACKTYPE (gs -> sp) = 'R';
-
+         dres = cos (arg);
          break;
 
       case FTN_DSQRT:
-
-         disp = gs -> display [gs -> level];
-         addr = disp + pcode -> x;
-         intp = ADDRSTOR (addr);
-
-         doublep = ADDRSTOR (*intp);
-         dres = sqrt (*doublep);
-
-         //****************************************************
-         //* LOD real result onto stack
-         //****************************************************
-
-         (gs -> sp) += 4;
-         stackp = ADDRSTACK (gs -> sp);
-         doublep = (double *) stackp;
-         *doublep = dres;
-         (gs -> sp) += 4;
-         STACKTYPE (gs -> sp) = 'R';
-
+         dres = sqrt (arg);
          break;
 
       case FTN_DEXP:
+         dres = exp (arg);
+         break;
 
-         disp = gs -> display [gs -> level];
-         addr = disp + pcode -> x;
-         intp = ADDRSTOR (addr);
+      case FTN_DLOG:
+         dres = log (arg);
+         break;
 
-         // printf ("int_ftn: *intp = %d\n", *intp);
-         doublep = ADDRSTOR (*intp);
-         // printf ("int_ftn: double arg = %10.2f\n", *doublep);
-         dres = exp (*doublep);
-         // printf ("int_ftn: double res = %10.2f\n", dres);
-
-         //****************************************************
-         //* LOD real result onto stack
-         //****************************************************
-
-         (gs -> sp) += 4;
-         stackp = ADDRSTACK (gs -> sp);
-         doublep = (double *) stackp;
-         *doublep = dres;
-         (gs -> sp) += 4;
-         STACKTYPE (gs -> sp) = 'R';
-
+      case FTN_DATAN:
+         dres = atan (arg);
          break;
 
       default:
-
          runtime_error (gs, FTNFUNCNDEF, funcname);
+         return;
    }
+
+   //****************************************************
+   //* LOD real result onto stack
+   //****************************************************
+
+   (gs -> sp) += 4;
+   stackp = ADDRSTACK (gs -> sp);
+   doublep = (double *) stackp;
+   *doublep = dres;
+   (gs -> sp) += 4;
+   STACKTYPE (gs -> sp) = 'R';
 }
 
 
@@ -4525,8 +4475,24 @@ static char *check_fortran (global_store *gs,
 /**********************************************************/
 
 {
+   static const struct
+   {
+      const char *name;
+      int code;
+   }
+   ftn_names [] =
+   {
+      { "DSIN    ", FTN_DSIN },
+      { "DCOS    ", FTN_DCOS },
+      { "DEXP    ", FTN_DEXP },
+      { "DSQRT   ", FTN_DSQRT },
+      { "DLOG    ", FTN_DLOG },
+      { "DATAN   ", FTN_DATAN },
+      { NULL, 0 }
+   };
    char funcname [9];
    char *cp;
+   int i;
 
    memset (funcname, ' ', 8);
    funcname [8] = 0x00;
@@ -4542,28 +4508,13 @@ static char *check_fortran (global_store *gs,
       memcpy (funcname, cp, 8);
    }
 
-   if (memcmp (funcname, "DSIN    ", 8) == 0)
+   for (i = 0; ftn_names [i] . name != NULL; i ++)
    {
-      int_ftn (gs, FTN_DSIN, funcname);
-      return NULL;
-   }
-
-   if (memcmp (funcname, "DCOS    ", 8) == 0)
-   {
-      int_ftn (gs, FTN_DCOS, funcname);
-      return NULL;
-   }
-
-   if (memcmp (funcname, "DEXP    ", 8) == 0)
-   {
-      int_ftn (gs, FTN_DEXP, funcname);
-      return NULL;
-   }
-
-   if (memcmp (funcname, "DSQRT   ", 8) == 0)
-   {
-      int_ftn (gs, FTN_DSQRT, funcname);
-      return NULL;
+      if (memcmp (funcname, ftn_names [i] . name, 8) == 0)
+      {
+         int_ftn (gs, ftn_names [i] . code, funcname);
+         return NULL;
+      }
    }
 
    return message;

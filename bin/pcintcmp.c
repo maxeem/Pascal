@@ -2681,7 +2681,9 @@ void translate2 (global_store *gs)
                if (memcmp (plabel, "DSIN    ", 8) == 0 ||
                    memcmp (plabel, "DCOS    ", 8) == 0 ||
                    memcmp (plabel, "DEXP    ", 8) == 0 ||
-                   memcmp (plabel, "DSQRT   ", 8) == 0)
+                   memcmp (plabel, "DSQRT   ", 8) == 0 ||
+                   memcmp (plabel, "DLOG    ", 8) == 0 ||
+                   memcmp (plabel, "DATAN   ", 8) == 0)
                {
 #if 0
                   fprintf (stderr, "%s: section label %s not found; "
