@@ -2811,7 +2811,7 @@ const BLANKID : ALPHA = '            ' ;
         'CONTINUE    ' , 'PROCEDURE   ' , 'OTHERWISE   ' ,
         '            ' , '            ' , '            ' ,
         '            ' , '            ' ) ;
-      FRW : array [ 1 .. 12 ] of 1 .. MAXRW =
+      FRW : array [ 1 .. 12 ] of - 1 .. MAXRW =
 
       //********************************************************
       //  1  2  3    4    5    6    7    8    9   10   11   12  
@@ -6951,18 +6951,33 @@ procedure LOAD_NEU ( var PCODEP : TEXT ; var GATTR : ATTR ; var VAR_REF
 //**********************************************
 
 
+   var LTYP : TTP ;
+
    begin (* LOAD_NEU *)
      with GATTR do
        if TYPTR <> NIL then
          begin
+
+     //**********************************************
+     // a constant of a subrange type (a typed       
+     // constant, const k : 1 .. 5 = 3) is loaded as 
+     // its base type; it gave LDC with type 5 and   
+     // P412                                         
+     //**********************************************
+
+           LTYP := TYPTR ;
+           if KIND = CST then
+             if LTYP -> . FORM = SUBRANGE then
+               if LTYP -> . RANGETYPE <> NIL then
+                 LTYP := LTYP -> . RANGETYPE ;
            case KIND of
-             CST : if ( TYPTR -> . FORM = SCALAR ) and not IS_STDTYPE (
-                   TYPTR , 'R' ) then
-                     if TYPTR = PTYPE_BOOL then
+             CST : if ( LTYP -> . FORM = SCALAR ) and not IS_STDTYPE (
+                   LTYP , 'R' ) then
+                     if LTYP = PTYPE_BOOL then
                        GEN2_NEU ( PCODEP , PCODE_LDC , 3 , CVAL . IVAL
                                   , NIL )
                      else
-                       if TYPTR = PTYPE_CHAR then
+                       if LTYP = PTYPE_CHAR then
 
      //*****************************************************
      // LDC - if char constant has been coded in binary     
@@ -6985,16 +7000,27 @@ procedure LOAD_NEU ( var PCODEP : TEXT ; var GATTR : ATTR ; var VAR_REF
                          GEN2_NEU ( PCODEP , PCODE_LDC , 1 , CVAL .
                                     IVAL , NIL )
                    else
-                     if TYPTR = PTYPE_ANY then
+                     if LTYP = PTYPE_ANY then
                        GEN2_NEU ( PCODEP , PCODE_LDC , 4 , 0 , NIL )
                      else
                        begin
-                         if IS_STDTYPE ( TYPTR , 'R' ) then
+                         if IS_STDTYPE ( LTYP , 'R' ) then
                            GEN2_NEU ( PCODEP , PCODE_LDC , 2 , 0 , ADDR
                                       ( CVAL ) )
                          else
-                           GEN2_NEU ( PCODEP , PCODE_LDC , 5 , 0 , NIL
-                                      )
+
+     //**********************************************
+     // a constant of a pointer type can only be nil 
+     // (const p: ptrtype = nil); it gave LDC with   
+     // type 5 and P412                              
+     //**********************************************
+
+                           if LTYP -> . FORM = POINTER then
+                             GEN2_NEU ( PCODEP , PCODE_LDC , 4 , 0 ,
+                                        NIL )
+                           else
+                             GEN2_NEU ( PCODEP , PCODE_LDC , 5 , 0 ,
+                                        NIL )
                        end (* else *) ;
              VARBL : case ACCESS of
                        DRCT : GEN3_NEU_VARN ( PCODEP , PCODE_LOD ,
@@ -10455,6 +10481,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
           CT_RESULT : INTEGER ;
           LCP : IDP ;
           TEMPBUF : CHAR ( 15 ) ;
+          LMIN_SC , LMAX_SC : INTEGER ;
 
 
       procedure STOWCONST ( ELSP : TTP ) ;
@@ -10613,8 +10640,29 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
              LSP_WORK : TTP ;
              LRECTAGTYPE : TTP ;
              CONSTL_WORK : -> CONSTLIST ;
+             VAL_ZERO : XCONSTANT ;
+
+         procedure ZERO_GAP ( UPTO : INTEGER ) ;
+
+         //************************************************
+         // the bytes from the end of the last field       
+         // stored up to the next field (or the end of     
+         // the record) are set to zero: they held the     
+         // storage fill pattern, so that records with     
+         // equal fields compared unequal, and fields      
+         // left out were garbage                         
+         //************************************************
+
+            begin (* ZERO_GAP *)
+              if UPTO > XSC . ACTUALCOUNTER then
+                STORE_PATTERN ( XSC , NIL , UPTO - XSC . ACTUALCOUNTER
+                                , VAL_ZERO , TRUE )
+            end (* ZERO_GAP *) ;
 
          begin (* STRUCT_RECORDCONST *)
+           VAL_ZERO . IVAL := 0 ;
+           VAL_ZERO . CONSTCLASS := XINT ;
+           VAL_ZERO . STRTYPE := ' ' ;
            WEITER := TRUE ;
            if FALSE then
              begin
@@ -10660,6 +10708,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                          FLDPR := NEXT ;
                          continue
                        end (* then *) ;
+                     ZERO_GAP ( CONSTLOC + FIELDADDR ) ;
                      XSC . ACTUALCOUNTER := CONSTLOC + FIELDADDR ;
                      STOWCONST ( IDTYPE ) ;
                      FLDPR := NEXT ;
@@ -10683,6 +10732,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                            begin
                              if NAME <> BLANKID then
                                begin
+                                 ZERO_GAP ( CONSTLOC + FIELDADDR ) ;
                                  XSC . ACTUALCOUNTER := CONSTLOC +
                                                    FIELDADDR ;
                                  STOWCONST ( IDTYPE )
@@ -10724,7 +10774,22 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                                      LSP_WORK := NEXTVARIANT ;
                                  end (* with *)
                            end (* with *)
-                     end (* with *)
+                     end (* with *) ;
+
+           //************************************************
+           // fields left out: warning, and zeros            
+           //************************************************
+
+               while FLDPR <> NIL do
+                 if FLDPR -> . INSERTED_BY_WITH then
+                   FLDPR := FLDPR -> . NEXT
+                 else
+                   begin
+                     ERRKIND := 'W' ;
+                     SET_ERROR ( 211 ) ;
+                     FLDPR := NIL
+                   end (* else *) ;
+               ZERO_GAP ( CONSTLOC + L_WORK ) ;
              end (* with *) ;
            XSC . ACTUALCOUNTER := CONSTLOC + L_WORK ;
            if FALSE then
@@ -10898,7 +10963,21 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                         FSP := LSP ;
                         if CT_RESULT in [ 2 , 3 , 4 ] then
                           MOD_STRCONST ( CT_RESULT , FVALU , DUMMY_TYP
-                                         , LSP -> . SIZE )
+                                         , LSP -> . SIZE ) ;
+
+        //**********************************************
+        // a value for a subrange must lie within it;   
+        // var i : 1 .. 5 := 9 was accepted             
+        //**********************************************
+
+                        if ( LSP -> . FORM = SUBRANGE ) and ( FVALU .
+                        CONSTCLASS = XINT ) then
+                          begin
+                            GETBOUNDS ( LSP , LMIN_SC , LMAX_SC ) ;
+                            if ( FVALU . IVAL < LMIN_SC ) or ( FVALU .
+                            IVAL > LMAX_SC ) then
+                              SET_ERROR ( 303 )
+                          end (* then *)
                       end (* then *) ;
                   end (* then *)
                 else
@@ -11279,7 +11358,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                             ;
 
       var LCP , NXT , NXT1 : IDP ;
-          LSP : TTP ;
+          LSP , LSP_DECL : TTP ;
           LSIZE : ADDRRANGE ;
           LFPTR : FRECPTR ;
           ERRINFO : CHAR64 ;
@@ -11390,8 +11469,22 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
               XSC . FIRSTELEM := NIL ;
               XSC . ACTELEM := NIL ;
               INITVAL := TRUE ;
+              LSP_DECL := LSP ;
               STRUCTCONSTANT ( FSYS + [ SYSEMICOLON ] , XSC , SKID ,
                                LSP , LVALU , SKLC ) ;
+
+        //*******************************************
+        // after an error in the initial value the   
+        // variable keeps its type and has no        
+        // initial value; the undefined value made   
+        // the compiler stop with RANGEERR           
+        //*******************************************
+
+              if ( LSP = NIL ) and ( LSP_DECL <> NIL ) then
+                begin
+                  LSP := LSP_DECL ;
+                  INITVAL := FALSE
+                end (* then *)
             end (* then *) ;
 
         //************************************************
@@ -11513,7 +11606,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                                ) ;
 
       var LCP , NXT , NXT1 : IDP ;
-          LSP : TTP ;
+          LSP , LSP_DECL : TTP ;
           LSIZE : ADDRRANGE ;
           LVALU_DUMMY : XCONSTANT ;
           ELSIZE : INTEGER ;
@@ -11614,8 +11707,22 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
               XSC . FIRSTELEM := NIL ;
               XSC . ACTELEM := NIL ;
               INITVAL := TRUE ;
+              LSP_DECL := LSP ;
               STRUCTCONSTANT ( FSYS + [ SYSEMICOLON ] , XSC , SKID ,
                                LSP , LVALU , SKLC ) ;
+
+        //*******************************************
+        // after an error in the initial value the   
+        // variable keeps its type and has no        
+        // initial value; the undefined value made   
+        // the compiler stop with RANGEERR           
+        //*******************************************
+
+              if ( LSP = NIL ) and ( LSP_DECL <> NIL ) then
+                begin
+                  LSP := LSP_DECL ;
+                  INITVAL := FALSE
+                end (* then *)
             end (* then *) ;
 
         //************************************************
@@ -21279,6 +21386,20 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                               TYPTR := IDTYPE ;
                               KIND := CST ;
                               CVAL := VALUES ;
+
+                     //*****************************************
+                     // a typed constant of a subrange type     
+                     // has the base type in expressions, like  
+                     // a variable (write and arithmetic        
+                     // rejected it)                            
+                     //*****************************************
+
+                              if TYPTR <> NIL then
+                                if TYPTR -> . FORM = SUBRANGE then
+                                  begin
+                                    BTYPE := TYPTR ;
+                                    TYPTR := TYPTR -> . RANGETYPE
+                                  end (* then *) ;
                               if SY in [ SYLBRACK , SYLPARENT ] then
                                 if IS_CARRAY ( TYPTR ) then
                                   begin
