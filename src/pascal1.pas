@@ -22846,6 +22846,20 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
 
                     CT_RESULT := COMPTYPES ( LATTR . TYPTR , GATTR .
                                  TYPTR ) ;
+
+              //******************************************
+              // a string compared with a char array of   
+              // any length: the array is converted (VC2) 
+              // to a string of its own length; comptypes 
+              // gave 7 for a conformant string (such as  
+              // a function result) and 0 for an array    
+              // longer than the string, both P129        
+              //******************************************
+
+                    if CT_RESULT in [ 0 , 7 ] then
+                      if LATTR . TYPTR -> . FORM = CSTRING then
+                        if IS_CARRAY ( GATTR . TYPTR ) then
+                          CT_RESULT := 5 ;
                     if CT_RESULT in [ 1 , 2 , 3 , 4 , 5 , 6 , 8 , 9 ]
                     then
                       begin
@@ -22932,7 +22946,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                                           CTLS . VPO1_NEEDED := TRUE ;
                                           GEN0 ( PCODE_VC1 ) ;
                                         end (* tag/ca *) ;
-                                    5 : begin
+                                    5 , 7 , 0 : begin
                                           CTLS . VPO1_NEEDED := TRUE ;
                                           GEN1 ( PCODE_VC2 , RSIZE ) ;
                                         end (* tag/ca *) ;
