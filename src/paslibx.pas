@@ -2496,9 +2496,18 @@ function $PASSTR1 ( FUNCCODE : INTEGER ; const S1 : STRING ; I1 :
              LEN := I2 ;
              if START < 1 then
                $ERROR ( 1201 ) ;
+
+     //*******************************
+     // start may be one past the end, 
+     // which gives the empty string   
+     // (as in PL/I); it was an error, 
+     // and with a length of 0 the     
+     // address of s1 [start] failed   
+     //*******************************
+
              if LEN < 0 then
                begin
-                 if START > LENGTH ( S1 ) then
+                 if START > LENGTH ( S1 ) + 1 then
                    $ERROR ( 1201 ) ;
                  LEN := LENGTH ( S1 ) - START + 1 ;
                end (* then *)
@@ -2509,9 +2518,12 @@ function $PASSTR1 ( FUNCCODE : INTEGER ; const S1 : STRING ; I1 :
                    $ERROR ( 1201 ) ;
                end (* else *) ;
              $PASSTR1 := REPEATSTR ( ' ' , LEN ) ;
-             P := STRRESULTP ;
-             Q := ADDR ( S1 [ START ] ) ;
-             MEMCPY ( P , Q , LEN ) ;
+             if LEN > 0 then
+               begin
+                 P := STRRESULTP ;
+                 Q := ADDR ( S1 [ START ] ) ;
+                 MEMCPY ( P , Q , LEN ) ;
+               end (* then *)
            end (* tag/ca *) ;
 
      //*******************************
@@ -2525,12 +2537,15 @@ function $PASSTR1 ( FUNCCODE : INTEGER ; const S1 : STRING ; I1 :
                $ERROR ( 1201 ) ;
              if LEN < 0 then
                begin
-                 if START > LENGTH ( S1 ) then
+                 if START > LENGTH ( S1 ) + 1 then
                    $ERROR ( 1201 ) ;
                  RESTL := START - 1 ;
                  $PASSTR1 := REPEATSTR ( ' ' , RESTL ) ;
-                 Q := ADDR ( S1 [ 1 ] ) ;
-                 MEMCPY ( STRRESULTP , Q , RESTL ) ;
+                 if RESTL > 0 then
+                   begin
+                     Q := ADDR ( S1 [ 1 ] ) ;
+                     MEMCPY ( STRRESULTP , Q , RESTL ) ;
+                   end (* then *)
                end (* then *)
              else
                begin
@@ -2784,7 +2799,7 @@ function $PASSTR2 ( FUNCCODE : INTEGER ; const S1 : STRING ; const S2 :
              $PASSTR2 := 0 ;
              LS1 := LENGTH ( S1 ) ;
              LS2 := LENGTH ( S2 ) ;
-             if LS2 > LS1 then
+             if ( LS2 > LS1 ) or ( LS2 = 0 ) then
                return ;
 
      //**************************************************
@@ -2907,7 +2922,7 @@ function $PASSTR2 ( FUNCCODE : INTEGER ; const S1 : STRING ; const S2 :
              $PASSTR2 := 0 ;
              LS1 := LENGTH ( S1 ) ;
              LS2 := LENGTH ( S2 ) ;
-             if LS2 > LS1 then
+             if ( LS2 > LS1 ) or ( LS2 = 0 ) then
                return ;
 
      //**************************************************
