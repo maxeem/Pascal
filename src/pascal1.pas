@@ -15335,7 +15335,19 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                  if USE_DEFAULT then
                    begin
                      if DFILE = NIL then
-                       SET_ERROR ( 185 ) ;
+                       begin
+
+                 //********************************************
+                 // close without a file: selector must not    
+                 // get nil, it stopped the compiler with a    
+                 // range error (close (1) was enough)         
+                 //********************************************
+
+                         SET_ERROR ( 185 ) ;
+                         SKIP_SYMBOL ( FSYS + [ SYRPARENT ] ) ;
+                         GATTR . TYPTR := NIL ;
+                         return
+                       end (* then *) ;
                      LCP := DFILE ;
                    end (* then *) ;
                  SELECTOR ( FSYS + [ SYRPARENT ] , LCP , TRUE , DUMMYB
