@@ -20447,6 +20447,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                var LCP : IDP ;
                    XTYPE : TTP ;
                    PSI : PSETCINFO ;
+                   LMIN , LMAX : INTEGER ;
 
                begin (* ALL1 *)
                  LCP := NIL ;
@@ -20491,11 +20492,22 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
 
                  if XTYPE <> NIL then
                    begin
+
+                 //**************************************************
+                 // the elements are those of the base type; the     
+                 // set type's SETMIN .. SETMAX is its storage, which
+                 // for every set of a char subrange is 0 .. 255,    
+                 // so all ( set of 'a' .. 'z' ) held every char     
+                 //**************************************************
+
+                     LMIN := XTYPE -> . SETMIN ;
+                     LMAX := XTYPE -> . SETMAX ;
+                     if XTYPE -> . BASETYPE <> NIL then
+                       GETBOUNDS ( XTYPE -> . BASETYPE , LMIN , LMAX ) ;
                      PSI := PSIGLOB ;
-                     PSI -> . ELEMCOUNT := XTYPE -> . SETMAX - XTYPE ->
-                                           . SETMIN + 1 ;
-                     PSI -> . SETCMIN := XTYPE -> . SETMIN ;
-                     PSI -> . SETCMAX := XTYPE -> . SETMAX ;
+                     PSI -> . ELEMCOUNT := LMAX - LMIN + 1 ;
+                     PSI -> . SETCMIN := LMIN ;
+                     PSI -> . SETCMAX := LMAX ;
                      PSI -> . RANGEERR := 0 ;
                      PSI -> . CHARTYPE := FALSE ;
                      PSI -> . HEXORBIN := ' ' ;
@@ -20506,7 +20518,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                        := TRUE ;
                      GATTR . TYPTR := XTYPE ;
                      GATTR . KIND := CST ;
-                     if XTYPE -> . BASETYPE = PTYPE_CHAR then
+                     if IS_CHAR_TYPE ( XTYPE -> . BASETYPE ) then
                        begin
                          PSI -> . HEXORBIN := 'J' ;
                          BUILD_SETCONST ( GATTR . CVAL , XTYPE , PSI ,
