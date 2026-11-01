@@ -4149,8 +4149,17 @@ procedure INSYMBOL ;
                        if ( SYVAL . RVAL [ I ] = 'e' ) or ( SYVAL .
                        RVAL [ I ] = 'E' ) then
                          begin
+
+     //********************************************************
+     //   a literal with an exponent is an ordinary real, not  
+     //   a decimal with the digits of its mantissa: 1.5e-5    
+     //   was written as 0.0 and 1e30 with 31 digits           
+     //********************************************************
+
                            SCH_DIG := FALSE ;
                            SCH_PREC := FALSE ;
+                           SYDIGITS := 0 ;
+                           SYPREC := 0 ;
                          end (* then *) ;
                        if SYVAL . RVAL [ I ] in [ '0' .. '9' ] then
                          begin
@@ -4583,6 +4592,46 @@ function IS_STDTYPE ( TYP : TTP ; WHAT : CHAR ) : BOOLEAN ;
          if TYP -> . SCALKIND = STANDARD then
            IS_STDTYPE := ( TYP -> . WHATSTANDARD = WHAT ) ;
    end (* IS_STDTYPE *) ;
+
+
+
+function INT_AS_REAL ( OTHER : TTP ) : TTP ;
+
+//******************************************************************
+// the type an integer operand gets when it is converted for real   
+// arithmetic: the other operand's decimal type if it has one (an   
+// integer is exact, so 3.25 * 2 keeps two decimals), else real     
+//******************************************************************
+
+
+   begin (* INT_AS_REAL *)
+     INT_AS_REAL := PTYPE_REAL ;
+     if OTHER <> NIL then
+       if IS_STDTYPE ( OTHER , 'R' ) then
+         if OTHER -> . STDPARM1 > 0 then
+           INT_AS_REAL := OTHER
+   end (* INT_AS_REAL *) ;
+
+
+
+function REAL_RESULT ( KEEP , OTHER : TTP ) : TTP ;
+
+//******************************************************************
+// the type of the result of real arithmetic: a decimal type (from  
+// a declaration or a literal like 0.3) only when both operands     
+// are decimals, else real. The result used to keep the type of     
+// one operand: x - 0.3 and 2.5 * x, with x a real, were written    
+// with one decimal, 0.75 as 0.8                                    
+//******************************************************************
+
+
+   begin (* REAL_RESULT *)
+     REAL_RESULT := PTYPE_REAL ;
+     if ( KEEP <> NIL ) and ( OTHER <> NIL ) then
+       if ( KEEP -> . STDPARM1 > 0 ) and ( OTHER -> . STDPARM1 > 0 )
+       then
+         REAL_RESULT := KEEP
+   end (* REAL_RESULT *) ;
 
 
 
@@ -22433,19 +22482,21 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                        if GATTR . TYPTR = PTYPE_INT then
                          begin
                            GEN0 ( PCODE_FLT ) ;
-                           GATTR . TYPTR := PTYPE_REAL
+                           GATTR . TYPTR := INT_AS_REAL ( LATTR . TYPTR )
                          end (* then *)
                        else
                          if LATTR . TYPTR = PTYPE_INT then
                            begin
                              GEN0 ( PCODE_FLO ) ;
-                             LATTR . TYPTR := PTYPE_REAL
+                             LATTR . TYPTR := INT_AS_REAL ( GATTR . TYPTR )
                            end (* then *) ;
                        if IS_STDTYPE ( LATTR . TYPTR , 'R' ) and
                        IS_STDTYPE ( GATTR . TYPTR , 'R' ) then
                          begin
                            GEN0 ( PCODE_MPR ) ;
                            GATTR_NEU := LATTR ;
+                           GATTR_NEU . TYPTR := REAL_RESULT ( LATTR .
+                                                TYPTR , GATTR . TYPTR ) ;
                            return
                          end (* then *) ;
                        if LATTR . TYPTR <> NIL then
@@ -22517,7 +22568,10 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                                 if IS_STDTYPE ( LATTR . TYPTR , 'R' )
                                 and IS_STDTYPE ( GATTR . TYPTR , 'R' )
                                 then
-                                  GEN0 ( PCODE_DVR )
+                                  begin
+                                    GEN0 ( PCODE_DVR ) ;
+                                    GATTR . TYPTR := PTYPE_REAL
+                                  end (* then *)
                                 else
                                   begin
                                     SET_ERROR ( 134 ) ;
@@ -22744,18 +22798,23 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                                if GATTR . TYPTR = PTYPE_INT then
                                  begin
                                    GEN0 ( PCODE_FLT ) ;
-                                   GATTR . TYPTR := PTYPE_REAL
+                                   GATTR . TYPTR := INT_AS_REAL ( LATTR . TYPTR )
                                  end (* then *)
                                else
                                  if LATTR . TYPTR = PTYPE_INT then
                                    begin
                                      GEN0 ( PCODE_FLO ) ;
-                                     LATTR . TYPTR := PTYPE_REAL
+                                     LATTR . TYPTR := INT_AS_REAL ( GATTR . TYPTR )
                                    end (* then *) ;
                                if IS_STDTYPE ( LATTR . TYPTR , 'R' )
                                and IS_STDTYPE ( GATTR . TYPTR , 'R' )
                                then
-                                 GEN0 ( PCODE_ADR )
+                                 begin
+                                   GEN0 ( PCODE_ADR ) ;
+                                   GATTR . TYPTR := REAL_RESULT ( GATTR
+                                                  . TYPTR , LATTR .
+                                                  TYPTR )
+                                 end (* then *)
                                else
                                  begin
                                    if LATTR . TYPTR <> NIL then
@@ -22785,18 +22844,23 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                                if GATTR . TYPTR = PTYPE_INT then
                                  begin
                                    GEN0 ( PCODE_FLT ) ;
-                                   GATTR . TYPTR := PTYPE_REAL
+                                   GATTR . TYPTR := INT_AS_REAL ( LATTR . TYPTR )
                                  end (* then *)
                                else
                                  if LATTR . TYPTR = PTYPE_INT then
                                    begin
                                      GEN0 ( PCODE_FLO ) ;
-                                     LATTR . TYPTR := PTYPE_REAL
+                                     LATTR . TYPTR := INT_AS_REAL ( GATTR . TYPTR )
                                    end (* then *) ;
                                if IS_STDTYPE ( LATTR . TYPTR , 'R' )
                                and IS_STDTYPE ( GATTR . TYPTR , 'R' )
                                then
-                                 GEN0 ( PCODE_SBR )
+                                 begin
+                                   GEN0 ( PCODE_SBR ) ;
+                                   GATTR . TYPTR := REAL_RESULT ( GATTR
+                                                  . TYPTR , LATTR .
+                                                  TYPTR )
+                                 end (* then *)
                                else
                                  begin
                                    if LATTR . TYPTR <> NIL then
