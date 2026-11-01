@@ -1200,6 +1200,7 @@ local procedure COMMENT ( var SCANINP : TEXT ; var SCANOUT : TEXT ; var
                        if SCANCH = '*' then
                          begin
                            COMMENT ( SCANINP , SCANOUT , SCB , 1 ) ;
+                           SCANCH := SCB . LOOKAHEAD ;
                            continue
                          end (* then *) ;
                      end (* then *)
@@ -1212,6 +1213,7 @@ local procedure COMMENT ( var SCANINP : TEXT ; var SCANOUT : TEXT ; var
                        if SCANCH = '*' then
                          begin
                            COMMENT ( SCANINP , SCANOUT , SCB , 2 ) ;
+                           SCANCH := SCB . LOOKAHEAD ;
                            continue ;
                          end (* then *) ;
                      end (* then *)
@@ -1219,7 +1221,19 @@ local procedure COMMENT ( var SCANINP : TEXT ; var SCANOUT : TEXT ; var
              3 : begin
                    if SCANCH = '{' then
                      begin
+
+     //***************************************
+     //   step past the { first, like the    
+     //   two-character openers above;       
+     //   otherwise COMMENT sees the same {  
+     //   again and recurses until the stack 
+     //   overflows                          
+     //***************************************
+
+                       PASSCANR ( SCANINP , SCANOUT , SCB , SCANCH ) ;
+                       SCB . LOOKAHEAD := SCANCH ;
                        COMMENT ( SCANINP , SCANOUT , SCB , 3 ) ;
+                       SCANCH := SCB . LOOKAHEAD ;
                        continue
                      end (* then *) ;
                  end (* tag/ca *) ;
