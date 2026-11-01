@@ -11968,6 +11968,42 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
       end (* MKPROCNAME *) ;
 
 
+   procedure CHECK_EXTNAME ( PROCID : IDP ) ;
+
+   //****************************************************************
+   // the external name of a procedure is the first 8 characters    
+   // of its name; warn (P225) when two external procedures of the  
+   // program or module get the same one, because a call of one     
+   // then goes to the other, without any message                   
+   //****************************************************************
+
+
+      var LCP : IDP ;
+          ERRINFO : CHAR64 ;
+
+      begin (* CHECK_EXTNAME *)
+        if PROCID <> NIL then
+          if PROCID -> . EXTRN then
+            begin
+              LCP := PROCID -> . PREV_PROC_IN_BLOCK ;
+              while LCP <> NIL do
+                begin
+                  if LCP -> . KLASS in [ PROC , FUNC ] then
+                    if LCP -> . EXTRN then
+                      if LCP -> . EXTNAME = PROCID -> . EXTNAME then
+                        begin
+                          ERRINFO := PROCID -> . NAME ;
+                          SET_ERROR_POS ( 'W' , 225 , ERRINFO , SCB .
+                                          LINENR , SCB . LINEPOS ) ;
+                          return
+                        end (* then *) ;
+                  LCP := LCP -> . PREV_PROC_IN_BLOCK
+                end (* while *)
+            end (* then *)
+      end (* CHECK_EXTNAME *) ;
+
+
+
    procedure PROCDECLARATION ( var PCODEP : TEXT ; FSY : SYMB ; PLOCAL
                              : BOOLEAN ; var LAST_PROC : IDP ) ;
 
@@ -12698,7 +12734,8 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                         PROC_TO_STATNAME ( EXTNAME , EXTRN , CSTNAME )
                                            ;
                       end (* else *)
-                  end (* with *)
+                  end (* with *) ;
+                CHECK_EXTNAME ( PROCID ) ;
               end (* else *) ;
             if SY = SYSEMICOLON then
               INSYMBOL
@@ -12715,6 +12752,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
               DBG_PRINTSYMBOL ( PROCID ) ;
             if OPT . SHOW_LISTDEF then
               DEF_PRINTSYMBOL ( PROCID ) ;
+            CHECK_EXTNAME ( PROCID ) ;
             MARK ( MARKP ) ;
             REF_BEFORE_BODY := PROCID -> . REFERENCEP ;
             ALIGN ( LCOUNTER , MAXDATASIZE ) ;
