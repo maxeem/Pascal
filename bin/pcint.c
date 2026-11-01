@@ -1574,6 +1574,26 @@ static void *cspf_tim (void *vgs,
 
 
 
+//**********************************************************
+//  round and trunc of a real outside the integer range (or
+//  of NaN) gave -2147483648 without a message (the result
+//  of the conversion in C is undefined); now RANGEERR
+//**********************************************************
+
+static void check_int_range (void *vgs, double dwert, int is_round)
+
+{
+   double lo = is_round ? -2147483648.5 : -2147483649.0;
+   double hi = is_round ? 2147483647.5 : 2147483648.0;
+
+   if (! (dwert > lo && dwert < hi))
+      runtime_error (vgs, RANGEERR,
+                     "round/trunc: value outside the integer range");
+}
+
+
+
+
 static void *cspf_rnd (void *vgs,
                        double *parm1)
 
@@ -1600,6 +1620,7 @@ static void *cspf_rnd (void *vgs,
    (gs -> sp) -= 4;
    STACKTYPE (gs -> sp) = ' ';
 
+   check_int_range (gs, dwert, 1);
    intp = ADDRSTACK (gs -> sp);
    *intp = roundx (dwert, 0);
 
@@ -1635,6 +1656,7 @@ static void *cspf_trc (void *vgs,
    (gs -> sp) -= 4;
    STACKTYPE (gs -> sp) = ' ';
 
+   check_int_range (gs, dwert, 0);
    intp = ADDRSTACK (gs -> sp);
    if (dwert >= 0.0)
    {
@@ -8266,6 +8288,7 @@ static void int1 (global_store *gs)
          (gs -> sp) -= 4;
          STACKTYPE (gs -> sp) = ' ';
 
+         check_int_range (gs, dwert, 1);
          intp = ADDRSTACK (gs -> sp);
          *intp = roundx (dwert, 0);
 
@@ -8788,6 +8811,7 @@ static void int1 (global_store *gs)
          (gs -> sp) -= 4;
          STACKTYPE (gs -> sp) = ' ';
 
+         check_int_range (gs, dwert, 0);
          intp = ADDRSTACK (gs -> sp);
          if (dwert >= 0.0)
          {
