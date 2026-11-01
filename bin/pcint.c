@@ -785,6 +785,8 @@ static void print_runtime_error (FILE *outfile,
    int pcups_work;
    int ip_work;
    int entry_work;
+   int ncalls;
+   int icall;
 
    fprintf (outfile, "\n\n");
    fprintf (outfile, "+++ runtime error %s\n",
@@ -820,12 +822,36 @@ static void print_runtime_error (FILE *outfile,
                pent -> sourcename);
    }
 
+   //****************************************************
+   //   a deep recursion (STACKCOLL) has thousands of
+   //   active calls; print the first 10 and the last 3
+   //****************************************************
+
+   ncalls = 0;
+   for (pcups_work = gs -> pcups; pcups_work != 0;
+        pcups_work = ((cup_section *) ADDRSTOR (pcups_work)) -> backchain)
+      ncalls ++;
+
+   icall = 0;
    pcups_work = gs -> pcups;
    while (pcups_work != 0)
    {
       pcup = ADDRSTOR (pcups_work);
       entry_work = pcup -> entry_old;
       ip_work = pcup -> returnaddr - 1;
+
+      icall ++;
+      if (ncalls > 20 && icall > 10 && icall <= ncalls - 3)
+      {
+         if (icall == 11)
+         {
+            fprintf (outfile, "--------------------------------------------\n");
+            fprintf (outfile, "... %d more calls not shown ...\n",
+                     ncalls - 13);
+         }
+         pcups_work = pcup -> backchain;
+         continue;
+      }
 
       fprintf (outfile, "--------------------------------------------\n");
       fprintf (outfile, "block was called from\n");
