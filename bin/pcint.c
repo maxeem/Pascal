@@ -2699,7 +2699,15 @@ static void *cspf_eln (void *vgs,
 
    STOR_FCB (parm1, fcb);
 
-   if (fcb -> status == '0')
+   //****************************************************
+   //   on a terminal, readln only schedules reading the
+   //   next line; eoln has to look at that line, so the
+   //   scheduled read is done here (it answered true,
+   //   from the line before, without waiting for input)
+   //****************************************************
+
+   if (fcb -> status == '0' ||
+       (fcb -> status == '3' && fcb -> readbuf_sched == 'Y'))
    {
       check_read (gs, fcb);
    }
