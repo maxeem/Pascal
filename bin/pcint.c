@@ -1691,8 +1691,18 @@ static void *cspf_xit (void *vgs,
 
 #endif
 
+   //*************************************************
+   // exit (n) used to write "*** EXIT Aufruf mit
+   // Parameter = n ***" to the program's standard
+   // output; the exit status says the same
+   //*************************************************
+
+#if 0
+
    fprintf (stdout, "\n*** EXIT Aufruf mit Parameter = %d ***\n",
             parm1);
+
+#endif
 
    gs -> global_rc = parm1;
    gs -> stepanz = -10;
