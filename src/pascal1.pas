@@ -10119,6 +10119,21 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                                       ARRAY_ERROR := TRUE ;
                                     end (* then *)
                                 end (* then *) ;
+        //******************************************************
+        // addresses have 24 bits (16 MB): a larger array used   
+        // to stop the compiler with a range error in this       
+        // multiplication; now it is error P391                  
+        //******************************************************
+
+                              if not ARRAY_ERROR then
+                                if LSIZE > 0 then
+                                  if LMAX - LMIN + 1 > MAXADDR div LSIZE
+                                  then
+                                    begin
+                                      SET_ERROR ( 391 ) ;
+                                      ARRAY_ERROR := TRUE ;
+                                      LSIZE := 1
+                                    end (* then *) ;
                               if not ARRAY_ERROR then
                                 begin
                                   LSIZE := LSIZE * ( LMAX - LMIN + 1 )
@@ -11658,6 +11673,11 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                   IVADDR := CONSTLCOUNTER ;
                   WRITEDFC ( PCODEP , CONSTLCOUNTER , LSP , ISIZE ,
                              LVALU , FALSE ) ;
+                  if LSIZE > MAXADDR - CONSTLCOUNTER then
+                    begin
+                      SET_ERROR ( 389 ) ;
+                      LSIZE := 0
+                    end (* then *) ;
                   CONSTLCOUNTER := CONSTLCOUNTER + LSIZE ;
                 end (* else *)
             end (* then *) ;
@@ -11674,6 +11694,11 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                   begin
                     ALIGN ( LCOUNTER , LSP -> . ALN ) ;
                     VADDR := LCOUNTER ;
+                    if LSIZE > MAXADDR - LCOUNTER then
+                      begin
+                        SET_ERROR ( 389 ) ;
+                        LSIZE := 0
+                      end (* then *) ;
                     LCOUNTER := LCOUNTER + LSIZE ;
                     if LSP -> . FORM = FILES then
                       if LEVEL > 1 then
@@ -11936,6 +11961,11 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                               VADDR := CONSTLCOUNTER ;
                               WRITEDFC ( PCODEP , CONSTLCOUNTER , LSP ,
                                          ELSIZE , LVALU , FALSE ) ;
+                              if LSIZE > MAXADDR - CONSTLCOUNTER then
+                                begin
+                                  SET_ERROR ( 389 ) ;
+                                  LSIZE := 0
+                                end (* then *) ;
                               CONSTLCOUNTER := CONSTLCOUNTER + LSIZE ;
                             end (* else *)
                         end (* then *)
@@ -11948,6 +11978,11 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                           VADDR := CONSTLCOUNTER ;
                           WRITEDFC ( PCODEP , CONSTLCOUNTER , LSP ,
                                      ELSIZE , LVALU_DUMMY , TRUE ) ;
+                          if LSIZE > MAXADDR - CONSTLCOUNTER then
+                            begin
+                              SET_ERROR ( 389 ) ;
+                              LSIZE := 0
+                            end (* then *) ;
                           CONSTLCOUNTER := CONSTLCOUNTER + LSIZE ;
                         end (* else *)
                   end (* then *)
