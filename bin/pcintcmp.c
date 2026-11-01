@@ -1034,7 +1034,7 @@ static void load (void *vgs,
             {
                case 'M':
 
-                  if (gs -> string_alloc <= gs -> string_used + 1000)
+                  while (gs -> string_alloc <= gs -> string_used + len_used + 1000)
                   {
                      gs -> string_alloc += 10000;
                      gs -> string0 = realloc (gs -> string0,
@@ -1053,7 +1053,7 @@ static void load (void *vgs,
 
                case 'S':
 
-                  if (gs -> string_alloc <= gs -> string_used + 1000)
+                  while (gs -> string_alloc <= gs -> string_used + len_used + 1000)
                   {
                      gs -> string_alloc += 10000;
                      gs -> string0 = realloc (gs -> string0,
