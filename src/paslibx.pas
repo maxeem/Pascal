@@ -5879,7 +5879,15 @@ procedure $PASWSR ( var S : STRING ; INIT : BOOLEAN ; V : REAL ; WIDTH
              else
                SEXP [ 2 ] := '+' ;
              SEXP [ 1 ] := 'E' ;
-             WRITELN ( 'WSR: <' , SVO , SNK , '> EXP = ' , SEXP ) ;
+
+     //***************************************
+     // a trace line here wrote 'WSR: <...>  
+     // EXP = ...' for every real written    
+     // with writestr in exponent form       
+     //***************************************
+
+             if FALSE then
+               WRITELN ( 'WSR: <' , SVO , SNK , '> EXP = ' , SEXP ) ;
 
      //***************************************
      // Platz fuer Nachkomma = Width minus 3  

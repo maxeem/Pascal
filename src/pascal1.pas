@@ -2554,6 +2554,14 @@ var MXINT2 : INTEGER ;
     PTYPE_ANYFILE , PTYPE_TEXT , PTYPE_ALFA , PTYPE_VARCHAR ,
     PTYPE_DECIMAL : TTP ;
 
+    //******************************************************
+    // ptype_intdec: the type an integer gets in arithmetic 
+    // with a decimal: one digit, no places (it took the    
+    // other operand's type, so 3.25 * 2 got four places)   
+    //******************************************************
+
+    PTYPE_INTDEC : TTP ;
+
     //****************************************
     // pointers to                            
     // ENTRIES OF STANDARD IDS                
@@ -4617,7 +4625,7 @@ function INT_AS_REAL ( OTHER : TTP ) : TTP ;
      if OTHER <> NIL then
        if IS_STDTYPE ( OTHER , 'R' ) then
          if OTHER -> . STDPARM1 > 0 then
-           INT_AS_REAL := OTHER
+           INT_AS_REAL := PTYPE_INTDEC
    end (* INT_AS_REAL *) ;
 
 
@@ -7679,6 +7687,57 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
               WRITELN ( TRACEF , 'fsp.form          = ' , FORM ) ;
             end (* then *) ;
       end (* MODIFY_TYPE_PARMS *) ;
+
+
+
+   function DEC_RESULT ( KEEP , OTHER : TTP ; OP : CHAR ) : TTP ;
+
+   //******************************************************
+   // type of the result of real arithmetic (+, -, *).     
+   // two decimals give a decimal with the places the      
+   // result needs: the larger of the two for + and -,     
+   // their sum for * (0.25 + 0.5 kept one operand's one   
+   // place and was written as 0.8, 1.5 * 1.5 as 2.3);     
+   // a decimal and a real give a real (see REAL_RESULT)   
+   //******************************************************
+
+
+      var T : TTP ;
+          D1 , D2 , P1 , P2 , INT1 , INT2 , PL : INTEGER ;
+
+      begin (* DEC_RESULT *)
+        T := REAL_RESULT ( KEEP , OTHER ) ;
+        if T <> PTYPE_REAL then
+          begin
+            D1 := KEEP -> . STDPARM1 ;
+            P1 := KEEP -> . STDPARM2 ;
+            D2 := OTHER -> . STDPARM1 ;
+            P2 := OTHER -> . STDPARM2 ;
+            if OP = '*' then
+              begin
+                PL := P1 + P2 ;
+                D1 := D1 + D2
+              end (* then *)
+            else
+              begin
+                PL := P1 ;
+                if P2 > PL then
+                  PL := P2 ;
+                INT1 := D1 - P1 ;
+                INT2 := D2 - P2 ;
+                if INT2 > INT1 then
+                  INT1 := INT2 ;
+                D1 := INT1 + 1 + PL
+              end (* else *) ;
+            if D1 > 31 then
+              D1 := 31 ;
+            if PL > D1 then
+              PL := D1 ;
+            T := PTYPE_DECIMAL ;
+            MODIFY_TYPE_PARMS ( T , 'DECIMAL' , D1 , PL ) ;
+          end (* then *) ;
+        DEC_RESULT := T
+      end (* DEC_RESULT *) ;
 
 
    procedure CONSTANT ( FSYS : SYMSET ; var FSP : TTP ; var FVALU :
@@ -20723,6 +20782,15 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                        17 : OP := PCODE_SQR ;
                      end (* case *) ;
                      GEN0 ( OP ) ;
+
+                 //*****************************************
+                 // sqr of a decimal needs twice its places 
+                 // (sqr (1.5) was written as 2.3)          
+                 //*****************************************
+
+                     if LKEY = 17 then
+                       GATTR . TYPTR := DEC_RESULT ( GATTR . TYPTR ,
+                                        GATTR . TYPTR , '*' ) ;
                      return
                    end (* then *) ;
                  SET_ERROR ( 125 ) ;
@@ -22538,8 +22606,9 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                          begin
                            GEN0 ( PCODE_MPR ) ;
                            GATTR_NEU := LATTR ;
-                           GATTR_NEU . TYPTR := REAL_RESULT ( LATTR .
-                                                TYPTR , GATTR . TYPTR ) ;
+                           GATTR_NEU . TYPTR := DEC_RESULT ( LATTR .
+                                                TYPTR , GATTR . TYPTR ,
+                                                '*' ) ;
                            return
                          end (* then *) ;
                        if LATTR . TYPTR <> NIL then
@@ -22854,9 +22923,9 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                                then
                                  begin
                                    GEN0 ( PCODE_ADR ) ;
-                                   GATTR . TYPTR := REAL_RESULT ( GATTR
-                                                  . TYPTR , LATTR .
-                                                  TYPTR )
+                                   GATTR . TYPTR := DEC_RESULT ( GATTR .
+                                                  TYPTR , LATTR . TYPTR
+                                                  , '+' )
                                  end (* then *)
                                else
                                  begin
@@ -22900,9 +22969,9 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                                then
                                  begin
                                    GEN0 ( PCODE_SBR ) ;
-                                   GATTR . TYPTR := REAL_RESULT ( GATTR
-                                                  . TYPTR , LATTR .
-                                                  TYPTR )
+                                   GATTR . TYPTR := DEC_RESULT ( GATTR .
+                                                  TYPTR , LATTR . TYPTR
+                                                  , '-' )
                                  end (* then *)
                                else
                                  begin
@@ -26445,6 +26514,10 @@ procedure ENTERSTDTYPES ;
 
      NEW ( PTYPE_DECIMAL ) ;
      PTYPE_DECIMAL -> := DECIMALTYPE ;
+     NEW ( PTYPE_INTDEC ) ;
+     PTYPE_INTDEC -> := REALTYPE ;
+     PTYPE_INTDEC -> . STDPARM1 := 1 ;
+     PTYPE_INTDEC -> . STDPARM2 := 0 ;
 
      //************************************
      // boolean type                       
