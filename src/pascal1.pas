@@ -23556,6 +23556,20 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                                             LPT2 := LPT1 ;
                                             LPT1 := NEXT
                                           end (* with *) ;
+
+              //********************************
+              // the label before the insertion 
+              // point ends above the new one;  
+              // they overlap if it starts at   
+              // or below the new label's end   
+              // (e.g. 3 after 1 .. 5)          
+              //********************************
+
+                                      if LPT2 <> NIL then
+                                        if LSP1 <> NIL then
+                                          if LPT2 -> . CSLAB1 . IVAL <=
+                                          LVAL2 . IVAL then
+                                            SET_ERROR ( 156 ) ;
                                       NEW ( LPT3 ) ;
                                       with LPT3 -> do
                                         begin
