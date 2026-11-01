@@ -2505,6 +2505,14 @@ var MXINT2 : INTEGER ;
 
     SEL_KONST : BOOLEAN ;
 
+    //******************************************************
+    // the control variables of the for loops being         
+    // compiled; assigning to one in the loop is P219       
+    //******************************************************
+
+    FOR_CONTROLS : array [ 1 .. 20 ] of IDP ;
+    FOR_DEPTH : INTEGER ;
+
     //****************************************
     // SWITCHES:                              
     // *********                              
@@ -23385,9 +23393,20 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                 IS_CONST : BOOLEAN ;
                 RIGHT_SIDE_CONST : BOOLEAN ;
                 CONST_FOR_CHKBNDS : INTEGER ;
+                IFOR : INTEGER ;
 
             begin (* ASSIGNMENT *)
               RIGHT_SIDE_CONST := FALSE ;
+
+              //************************************************
+              // the control variable of an enclosing for loop  
+              // can't be assigned in the loop (it used to be,  
+              // and changed the number of iterations)          
+              //************************************************
+
+              for IFOR := 1 to FOR_DEPTH do
+                if FOR_CONTROLS [ IFOR ] = FCP then
+                  SET_ERROR ( 219 ) ;
               if CTLS . WATCH1 then
                 SET_ERROR ( 403 ) ;
               CTLS . WATCH1 := TRUE ;
@@ -24447,6 +24466,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                 LLC_ELEM : ADDRRANGE ;
                 FOR_WITH_SETS : BOOLEAN := FALSE ;
                 XTYPE : TTP ;
+                PUSHED : BOOLEAN ;
 
             begin (* FORSTATEMENT *)
               LLC := LCOUNTER ;
@@ -24838,7 +24858,16 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
               // COUNTER HERE                    
               //*********************************
 
+              PUSHED := FALSE ;
+              if ( LCP_CONTROL <> NIL ) and ( FOR_DEPTH < 20 ) then
+                begin
+                  FOR_DEPTH := FOR_DEPTH + 1 ;
+                  FOR_CONTROLS [ FOR_DEPTH ] := LCP_CONTROL ;
+                  PUSHED := TRUE
+                end (* then *) ;
               STATEMENT ( FSYS , LOOPF , SUBR ) ;
+              if PUSHED then
+                FOR_DEPTH := FOR_DEPTH - 1 ;
               if LOOPF . CONTUSED then
                 PUTLABEL ( LINCR ) ;
               if not FOR_WITH_SETS then
@@ -27381,6 +27410,7 @@ procedure INITSCALARS ;
      ICOUNTER := 0 ;
      LINECNT := 0 ;
      CODELINE := 0 ;
+     FOR_DEPTH := 0 ;
      PLCNT := OPT . PAGESIZE ;
 
      //**************************
