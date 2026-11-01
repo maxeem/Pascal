@@ -12026,6 +12026,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
           CHECKID : ALPHA ;
           ERRINFO : CHAR64 ;
           LIST_OF_VARS : IDP ;
+          OLD_SCRATCHPOS : ADDRRANGE ;
 
 
       procedure PARAMETERLIST ( FSY : SYMSET ; FPAR : IDP ; FW :
@@ -12490,6 +12491,18 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
 
 
       begin (* PROCDECLARATION *)
+
+        //******************************************************
+        // scratchpos is the scratch area of the procedure     
+        // being compiled; a nested procedure sets its own,    
+        // and the enclosing one must get its own back before  
+        // its body is compiled (it kept the nested one's,     
+        // usually 112, the first parameter: writestr of a     
+        // string expression overwrote the parameters, and so  
+        // did the scratch area use of the mainframe back end) 
+        //******************************************************
+
+        OLD_SCRATCHPOS := SCRATCHPOS ;
         LLC := LCOUNTER ;
         LCOUNTER := BEGIN_OF_VARS ;
 
@@ -12801,6 +12814,7 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
           SHOW_BUCKET_COUNTS ;
         BUCKET := OLD_HASH ;
         BUCKET_COUNT := OLD_COUNT ;
+        SCRATCHPOS := OLD_SCRATCHPOS ;
 
         //********************
         //RESTORE SYMBOL TABLE

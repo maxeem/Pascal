@@ -327,6 +327,8 @@ typedef struct ent_sect
    int flag4;
    int numb1;
    int numb2;
+   int init_auto;                 // option I+: fill the locals
+   int parm_end;                  // offset after the parameters
    char sourcename [16];
 }
 ent_section;

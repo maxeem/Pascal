@@ -2039,6 +2039,36 @@ static void load (void *vgs,
          }
          cp = cpsave;
 
+         //*****************************************************
+         // option I+ (init auto): the fifth character of the
+         // flags after the name is T; the last field is the
+         // offset after the parameters. The locals are then
+         // filled with X'81' on entry (see ENT in pcint.c)
+         //*****************************************************
+
+         {
+            char *fp = cpsave;
+            char *lastcomma;
+            int nflag = 0;
+
+            pent -> init_auto = 0;
+            pent -> parm_end = 0;
+            while (*fp == ' ')
+               fp ++;
+            if (*fp == ',')
+               fp ++;
+            while (*fp != ',' && *fp != 0x00)
+            {
+               nflag ++;
+               if (nflag == 5 && *fp == 'T')
+                  pent -> init_auto = 1;
+               fp ++;
+            }
+            lastcomma = strrchr (poper, ',');
+            if (lastcomma != NULL)
+               pent -> parm_end = atoi (lastcomma + 1);
+         }
+
          // printf ("name %s loaded ... \n", pent -> name_long);
 
          //*****************************************************

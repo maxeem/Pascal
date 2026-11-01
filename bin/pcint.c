@@ -6826,6 +6826,21 @@ static void int1 (global_store *gs)
             pcup -> oldstaticdisp = gs -> display [pcup -> level_called];
             gs -> level = pcup -> level_called;
             gs -> display [gs -> level] = pcup -> newdisp;
+
+            //*******************************************
+            // option I+: the locals start as X'81',
+            // like the main program's variables; the
+            // option used to have no effect here
+            //*******************************************
+
+            pent = (ent_section *) (pcode -> psect);
+            if (pent -> init_auto &&
+                pent -> size > pent -> parm_end &&
+                pent -> parm_end >= 112)
+            {
+               memset (ADDRSTOR (pcup -> newdisp + pent -> parm_end),
+                       INIT_PATTERN, pent -> size - pent -> parm_end);
+            }
          }
          else
          {
@@ -11181,6 +11196,19 @@ static void int1 (global_store *gs)
                }
             }
          }
+
+         break;
+
+      case XXX_CTS:
+      case XXX_CTI:
+
+         //*************************************************
+         // statement counters of option K+ (counter table
+         // and increments): the mainframe counts; here
+         // they are accepted and ignored, instead of
+         // writing "Opcode CTI not implemented" for every
+         // statement executed
+         //*************************************************
 
          break;
 
