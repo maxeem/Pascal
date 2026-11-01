@@ -907,6 +907,50 @@ static void runtime_error (void *vgs, int errn, char *info)
 //  a runtime error and the usual traceback
 //**********************************************************
 
+//**********************************************************
+//  texts for the error numbers of $ERROR calls in the
+//  runtime library (paslibx), which used to be shown as a
+//  bare number
+//**********************************************************
+
+static const char *library_error_text (int code)
+
+{
+   if (code >= 1100 && code <= 1113)
+      return "alloc/free: heap damaged, or a pointer not from alloc";
+
+   switch (code)
+   {
+      case 1120: return "library: unknown subfunction";
+      case 1201: return "string function: position or length "
+                        "out of range";
+      case 1202: return "translate: the two tables differ in length";
+      case 1203: return "read: no valid integer in the input";
+      case 1204: return "read: no valid real in the input";
+      case 1205: return "read: misplaced decimal point in a real";
+      case 1206: return "read: bad exponent in a real";
+      case 1207: return "write: more than 16 decimals for a real";
+      case 1209: return "read: no boolean in the input";
+      case 1210: return "read: boolean is neither TRUE nor FALSE";
+      case 1211: return "read: other characters after a value";
+      case 1212: return "read: no enumeration value in the input";
+      case 1213: return "read: other characters after an "
+                        "enumeration value";
+      case 1214: return "read: enumeration name too short";
+      case 1215: return "read: not a value of the enumeration";
+      case 1216: return "read: width 0 for an enumeration value";
+      case 1220: return "library: bad type information";
+      case 1221: return "write: width too small for an "
+                        "enumeration value";
+      case 1222: return "write: enumeration value out of range";
+      case 1226: return "writestr: result longer than the string";
+   }
+   return NULL;
+}
+
+
+
+
 static void *segv_gs = NULL;
 
 #if defined (_WIN32)
@@ -2407,6 +2451,87 @@ static void *cspf_wln (void *vgs,
 
 
 
+//**********************************************************
+//  PAGE, SKIP, LINELIMIT and MESSAGE were missing: pcint
+//  wrote "CSP not implemented" and left their arguments on
+//  the stack. PAGE writes a form feed, SKIP (f, n) n line
+//  ends, MESSAGE writes its text to stderr (on the
+//  mainframe it goes to the operator); LINELIMIT is
+//  accepted and has no effect
+//**********************************************************
+
+static void *cspf_pag (void *vgs,
+                       int parm1,
+                       int parm2,
+                       int parm3,
+                       int parm4)
+
+{
+   global_store *gs = vgs;
+   filecb *fcb;
+
+   STOR_FCB (parm1, fcb);
+   check_write (gs, fcb);
+   fprintf (fcb -> fhandle, "\f");
+   return NULL;
+}
+
+
+
+
+static void *cspf_skp (void *vgs,
+                       int parm1,
+                       int parm2,
+                       int parm3,
+                       int parm4)
+
+{
+   global_store *gs = vgs;
+   filecb *fcb;
+   int i;
+
+   STOR_FCB (parm1, fcb);
+   check_write (gs, fcb);
+   for (i = 0; i < parm2; i ++)
+      fprintf (fcb -> fhandle, "\n");
+   return NULL;
+}
+
+
+
+
+static void *cspf_lim (void *vgs,
+                       int parm1,
+                       int parm2,
+                       int parm3,
+                       int parm4)
+
+{
+   return NULL;
+}
+
+
+
+
+static void *cspf_msg (void *vgs,
+                       int parm1,
+                       int parm2,
+                       int parm3,
+                       int parm4)
+
+{
+   global_store *gs = vgs;
+
+   fflush (stdout);
+   if (parm2 > 0)
+      fwrite (ADDRSTOR (parm1), 1, parm2, stderr);
+   fprintf (stderr, "\n");
+   return NULL;
+}
+
+
+
+
 static void *cspf_sio (void *vgs,
                        int parm1,
                        int parm2,
@@ -2700,7 +2825,7 @@ static void *cspf_eot (void *vgs,
    filecb *fcb;
    int *intp;
 
-#if 1
+#if 0
 
    fprintf (stderr, "eot: parm1 = %d\n", parm1);
 
@@ -2716,7 +2841,11 @@ static void *cspf_eot (void *vgs,
    intp = ADDRSTACK (gs -> sp);
    *intp = fcb -> eof;
 
-   fprintf (stderr, "+++ eot noch nicht korrekt implementiert !!\n");
+   //***********************************************
+   // eot answers like eof; it used to say so on
+   // stderr ("noch nicht korrekt implementiert")
+   // each time it was called
+   //***********************************************
 
    return NULL;
 }
@@ -4003,7 +4132,7 @@ static funtab ft [] =
    { "N07", CSP_N07, NULL,     0, 0, 0, ' ' },
    { "N08", CSP_N08, NULL,     0, 0, 0, ' ' },
    { "N09", CSP_N09, NULL,     0, 0, 0, ' ' },
-   { "PAG", CSP_PAG, NULL,     0, 0, 0, ' ' },
+   { "PAG", CSP_PAG, cspf_pag, 1, 0, 0, ' ' },
    { "GET", CSP_GET, cspf_get, 1, 0, 0, ' ' },
    { "PUT", CSP_PUT, cspf_put, 1, 0, 0, ' ' },
    { "RES", CSP_RES, cspf_res, 1, 0, 0, ' ' },
@@ -4036,9 +4165,9 @@ static funtab ft [] =
    { "FDF", CSP_FDF, cspf_fdf, 3, 2, 0, ' ' },
    { "SIO", CSP_SIO, cspf_sio, 1, 0, 0, ' ' },
    { "EIO", CSP_EIO, cspf_eio, 1, 1, 0, ' ' },
-   { "MSG", CSP_MSG, NULL,     0, 0, 0, ' ' },
-   { "SKP", CSP_SKP, NULL,     0, 0, 0, ' ' },
-   { "LIM", CSP_LIM, NULL,     0, 0, 0, ' ' },
+   { "MSG", CSP_MSG, cspf_msg, 2, 2, 0, ' ' },
+   { "SKP", CSP_SKP, cspf_skp, 2, 1, 0, ' ' },
+   { "LIM", CSP_LIM, cspf_lim, 2, 1, 0, ' ' },
    { "TRA", CSP_TRA, NULL,     0, 0, 0, ' ' },
    { "WRP", CSP_WRP, cspf_wrp, 3, 2, 0, ' ' },
    { "CLS", CSP_CLS, cspf_cls, 1, 0, 0, ' ' },
@@ -5807,7 +5936,7 @@ static void int1 (global_store *gs)
    int label2;
 
    char *errmsg;
-   char errbuffer [64];
+   char errbuffer [128];
 
    /************************************************/
    /*   Branch Table fuer XJP                      */
@@ -6092,6 +6221,9 @@ static void int1 (global_store *gs)
          {
             case 'E':
                sprintf (errbuffer, "%d", wert1);
+               if (library_error_text (wert1) != NULL)
+                  sprintf (errbuffer, "%d (%s)", wert1,
+                           library_error_text (wert1));
                runtime_error (gs, ERROR_CALL, errbuffer);
                break;
 

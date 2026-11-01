@@ -11402,6 +11402,9 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
           INITVAL : BOOLEAN ;
           IVADDR : ADDRRANGE ;
           ISIZE : ADDRRANGE ;
+          OTHERF : FRECPTR ;
+          SAMENAME : BOOLEAN ;
+          K : INTEGER ;
 
       begin (* VARDECLARATION *)
         if IS_MODULE and ( LEVEL <= 1 ) then
@@ -11576,6 +11579,36 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
 
                       else
                         begin
+
+        //*****************************************************
+        // a file's external name is the first 8 characters    
+        // of its name (its DD name); warn when two files of    
+        // the program share it, because they then use the     
+        // same file, and one overwrites the other             
+        //*****************************************************
+
+                          OTHERF := FILEHEAD ;
+                          while OTHERF <> NIL do
+                            begin
+                              if OTHERF -> . FILIDPTR <> NIL then
+                                begin
+                                  SAMENAME := TRUE ;
+                                  for K := 1 to 8 do
+                                    if OTHERF -> . FILIDPTR -> . NAME [
+                                    K ] <> NXT1 -> . NAME [ K ] then
+                                      SAMENAME := FALSE ;
+                                  if SAMENAME then
+                                    begin
+                                      ERRINFO := NXT1 -> . NAME ;
+                                      SET_ERROR_POS ( 'W' , 224 ,
+                                                   ERRINFO , SCB .
+                                                   LINENR , SCB .
+                                                   LINEPOS ) ;
+                                      break
+                                    end (* then *)
+                                end (* then *) ;
+                              OTHERF := OTHERF -> . NEXTFILE
+                            end (* while *) ;
                           NEW ( LFPTR ) ;
                           LFPTR -> . FILIDPTR := NXT1 ;
                           LFPTR -> . NEXTFILE := FILEHEAD ;
