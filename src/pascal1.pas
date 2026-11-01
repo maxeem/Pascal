@@ -20558,6 +20558,17 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                  //****************************************
 
                  GATTR_SET := GATTR ;
+
+                 //****************************************
+                 // the set's address goes on the stack    
+                 // first, before the element's code; it   
+                 // was loaded after it, so that with an   
+                 // element like n mod 10 the operands of  
+                 // ZIC / ZEC were swapped and nothing     
+                 // happened                               
+                 //****************************************
+
+                 LOADADDRESS_SET ( PCODEP , GATTR_SET ) ;
                  if SY <> SYCOMMA then
                    begin
                      SET_ERROR_SKIP ( 553 , FSYS + [ SYCOMMA ,
@@ -20595,7 +20606,6 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                            end (* otherw *)
                        end (* case *) ;
                      end (* else *) ;
-                 LOADADDRESS_SET ( PCODEP , GATTR_SET ) ;
                  LOAD_NEU ( PCODEP , GATTR , VAR_REF ) ;
                  GEN0 ( PCODE_ZIC ) ;
                end (* INCLUDE1 *) ;
@@ -20639,6 +20649,17 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                  //****************************************
 
                  GATTR_SET := GATTR ;
+
+                 //****************************************
+                 // the set's address goes on the stack    
+                 // first, before the element's code; it   
+                 // was loaded after it, so that with an   
+                 // element like n mod 10 the operands of  
+                 // ZIC / ZEC were swapped and nothing     
+                 // happened                               
+                 //****************************************
+
+                 LOADADDRESS_SET ( PCODEP , GATTR_SET ) ;
                  if SY <> SYCOMMA then
                    begin
                      SET_ERROR_SKIP ( 553 , FSYS + [ SYCOMMA ,
@@ -20676,7 +20697,6 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                            end (* otherw *)
                        end (* case *) ;
                      end (* else *) ;
-                 LOADADDRESS_SET ( PCODEP , GATTR_SET ) ;
                  LOAD_NEU ( PCODEP , GATTR , VAR_REF ) ;
                  GEN0 ( PCODE_ZEC ) ;
                end (* EXCLUDE1 *) ;
