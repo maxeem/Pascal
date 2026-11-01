@@ -10044,9 +10044,22 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                                 SET_ERROR ( 8 ) ;
                               PACKDATA := FALSE ;
                               SIMPLETYPE ( FSYS , LSP1 ) ;
+
+        //*********************************************
+        //  after an error the base type is dropped,   
+        //  so that the set is not sized from the      
+        //  whole range of integer or real             
+        //  (which crashed the compiler); the limits   
+        //  are tested before the number of elements   
+        //  is computed, which could overflow          
+        //*********************************************
+
                               if LSP1 <> NIL then
                                 if LSP1 = PTYPE_INT then
-                                  SET_ERROR ( 304 )
+                                  begin
+                                    SET_ERROR ( 304 ) ;
+                                    LSP1 := NIL
+                                  end (* then *)
                                 else
                                   if ( LSP1 -> . FORM > SUBRANGE ) then
                                     begin
@@ -10055,21 +10068,33 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                                     end (* then *)
                                   else
                                     if IS_STDTYPE ( LSP1 , 'R' ) then
-                                      SET_ERROR ( 114 )
+                                      begin
+                                        SET_ERROR ( 114 ) ;
+                                        LSP1 := NIL
+                                      end (* then *)
                                     else
                                       if LSP1 -> . FORM = SUBRANGE then
-                                        begin
-                                          if LSP1 -> . MAX . IVAL -
-                                          LSP1 -> . MIN . IVAL + 1 >
-                                          SETMAXSIZE then
-                                            SET_ERROR ( 307 ) ;
-                                          if LSP1 -> . MAX . IVAL >
-                                          SETUPPLIMIT then
+                                        if LSP1 -> . MAX . IVAL >
+                                        SETUPPLIMIT then
+                                          begin
                                             SET_ERROR ( 308 ) ;
+                                            LSP1 := NIL
+                                          end (* then *)
+                                        else
                                           if LSP1 -> . MIN . IVAL <
                                           SETLOWLIMIT then
-                                            SET_ERROR ( 309 )
-                                        end (* then *) ;
+                                            begin
+                                              SET_ERROR ( 309 ) ;
+                                              LSP1 := NIL
+                                            end (* then *)
+                                          else
+                                            if LSP1 -> . MAX . IVAL -
+                                            LSP1 -> . MIN . IVAL + 1 >
+                                            SETMAXSIZE then
+                                              begin
+                                                SET_ERROR ( 307 ) ;
+                                                LSP1 := NIL
+                                              end (* then *) ;
                               NEW ( LSP , SETS ) ;
                               with LSP -> do
                                 begin
