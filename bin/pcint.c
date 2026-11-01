@@ -1097,7 +1097,16 @@ static void file_input (void *vgs, filecb *fcb)
    }
    else
    {
+      //*********************************************
+      // a last line without a line end: its end
+      // reads as a blank too, as with a line end;
+      // it used to read as the terminating 0
+      // (fgets leaves room for the extra byte)
+      //*********************************************
+
       cp ++;
+      cp [0] = ' ';
+      cp [1] = 0x00;
    }
 
    fcb -> freclen = cp - fcb -> fbuffer;

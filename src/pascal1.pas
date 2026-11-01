@@ -15349,13 +15349,16 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                          begin
                            RWFILE := TYPTR -> . FILTYPE ;
                            if not ( LKEY in [ 1 .. 6 , 25 , 36 , 37 ,
-                           46 , 70 ] ) then
+                           46 , 70 , 97 ] ) then
                              SET_ERROR ( 116 ) ;
 
                  //********************************************
                  //   NON-TEXT FILES PERMITTED ONLY FOR:       
                  //   GET, PUT, RESET, READ, WRITE,            
-                 //   REWRITE, EOF, SKIP, LINELIMIT            
+                 //   REWRITE, EOF, SKIP, LINELIMIT,           
+                 //   CLOSE, FILEFCB, APPEND (97, which was    
+                 //   missing; the runtime appends to binary   
+                 //   files as well)                           
                  //********************************************
 
                          end (* else *) ;
