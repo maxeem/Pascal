@@ -3149,6 +3149,18 @@ function SET_ERROR_POS_FUNC ( ERRTYPE : CHAR ; FERRNR : ERRCODE ;
        PFRET : SCANF_PTR ;
 
    begin (* SET_ERROR_POS_FUNC *)
+
+     //************************************************
+     // option W- suppresses warnings; it used to      
+     // leave them out of the summary list only, while 
+     // the warnings themselves were still reported    
+     //************************************************
+
+     if ( ERRTYPE = 'W' ) and not OPT . WARNING then
+       begin
+         SET_ERROR_POS_FUNC := NIL ;
+         return
+       end (* then *) ;
      PASSCAN_ERRTYPE := ERRTYPE ;
      if PASSCAN_ERRTYPE = 'E' then
        PASSCAN_ERRTYPE := 'F' ;
