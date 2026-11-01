@@ -10792,7 +10792,19 @@ procedure BLOCK ( FSYS : SYMSET ; FSY : SYMB ; FPROCP : IDP ; var
                    BASETYPE := ELEMENTTYP ;
                    FORM := SETS ;
                    SIZE := FVALU . SETX_LENGTH ;
-                   ALN := WORDSIZE
+                   ALN := WORDSIZE ;
+
+           //*********************************************
+           // length and origin as for a set constant     
+           // in an expression; without them, a named     
+           // set constant used with + - * crashed the    
+           // compiler (WORK_SET_SIZE read garbage)       
+           //*********************************************
+
+                   SETMIN := FVALU . SETXMIN ;
+                   SETMAX := FVALU . SETXMAX ;
+                   SET_LENGTH := FVALU . SETX_LENGTH ;
+                   SET_ORIGIN := FVALU . SETX_ORIGIN
                  end (* with *) ;
                FSP := LSP
              end (* then *) ;
